@@ -3,140 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Next Trend Wire — What's trending, explained.</title>
-<meta name="description" content="Next Trend Wire — what's trending, explained. Clean, minimal coverage of tech, AI search, and social media.">
+<title>Next Trend Wire</title>
+<meta name="description" content="Next Trend Wire — New and noteworthy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;750;800;850&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<p class="demo">Demo preview — fake content only, to review the design.</p>
+<div class="shell">
+  <header>
+    <button class="logo" data-demo>Next Trend <b>Wire</b></button>
+    <nav aria-label="Sections">
+      <a href="#latest" data-demo>Latest</a>
+      <a href="#ideas" data-demo>Ideas</a>
+      <a href="#business" data-demo>Business</a>
+      <a href="#culture" data-demo>Culture</a>
+    </nav>
+    <a class="subscribe" href="#newsletter" data-demo>Subscribe <b>&#8599;</b></a>
+  </header>
 
-<header class="site">
-  <div class="top">
-    <span>Monday, October 26, 2026</span>
-    <span><button class="text-btn" data-demo>Subscribe</button> &nbsp;·&nbsp; <button class="text-btn" data-demo>Sign in</button></span>
-  </div>
+  <main class="modern page" id="latest">
+    <div class="modern-main">
+      <div class="date"><strong>New &amp; noteworthy</strong><span>Issue 024</span></div>
 
-  <div class="masthead">
-    <h1>Next Trend Wire</h1>
-    <p>What's trending, explained.</p>
-  </div>
+      <a class="modern-lead" href="#story" data-demo>
+        <div class="modern-lead-meta"><span class="eyebrow">Field Notes &middot; Technology</span><span class="read-time">7 min read</span></div>
+        <h1>A more human internet is taking shape.</h1>
+        <div class="modern-lead-bottom">
+          <p class="dek">Meet the independent builders choosing usefulness, character, and community over scale.</p>
+          <span class="read">Read the story <b>&#8599;</b></span>
+        </div>
+      </a>
 
-  <nav aria-label="Sections">
-    <button class="active" data-demo>Latest</button>
-    <button data-demo>Tech</button>
-    <button data-demo>AI &amp; Search</button>
-    <button data-demo>Social</button>
-    <button data-demo>Viral</button>
-  </nav>
-</header>
-
-<main class="layout">
-  <div class="main">
-    <article class="feature">
-      <p class="kicker">AI &amp; SEARCH</p>
-      <h2>Google's AI answers just changed what it means to rank on page one</h2>
-      <p class="dek">Traffic is moving from blue links to direct answers. Here is what changed this week, who gains, who loses, and what small sites should do next.</p>
-      <p class="meta">By Editorial Team &nbsp;·&nbsp; 6 min read &nbsp;·&nbsp; Updated 2 hours ago</p>
-      <button class="read-link" data-demo>Read the story →</button>
-    </article>
-
-    <section aria-label="Latest">
-      <h3 class="section-title">Latest</h3>
-      <article class="story">
-        <p class="kicker">GOOGLE ADS</p>
-        <h4>Google Ads lets you value new customers by the size of their order</h4>
-        <p>Percentage-based bidding is leaving beta, alongside wider customer-retention controls.</p>
-        <p class="meta">2 hours ago · 3 min read</p>
-      </article>
-      <article class="story">
-        <p class="kicker">AI</p>
-        <h4>Lower AI prices barely cut the bill in independent tests</h4>
-        <p>Stronger performance, while the cost of a completed task barely changes.</p>
-        <p class="meta">3 hours ago · 4 min read</p>
-      </article>
-      <article class="story">
-        <p class="kicker">SOCIAL</p>
-        <h4>Facebook group admins get AI help catching posts that break the rules</h4>
-        <p>The forum also adds shared scheduling and pinned replies for community managers.</p>
-        <p class="meta">4 hours ago · 2 min read</p>
-      </article>
-      <article class="story">
-        <p class="kicker">TECH</p>
-        <h4>OpenAI agents found a way to talk without an internet connection</h4>
-        <p>Security tests exposed hidden channels between supposedly isolated workspaces.</p>
-        <p class="meta">5 hours ago · 5 min read</p>
-      </article>
-      <article class="story">
-        <p class="kicker">AI &amp; SEARCH</p>
-        <h4>ChatGPT now cites 3 sources per answer. Here is how to be one of them.</h4>
-        <p>Our test of 50 prompts shows a clear pattern in what gets cited, and what gets skipped.</p>
-        <p class="meta">7 hours ago · 6 min read</p>
-      </article>
-      <article class="story">
-        <p class="kicker">VIRAL</p>
-        <h4>The founder fight that took over X this weekend, explained in 5 lines</h4>
-        <p>Two posts, 40,000 replies, and one lesson about how viral banter actually works.</p>
-        <p class="meta">Yesterday · 3 min read</p>
-      </article>
-    </section>
-
-    <section class="newsletter" aria-label="Newsletter">
-      <h3>Get the daily wire</h3>
-      <p>One email, every morning. The 5 trends that matter, in plain English.</p>
-      <div class="newsletter-form">
-        <input type="email" placeholder="you@example.com" aria-label="Email address">
-        <button data-demo>Subscribe</button>
+      <div class="cards">
+        <a href="#story" data-demo>
+          <span class="eyebrow">Culture</span>
+          <h2>Why small communities are becoming the new cultural capitals</h2>
+          <span class="meta">May 23 &middot; 4 min</span>
+        </a>
+        <a href="#story" data-demo>
+          <span class="eyebrow">Business</span>
+          <h2>The founders building for a slower, more deliberate economy</h2>
+          <span class="meta">May 23 &middot; 8 min</span>
+        </a>
+        <a href="#story" data-demo>
+          <span class="eyebrow">Design</span>
+          <h2>The next era of interfaces will feel almost invisible</h2>
+          <span class="meta">May 23 &middot; 5 min</span>
+        </a>
       </div>
-      <small>No spam. Unsubscribe anytime.</small>
-    </section>
-  </div>
-
-  <aside class="side" aria-label="Jobs">
-    <div class="jobs">
-      <h3>Jobs</h3>
-      <p class="sponsored">Sponsored</p>
-      <ul>
-        <li><button data-demo><strong>Growth Marketing Lead</strong><span>Mechanon · Remote, US · Full-time</span></button></li>
-        <li><button data-demo><strong>SEO Editor</strong><span>Next Trend Wire · Remote · Full-time</span></button></li>
-        <li><button data-demo><strong>AI Research Writer</strong><span>Startup · New York, NY · Contract</span></button></li>
-        <li><button data-demo><strong>Social Media Manager</strong><span>Media Co · Austin, TX · Full-time</span></button></li>
-        <li><button data-demo><strong>Content Strategist</strong><span>SaaS Co · Remote · Full-time</span></button></li>
-      </ul>
-      <button class="post-job" data-demo>Post a job — $49</button>
     </div>
 
-    <div class="trending">
-      <h3>Trending now</h3>
-      <ol>
-        <li><button data-demo>Why everyone is arguing about AI browsers today</button></li>
-        <li><button data-demo>A viral X thread says SEO is dead. It is not.</button></li>
-        <li><button data-demo>The $19 tool that sold out in 4 hours</button></li>
-        <li><button data-demo>Meta's shopping assistant picked these 6 products</button></li>
-        <li><button data-demo>What the new Google Ads update means for small budgets</button></li>
-      </ol>
-    </div>
-  </aside>
-</main>
+    <aside class="right-rail" aria-label="Sponsor">
+      <a class="sponsor-card" href="#sponsor" data-demo>
+        <div class="sponsor-label"><span>Trending startup</span><span class="sponsored">Sponsored</span></div>
+        <div class="sponsor-mark">A</div>
+        <h2>Arc makes money management feel simple.</h2>
+        <p>A calm financial workspace built for small, modern teams.</p>
+        <strong>Discover Arc <span>&#8599;</span></strong>
+      </a>
+      <p class="rail-note">One emerging company, selected weekly.</p>
+    </aside>
+  </main>
 
-<footer>
-  <div class="foot">
-    <div>
-      <strong>Next Trend Wire</strong>
-      <p>What's trending, explained.</p>
-    </div>
-    <div>
-      <button data-demo>Latest</button>
-      <button data-demo>Tech</button>
-      <button data-demo>AI &amp; Search</button>
-    </div>
-    <div>
-      <button data-demo>About</button>
-      <button data-demo>Contact</button>
-      <button data-demo>Advertise</button>
-    </div>
-  </div>
-  <p class="foot-bottom">© 2026 Next Trend Wire · Demo preview — placeholder content only</p>
-</footer>
+  <footer><span>&copy; 2025 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
 
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="script.js"></script>
