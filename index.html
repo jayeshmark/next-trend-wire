@@ -7,67 +7,62 @@
 <meta name="description" content="Next Trend Wire — New and noteworthy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;750;800;850&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="shell">
   <header>
-    <button class="logo" data-demo>Next Trend <b>Wire</b></button>
-    <nav aria-label="Sections">
-      <a href="#latest" data-demo>Latest</a>
-      <a href="#ideas" data-demo>Ideas</a>
-      <a href="#business" data-demo>Business</a>
-      <a href="#culture" data-demo>Culture</a>
-    </nav>
-    <a class="subscribe" href="#newsletter" data-demo>Subscribe <b>&#8599;</b></a>
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="#latest" data-demo>Latest</a><a href="#ideas" data-demo>Ideas</a><a href="#business" data-demo>Business</a><a href="#culture" data-demo>Culture</a></nav>
+    <a class="subscribe" href="#newsletter" data-demo>Subscribe <b>↗</b></a>
   </header>
-
+  <div class="switcher">
+    <p>Homepage direction</p>
+    <div>
+      <button data-demo><span>01</span>Text only</button>
+      <button data-demo><span>02</span>Editorial</button>
+      <button class="active" data-demo aria-pressed="true"><span>03</span>Modern</button>
+    </div>
+  </div>
   <main class="modern page" id="latest">
-    <div class="modern-main">
+    <section class="modern-main">
       <div class="date"><strong>New &amp; noteworthy</strong><span>Issue 024</span></div>
-
       <a class="modern-lead" href="#story" data-demo>
-        <div class="modern-lead-meta"><span class="eyebrow">Field Notes &middot; Technology</span><span class="read-time">7 min read</span></div>
+        <div class="modern-lead-meta">
+          <p class="eyebrow">Field Notes · Technology</p>
+          <span>7 min read</span>
+        </div>
         <h1>A more human internet is taking shape.</h1>
         <div class="modern-lead-bottom">
           <p class="dek">Meet the independent builders choosing usefulness, character, and community over scale.</p>
-          <span class="read">Read the story <b>&#8599;</b></span>
+          <span class="read">Read the story <b>↗</b></span>
         </div>
       </a>
-
       <div class="cards">
         <a href="#story" data-demo>
-          <span class="eyebrow">Culture</span>
-          <h2>Why small communities are becoming the new cultural capitals</h2>
-          <span class="meta">May 23 &middot; 4 min</span>
+          <p class="eyebrow">Culture</p><h2>Why small communities are becoming the new cultural capitals</h2><span>May 23 · 4 min</span>
         </a>
         <a href="#story" data-demo>
-          <span class="eyebrow">Business</span>
-          <h2>The founders building for a slower, more deliberate economy</h2>
-          <span class="meta">May 23 &middot; 8 min</span>
+          <p class="eyebrow">Business</p><h2>The founders building for a slower, more deliberate economy</h2><span>May 23 · 8 min</span>
         </a>
         <a href="#story" data-demo>
-          <span class="eyebrow">Design</span>
-          <h2>The next era of interfaces will feel almost invisible</h2>
-          <span class="meta">May 23 &middot; 5 min</span>
+          <p class="eyebrow">Design</p><h2>The next era of interfaces will feel almost invisible</h2><span>May 23 · 5 min</span>
         </a>
       </div>
-    </div>
-
-    <aside class="right-rail" aria-label="Sponsor">
+    </section>
+    <div class="right-rail">
       <a class="sponsor-card" href="#sponsor" data-demo>
-        <div class="sponsor-label"><span>Trending startup</span><span class="sponsored">Sponsored</span></div>
+        <div class="sponsor-label"><span>Trending startup</span><span>Sponsored</span></div>
         <div class="sponsor-mark">A</div>
         <h2>Arc makes money management feel simple.</h2>
         <p>A calm financial workspace built for small, modern teams.</p>
-        <strong>Discover Arc <span>&#8599;</span></strong>
+        <strong>Discover Arc <span>↗</span></strong>
       </a>
       <p class="rail-note">One emerging company, selected weekly.</p>
-    </aside>
+    </div>
   </main>
-
-  <footer><span>&copy; 2025 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+  <footer><span>© 2025 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
 </div>
 
 <div id="toast" role="status" aria-live="polite"></div>

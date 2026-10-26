@@ -1,96 +1,95 @@
-/* Next Trend Wire v3 — Figma Make Modern, exact copy.
-   White, text #101010, one blue accent #3047ff, Inter only.
-   No shadows, no Jobs, no newsletter, no switcher in production. */
-:root{
-  --blue:#3047ff;
-  --line:#d8d8d5;
-  font-family:Inter,"Helvetica Neue",Arial,sans-serif;
-  font-synthesis:none;
+/* Next Trend Wire v3.1 — copied verbatim from Figma Make src/index.css
+   (Modern view only in the HTML). Tailwind import removed, no other
+   values changed. Inter is loaded as a variable font in index.html so
+   weight 450 renders instead of falling back to 500. */
+:root { font-family: Inter, "Helvetica Neue", Arial, sans-serif; color: #101010; background: white; font-synthesis: none; }
+body { min-width: 320px; }
+a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+:root { --blue: #3047ff; --line: #d8d8d5; }
+.shell { width: min(calc(100% - 48px), 1440px); margin: auto; }
+header { height: 88px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid; }
+.logo { justify-self: start; font-size: 15px; font-weight: 850; letter-spacing: -.04em; cursor: pointer; }
+.logo b, .subscribe b, .eyebrow, .read b { color: var(--blue); }
+nav { display: flex; gap: 34px; font-size: 13px; }
+nav a:hover, .subscribe:hover { color: var(--blue); }
+.subscribe { justify-self: end; font-size: 13px; font-weight: 700; }
+.subscribe b { margin-left: 6px; }
+.switcher { padding: 18px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+.switcher > p, .date { color: #777; font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.switcher > div { display: flex; gap: 3px; padding: 3px; border-radius: 99px; background: #f0f0ee; }
+.switcher button { padding: 9px 16px; border-radius: 99px; color: #666; font-size: 12px; cursor: pointer; }
+.switcher button span { margin-right: 7px; font-size: 9px; }
+.switcher button.active { color: white; background: #111; }
+.page { animation: enter .35s ease-out; }
+@keyframes enter { from { opacity: 0; transform: translateY(5px) } }
+.date { padding: 24px 0; display: flex; justify-content: space-between; }
+.date strong { color: #111; }
+.date a { text-decoration: underline; text-underline-offset: 3px; }
+.eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.dek { max-width: 610px; color: #555; font-size: 17px; line-height: 1.55; }
+.lead h1, .modern-lead h1 { margin: 20px 0 28px; font-size: clamp(50px, 5.7vw, 88px); font-weight: 500; line-height: .98; letter-spacing: -.065em; }
+.read { margin-top: 43px; padding-bottom: 7px; border-bottom: 1px solid; font-size: 12px; font-weight: 750; }
+.read b { margin-left: 25px; }
+.modern { padding-top: 38px; display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: clamp(36px, 6vw, 96px); }
+.modern .date { padding: 0 0 18px; }
+.modern-main { min-width: 0; }
+.modern-lead { min-height: 500px; padding: clamp(34px, 5vw, 68px); display: flex; flex-direction: column; border: 0; border-radius: 4px; background: #f2f2ef; }
+.modern-lead-meta, .modern-lead-bottom { display: flex; align-items: start; justify-content: space-between; gap: 40px; }
+.modern-lead-meta > span { color: #888; font-size: 10px; }
+.modern-lead h1 { max-width: 920px; margin: auto 0; font-size: clamp(52px, 6.2vw, 94px); font-weight: 450; line-height: .94; letter-spacing: -.07em; }
+.modern-lead-bottom .dek { max-width: 520px; }
+.modern-lead-bottom .read { flex: 0 0 auto; margin-top: 0; }
+.cards { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--line); }
+.cards a { min-height: 235px; padding: 28px 24px; display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+.cards a:first-child { padding-left: 0; }
+.cards a:last-child { border: 0; }
+.cards h2 { margin: 18px 0 25px; font-size: 21px; font-weight: 500; line-height: 1.15; letter-spacing: -.035em; }
+.cards a:hover h2 { color: var(--blue); }
+.cards span { margin-top: auto; color: #888; font-size: 10px; }
+.right-rail { margin-top: 28px; align-self: start; position: sticky; top: 24px; }
+.sponsor-card { margin-top: 0; padding: 24px; display: block; border: 0; border-radius: 4px; background: #eef0ff; transition: transform .2s ease, background .2s ease; }
+.sponsor-card:hover { transform: translateY(-3px); background: #e7eaff; }
+.sponsor-label { display: flex; justify-content: space-between; color: var(--blue); font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.sponsor-label span:last-child { color: #888; font-weight: 600; }
+.sponsor-mark { width: 38px; height: 38px; margin: 48px 0 50px; display: grid; place-items: center; border-radius: 12px; color: white; background: var(--blue); font-size: 15px; font-weight: 800; }
+.sponsor-card h2 { font-size: 25px; font-weight: 500; line-height: 1.08; letter-spacing: -.045em; }
+.sponsor-card > p { margin-top: 13px; color: #666; font-size: 12px; line-height: 1.5; }
+.sponsor-card > strong { margin-top: 28px; display: flex; justify-content: space-between; font-size: 11px; }
+.sponsor-card > strong span { color: var(--blue); }
+.rail-note { max-width: 200px; margin: 14px 0 0 4px; color: #999; font-size: 9px; line-height: 1.45; }
+footer { padding: 35px 0 45px; display: flex; justify-content: space-between; color: #888; font-size: 10px; }
+@media (max-width: 900px) {
+  nav { display: none; }
+  header { grid-template-columns: 1fr 1fr; }
+  .modern { grid-template-columns: 1fr; gap: 26px; }
+  .right-rail { position: static; margin-top: 0; }
+  .sponsor-card { max-width: 430px; }
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#fff;color:#101010;font-family:Inter,"Helvetica Neue",Arial,sans-serif;min-width:320px;line-height:1.5}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit;text-align:left}
-.shell{width:min(calc(100% - 48px),1440px);margin:auto}
-.page{animation:enter .35s ease-out}
-@keyframes enter{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@media (prefers-reduced-motion:reduce){.page{animation:none}}
-
-/* Header */
-header{height:88px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:1px solid #101010}
-.logo{font-size:15px;font-weight:850;letter-spacing:-.04em;text-transform:uppercase}
-.logo b{color:var(--blue);font-weight:850}
-nav{display:flex;gap:34px;font-size:13px}
-nav a:hover{color:var(--blue)}
-.subscribe{font-size:13px;font-weight:700;justify-self:end}
-.subscribe b{color:var(--blue);margin-left:6px}
-.subscribe:hover{color:var(--blue)}
-
-/* Modern layout */
-.modern{padding-top:38px;display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:clamp(36px,6vw,96px)}
-.date{padding:0 0 18px;display:flex;justify-content:space-between;align-items:baseline}
-.date strong{color:#111;font-size:15px}
-.date span{color:#777;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
-
-/* Lead */
-.modern-lead{min-height:500px;padding:clamp(34px,5vw,68px);display:flex;flex-direction:column;border:0;border-radius:4px;background:#f2f2ef}
-.modern-lead-meta{display:flex;justify-content:space-between;align-items:baseline}
-.eyebrow{color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
-.read-time{color:#888;font-size:10px}
-.modern-lead h1{margin:auto 0;font-size:clamp(52px,6.2vw,94px);font-weight:450;line-height:.94;letter-spacing:-.07em;max-width:920px}
-.modern-lead-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
-.dek{font-size:17px;line-height:1.55;color:#555;max-width:520px}
-.read{padding-bottom:7px;border-bottom:1px solid #101010;font-size:12px;font-weight:750;white-space:nowrap}
-.read b{color:var(--blue);margin-left:25px}
-
-/* Cards */
-.cards{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line)}
-.cards a{min-height:235px;padding:28px 24px;display:flex;flex-direction:column;border-right:1px solid var(--line)}
-.cards a:first-child{padding-left:0}
-.cards a:last-child{border-right:0}
-.cards h2{margin:18px 0 25px;font-size:21px;font-weight:500;line-height:1.15;letter-spacing:-.035em}
-.cards a:hover h2{color:var(--blue)}
-.cards .meta{margin-top:auto;color:#888;font-size:10px}
-
-/* Right rail / sponsor */
-.right-rail{margin-top:28px;align-self:start;position:sticky;top:24px}
-.sponsor-card{margin-top:0;padding:24px;display:block;border:0;border-radius:4px;background:#eef0ff;transition:transform .2s ease,background .2s ease}
-.sponsor-card:hover{transform:translateY(-3px);background:#e7eaff}
-.sponsor-label{display:flex;justify-content:space-between;color:var(--blue);font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.sponsor-label .sponsored{color:#888;font-weight:600}
-.sponsor-mark{width:38px;height:38px;margin:48px 0 50px;display:grid;place-items:center;border-radius:12px;color:#fff;background:var(--blue);font-size:15px;font-weight:800}
-.sponsor-card h2{font-size:25px;font-weight:500;line-height:1.08;letter-spacing:-.045em}
-.sponsor-card p{margin-top:13px;color:#666;font-size:12px;line-height:1.5}
-.sponsor-card strong{margin-top:28px;display:flex;justify-content:space-between;font-size:11px}
-.sponsor-card strong span{color:var(--blue)}
-.rail-note{max-width:200px;margin:14px 0 4px;color:#999;font-size:9px;line-height:1.45}
-
-/* Footer */
-footer{padding:35px 0 45px;display:flex;justify-content:space-between;color:#888;font-size:10px}
-
-#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:50;max-width:90vw;text-align:center}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-@media(max-width:900px){
-  nav{display:none}
-  header{grid-template-columns:1fr 1fr}
-  .modern{grid-template-columns:1fr;gap:26px}
-  .right-rail{position:static;margin-top:0}
-  .sponsor-card{max-width:430px}
+@media (max-width: 640px) {
+  .shell { width: calc(100% - 32px); }
+  header { height: 70px; }
+  .switcher { align-items: start; flex-direction: column; gap: 12px; }
+  .switcher > div { width: 100%; }
+  .switcher button { flex: 1; padding-inline: 6px; font-size: 10px; }
+  .switcher button span { display: none; }
+  .date { padding: 18px 0; font-size: 9px; }
+  .lead h1, .modern-lead h1 { font-size: 48px; }
+  .dek { font-size: 15px; }
+  .modern { padding-top: 0; }
+  .modern .date { padding-top: 18px; }
+  .modern-lead { min-height: 500px; padding: 28px 22px; }
+  .modern-lead-meta, .modern-lead-bottom { gap: 24px; }
+  .modern-lead-bottom { flex-direction: column; }
+  .modern-lead-bottom .read { margin-top: 8px; }
+  .cards { grid-template-columns: 1fr; }
+  .cards a, .cards a:first-child { min-height: 0; padding: 26px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .right-rail { margin-inline: 0; }
+  .sponsor-card { margin: 0; padding: 24px; }
 }
-@media(max-width:640px){
-  .shell{width:calc(100% - 32px)}
-  header{height:70px}
-  .date{padding:18px 0;font-size:9px}
-  .modern{padding-top:0}
-  .modern .date{padding-top:18px}
-  .modern-lead{min-height:500px;padding:28px 22px}
-  .modern-lead-bottom{flex-direction:column;align-items:flex-start;gap:24px}
-  .read{margin-top:8px}
-  .modern-lead h1{font-size:48px}
-  .dek{font-size:15px}
-  .cards{grid-template-columns:1fr}
-  .cards a{min-height:0;padding:26px 0;border-right:0;border-bottom:1px solid var(--line)}
-  .right-rail{margin-inline:0}
-  .sponsor-card{margin:0;padding:24px}
-}
+@media (prefers-reduced-motion: reduce) { .page { animation: none; } }
+
+/* Demo toast only, not in Figma */
+#toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #111; color: #fff; padding: 12px 18px; border-radius: 999px; font-size: 14px; opacity: 0; pointer-events: none; transition: .2s; z-index: 50; max-width: 90vw; text-align: center; }
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
