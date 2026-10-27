@@ -15,7 +15,7 @@
   <header>
     <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
     <nav><a href="#latest" data-demo>Latest</a><a href="#ideas" data-demo>Ideas</a><a href="#business" data-demo>Business</a><a href="#culture" data-demo>Culture</a></nav>
-    <a class="subscribe" href="#newsletter" data-demo>Subscribe <b>↗</b></a>
+    <a class="subscribe" href="#newsletter">Subscribe <b>↗</b></a>
   </header>
   <main class="modern page" id="latest">
     <section class="modern-main">
@@ -52,9 +52,15 @@
         <strong>Discover Arc <span>↗</span></strong>
       </a>
       <p class="rail-note">One emerging company, selected weekly.</p>
+      <form class="newsletter-box" id="newsletter">
+        <label class="sr-only" for="email">Email address</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+        <button type="submit">Join</button>
+        <p>One newsletter per week.</p>
+      </form>
     </div>
   </main>
-  <footer><span>© 2025 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+  <footer><span>© 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
 </div>
 
 <div id="toast" role="status" aria-live="polite"></div>
