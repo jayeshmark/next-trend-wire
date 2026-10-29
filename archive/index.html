@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Archive: Great games. Built to last. | Next Trend Wire</title>
-<meta name="description" content="The Next Trend Wire sports archive: complete pages for the great games, with the story, the box score, the halftime show, and the commercials in one place.">
+<meta name="description" content="The Next Trend Wire sports archive: complete pages for the great games, with the story and the box score in one place.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
@@ -38,11 +38,12 @@
   <main class="page article archive-index">
     <p class="eyebrow">Archive</p>
     <h1>Great games. Built to last.</h1>
-    <p class="archive-note">Every flagship game, with the story, the box score, the halftime show, and the commercials in one place.</p>
+    <p class="archive-note">Every flagship game, with the story and the box score in one place.</p>
     <div class="filters" role="group" aria-label="Filter games">
       <span>Sport</span>
       <button type="button" data-filter-sport="all" class="active">All</button>
       <button type="button" data-filter-sport="nfl">NFL</button>
+      <button type="button" data-filter-sport="nba">NBA</button>
     </div>
     <div class="filters" role="group" aria-label="Filter by era">
       <span>Era</span>
@@ -70,6 +71,10 @@
         <option value="falcons">Atlanta Falcons</option>
         <option value="seahawks">Seattle Seahawks</option>
         <option value="49ers">San Francisco 49ers</option>
+        <option value="bulls">Chicago Bulls</option>
+        <option value="jazz">Utah Jazz</option>
+        <option value="cavaliers">Cleveland Cavaliers</option>
+        <option value="warriors">Golden State Warriors</option>
       </select>
     </div>
     <div id="game-list">
@@ -122,6 +127,16 @@
         <h2>Super Bowl LVIII: Kansas City Chiefs vs San Francisco 49ers</h2>
         <p class="score">Chiefs 25, 49ers 22, in overtime</p>
         <p>February 11, 2024 · Allegiant Stadium, Las Vegas area</p>
+      </a>
+      <a class="game-card" href="nba-1998-finals-game-6.html" data-sport="nba" data-era="1990s" data-teams="bulls jazz">
+        <h2>1998 NBA Finals Game 6: Chicago Bulls vs Utah Jazz</h2>
+        <p class="score">Bulls 87, Jazz 86</p>
+        <p>June 14, 1998 · Delta Center, Salt Lake City</p>
+      </a>
+      <a class="game-card" href="nba-2016-finals-game-7.html" data-sport="nba" data-era="2010s" data-teams="cavaliers warriors">
+        <h2>2016 NBA Finals Game 7: Cleveland Cavaliers vs Golden State Warriors</h2>
+        <p class="score">Cavaliers 93, Warriors 89</p>
+        <p>June 19, 2016 · Oracle Arena, Oakland</p>
       </a>
     </div>
     <form class="newsletter-box" id="newsletter" action="#">
