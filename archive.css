@@ -1,0 +1,92 @@
+/* Archive pages only. Next Trend Wire system: Inter only, #101010 text,
+   #3047ff accent, white background, #f2f2ef panels, hairlines only,
+   no shadows, no new colors, no new fonts. Mobile first. */
+
+.archive-note { color: #555; font-size: 17px; line-height: 1.55; margin: 0 0 24px; }
+
+.archive-header { grid-template-columns: 1fr auto auto 1fr; }
+.theme-toggle { justify-self: center; font-size: 12px; font-weight: 700; border: 1px solid var(--line); border-radius: 99px; padding: 8px 14px; }
+@media (max-width: 900px) {
+  .archive-header { grid-template-columns: 1fr auto 1fr; }
+}
+
+.facts { background: #f2f2ef; border: 1px solid var(--line); border-radius: 4px; padding: 24px; margin: 0 0 28px; }
+.facts h2 { font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin: 0 0 16px; }
+.facts dl { display: grid; grid-template-columns: 1fr; gap: 12px 32px; }
+.facts dl > div { display: grid; grid-template-columns: 132px 1fr; gap: 8px; }
+.facts dl > div.full { grid-column: 1 / -1; }
+.facts dt { color: #888; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding-top: 3px; }
+.facts dd { font-size: 15px; line-height: 1.5; }
+@media (min-width: 700px) {
+  .facts dl { grid-template-columns: 1fr 1fr; }
+}
+
+.article-body h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin: 24px 0 8px; }
+
+table.archive-table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 15px; line-height: 1.5; }
+.archive-table th, .archive-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.archive-table th { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #888; }
+.archive-table td:first-child { font-weight: 600; }
+@media (max-width: 640px) {
+  table.archive-table, .archive-table tbody, .archive-table tr, .archive-table td { display: block; width: 100%; }
+  .archive-table thead { display: none; }
+  .archive-table tr { border: 1px solid var(--line); border-radius: 4px; margin: 0 0 12px; padding: 4px 0; }
+  .archive-table td { display: flex; justify-content: space-between; gap: 16px; border-bottom: 0; padding: 8px 14px; text-align: right; }
+  .archive-table td::before { content: attr(data-label); font-weight: 700; color: #888; text-align: left; }
+  .archive-table td:last-child { padding-bottom: 12px; }
+}
+
+.article-body ol.timeline { list-style: none; padding-left: 0; margin: 0 0 20px; }
+.article-body ol.timeline li { position: relative; padding-left: 28px; }
+.article-body ol.timeline li::before { content: ""; position: absolute; left: 0; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+
+.article-body ul.sources { list-style: none; padding-left: 0; }
+.article-body ul.sources li { font-size: 14px; line-height: 1.6; margin: 0 0 10px; color: #555; }
+.article-body ul.sources a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: break-word; }
+.article-body .newsletter-box p { font-size: 10px; color: #888; margin-top: 10px; }
+
+.prev-next { display: flex; justify-content: space-between; gap: 16px; margin: 36px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; }
+.prev-next a { color: var(--blue); }
+.prev-next .next { margin-left: auto; text-align: right; }
+.prev-next .disabled { color: #888; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 8px; align-items: center; }
+.filters span { color: #888; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-right: 4px; }
+.filters button, .filters select { font-size: 13px; font-weight: 600; border: 1px solid var(--line); border-radius: 99px; padding: 8px 14px; background: none; color: inherit; font-family: inherit; }
+.filters button.active { background: #101010; color: #fff; border-color: #101010; }
+.filters select { padding-right: 8px; }
+.game-card { display: block; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.game-card h2 { font-size: 21px; font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 6px; }
+.game-card:hover h2 { color: var(--blue); }
+.game-card p { color: #888; font-size: 13px; margin: 0; }
+.game-card .score { color: #101010; font-size: 17px; font-weight: 600; margin: 0 0 4px; }
+.game-card.hidden { display: none; }
+
+/* Dark mode: same palette, light text on #101010, #3047ff accent kept. */
+html[data-theme="dark"] { background: #101010; color: #f2f2ef; }
+html[data-theme="dark"] .article-body p,
+html[data-theme="dark"] .article-body li,
+html[data-theme="dark"] .article-body ol.timeline li { color: #f2f2ef; }
+html[data-theme="dark"] .article-meta,
+html[data-theme="dark"] .facts dt,
+html[data-theme="dark"] .archive-table th,
+html[data-theme="dark"] .game-card p,
+html[data-theme="dark"] .article-body ul.sources li,
+html[data-theme="dark"] footer,
+html[data-theme="dark"] .archive-note,
+html[data-theme="dark"] .prev-next .disabled { color: rgba(242, 242, 239, 0.65); }
+html[data-theme="dark"] .facts { background: rgba(242, 242, 239, 0.08); border-color: rgba(242, 242, 239, 0.25); }
+html[data-theme="dark"] .archive-table th,
+html[data-theme="dark"] .archive-table td { border-bottom-color: rgba(242, 242, 239, 0.2); }
+html[data-theme="dark"] .archive-table tr { border-color: rgba(242, 242, 239, 0.25); }
+html[data-theme="dark"] .archive-table td::before { color: rgba(242, 242, 239, 0.65); }
+html[data-theme="dark"] .theme-toggle { border-color: rgba(242, 242, 239, 0.35); }
+html[data-theme="dark"] .filters button, html[data-theme="dark"] .filters select { border-color: rgba(242, 242, 239, 0.35); }
+html[data-theme="dark"] .filters button.active { background: #f2f2ef; color: #101010; border-color: #f2f2ef; }
+html[data-theme="dark"] .filters span { color: rgba(242, 242, 239, 0.65); }
+html[data-theme="dark"] .game-card { border-bottom-color: rgba(242, 242, 239, 0.2); }
+html[data-theme="dark"] .game-card .score { color: #f2f2ef; }
+html[data-theme="dark"] .prev-next { border-top-color: rgba(242, 242, 239, 0.2); }
+html[data-theme="dark"] .newsletter-box input { border-bottom-color: #f2f2ef; color: #f2f2ef; }
+html[data-theme="dark"] .newsletter-box button { border-bottom-color: #f2f2ef; }
+html[data-theme="dark"] header { border-bottom-color: rgba(242, 242, 239, 0.25); }
