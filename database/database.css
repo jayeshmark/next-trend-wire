@@ -1,0 +1,66 @@
+/* NFL stats section styles. Figma Modern tokens, same as the Archive and the
+   layout samples: white, ink #101010, one blue accent #3047ff, Inter only,
+   hairlines only, no shadows. All colours go through variables so dark mode
+   follows the samples' dark tokens. */
+:root {
+  --bg: #ffffff;
+  --ink: #101010;
+  --muted: #6b6b6b;
+  --accent: #3047ff;
+  --hairline: #e5e5e5;
+  --panel: #f2f2ef;
+  --panel-ink: #101010;
+}
+html[data-theme="dark"] {
+  --bg: #101010;
+  --ink: #f2f2f2;
+  --muted: #a3a3a3;
+  --accent: #7d8cff;
+  --hairline: #2e2e2e;
+  --panel: #1c1c1c;
+  --panel-ink: #f2f2f2;
+  background: #101010;
+  color: #f2f2f2;
+}
+
+.db-page { padding: 32px 0 48px; }
+.db-page h1 { margin: 16px 0 16px; font-size: clamp(36px, 4.5vw, 64px); font-weight: 500; line-height: 1.02; letter-spacing: -0.04em; }
+.db-page h2 { margin: 36px 0 12px; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+.db-page p { margin: 0 0 14px; color: var(--muted); font-size: 15px; line-height: 1.6; max-width: 760px; }
+.db-page .db-intro { color: var(--ink); font-size: 17px; }
+.db-page .db-formula { color: var(--ink); font-weight: 600; }
+.db-page a { color: inherit; }
+.db-page .db-table-wrap a, .db-page .db-player-list a, .db-page .db-link-list a, .db-page .db-letter-nav a, .db-page .db-back a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.db-table-wrap { overflow-x: auto; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); margin: 16px 0 24px; }
+.db-table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; }
+.db-table th { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--hairline); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.db-table td { padding: 10px 12px; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+.db-table td:first-child, .db-table th:first-child { position: sticky; left: 0; background: var(--bg); padding-left: 0; border-right: 1px solid var(--hairline); }
+.db-table tbody tr:last-child td { border-bottom: 0; }
+.db-table tbody tr:hover { background: var(--panel); }
+.db-table tbody tr:hover td:first-child { background: var(--panel); }
+.db-letter-nav { display: flex; flex-wrap: wrap; gap: 6px 14px; max-width: none; }
+.db-link-list { list-style: none; padding: 0; margin: 0 0 14px; }
+.db-link-list li { padding: 12px 0; border-bottom: 1px solid var(--hairline); font-size: 15px; line-height: 1.5; }
+.db-link-list li span { color: var(--muted); }
+.db-player-list { list-style: none; padding: 0; columns: 2; column-gap: 40px; }
+.db-player-list li { padding: 6px 0; border-bottom: 1px solid var(--hairline); font-size: 14px; line-height: 1.5; break-inside: avoid; }
+.db-player-list .db-years { color: var(--muted); font-size: 12px; }
+@media (max-width: 640px) {
+  .db-player-list { columns: 1; }
+  .db-page h1 { font-size: 38px; }
+  .db-table { font-size: 14px; }
+}
+
+/* Team season pages. Facts panels keep the label/value row layout; only the
+   colours are aligned to the samples' tokens. */
+.db-page .facts { background: var(--panel); color: var(--panel-ink); padding: 24px; margin: 0 0 28px; }
+.db-page .facts h2 { font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; margin: 0 0 16px; }
+.db-page .facts dl { display: grid; grid-template-columns: 1fr; gap: 12px 32px; }
+.db-page .facts dl > div { display: grid; grid-template-columns: 132px 1fr; gap: 8px; }
+.db-page .facts dt { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding-top: 3px; }
+.db-page .facts dd { font-size: 15px; line-height: 1.5; }
+.db-page .prev-next { display: flex; justify-content: space-between; gap: 16px; margin: 36px 0 10px; padding-top: 18px; border-top: 1px solid var(--hairline); font-size: 13px; font-weight: 700; }
+.db-page .prev-next a { color: var(--accent); }
+.db-page .prev-next .next { margin-left: auto; text-align: right; }
+.db-page .article-meta { color: var(--muted); font-size: 12px; margin: 0 0 24px; }
