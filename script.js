@@ -1,4 +1,5 @@
 document.addEventListener('click', function (e) {
+  if (e.target.closest('button.logo')) { window.location.href = '/'; return; }
   var t = e.target.closest('[data-demo]');
   if (!t) return;
   showToast('Demo preview — this button is not live yet.');
