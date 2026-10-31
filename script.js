@@ -1,3 +1,15 @@
+// Vercel Web Analytics (plain-HTML integration, same as @vercel/analytics inject()).
+// One shared file, so this covers every page type (posts, archive, database) that
+// loads script.js. Requires Web Analytics enabled on the Vercel project dashboard;
+// until then /_vercel/insights/script.js 404s harmlessly and va() just queues.
+(function () {
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  if (document.querySelector('script[src*="/_vercel/insights/script.js"]')) return;
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = '/_vercel/insights/script.js';
+  document.head.appendChild(s);
+})();
 document.addEventListener('click', function (e) {
   if (e.target.closest('button.logo')) { window.location.href = '/'; return; }
   var t = e.target.closest('[data-demo]');
