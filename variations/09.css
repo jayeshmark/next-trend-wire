@@ -1,0 +1,48 @@
+/* 9 · Literary. A calm reading room like a long-form newsletter: warm paper,
+   one centred column, small photos, italic dates, deep green ink. */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+:root { --blue: #1f5d4a; --serif: "Lora", Georgia, serif; --line: #e4dccb; --rule: #2b2620; --ink: #2b2620; --ink-soft: #4a4238; --muted: #8a7f6c; --panel: #f1ead9; background: #f8f3e8; }
+body { background: #f8f3e8; }
+.shell { width: min(calc(100% - 40px), 860px); }
+header { flex-wrap: wrap; justify-content: center; text-align: center; border-bottom: 1px solid var(--line); padding: 26px 0 14px; }
+.logo { flex: 1 0 100%; font-family: "Lora", serif; font-size: 30px; font-weight: 600; font-style: italic; letter-spacing: -.01em; }
+.logo b { color: var(--blue); font-weight: 600; }
+nav { flex: 1 0 100%; margin-top: 12px; font-family: "Lora", serif; font-style: italic; font-size: 15px; }
+.subscribe { position: absolute; right: 0; top: 28px; background: var(--blue); }
+.theme-toggle { position: absolute; left: 0; top: 28px; }
+header { position: relative; }
+.modern { grid-template-columns: minmax(0, 1fr); }
+.right-rail { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.right-rail .newsletter-box { margin-top: 0; }
+.rail-note { display: none; }
+.date { justify-content: center; gap: 18px; font-family: "Lora", serif; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 14px; }
+.modern-lead, .modern-lead.has-img { grid-template-columns: 1fr; grid-template-areas: "meta" "title" "img" "bottom"; text-align: center; justify-items: stretch; }
+.modern-lead-meta { justify-content: center; }
+.modern-lead h1 { font-weight: 500; font-size: clamp(32px, 4vw, 48px); line-height: 1.12; letter-spacing: -.01em; }
+.lead-img { aspect-ratio: 16 / 9; max-width: 640px; justify-self: center; border-radius: 2px; }
+.modern-lead-bottom { align-items: center; }
+.modern-lead > * { min-width: 0; max-width: 100%; }
+.modern-lead h1 { overflow-wrap: break-word; }
+.cards { grid-template-columns: 1fr; gap: 0; }
+.cards a { display: grid; grid-template-columns: 150px 1fr; grid-template-rows: auto auto 1fr; column-gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.cards a + a::before { display: none; }
+.card-img { grid-row: 1 / span 3; margin: 0; aspect-ratio: 1; border-radius: 2px; }
+.cards h2 { margin: 6px 0 8px; font-size: 22px; }
+.cards span { font-family: "Lora", serif; font-style: italic; font-size: 13px; }
+.eyebrow { color: var(--blue); }
+.today-list .day { justify-content: center; font-family: "Lora", serif; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--blue); }
+.today-list .day::before { content: ""; flex: 1; height: 1px; background: var(--line); }
+.today-list a span { font-family: "Lora", serif; font-style: italic; }
+.sponsor-card { background: transparent; border-color: var(--line); }
+.newsletter-box { background: var(--blue); }
+.article { max-width: 640px; }
+.article h1 { text-align: center; font-weight: 500; letter-spacing: -.01em; }
+.article > .eyebrow { text-align: center; }
+.article-meta { text-align: center; font-family: "Lora", serif; font-style: italic; }
+.article-body > p:first-child::first-letter { color: var(--blue); font-weight: 500; }
+.article-body h2 { text-align: center; border-top: 0; font-family: "Lora", serif; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 22px; font-weight: 500; }
+.article-body h2::after { content: "~"; display: block; color: var(--muted); }
+.article-body ul > li::before { background: none; content: "—"; color: var(--blue); top: 0; left: 0; width: auto; height: auto; }
+footer { justify-content: center; font-family: "Lora", serif; font-style: italic; border-top: 1px solid var(--line); }
+@media (max-width: 960px) { .logo { padding: 0 96px; } }
+@media (max-width: 640px) { .logo { padding: 0; font-size: 26px; } .right-rail { grid-template-columns: minmax(0, 1fr); } .right-rail .newsletter-box { grid-column: auto; grid-row: auto; } .cards a { grid-template-columns: 96px 1fr; } .subscribe { position: static; margin: 10px auto 0; } .theme-toggle { position: static; } }

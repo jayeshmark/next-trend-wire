@@ -1,0 +1,39 @@
+/* 8 · Brutalist. Loud and raw: thick black borders, highlighter yellow,
+   monospace everywhere, hard offset shadows, everything uppercase. */
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap");
+:root { --blue: #111; --line: #111; --rule: #111; --muted: #333; --serif: "Space Mono", monospace; --sans: "Space Mono", monospace; font-family: var(--sans); background: #fffef5; }
+body { background: #fffef5; }
+header { border-bottom: 4px solid #111; }
+.logo { font-family: "Archivo Black", sans-serif; font-size: 22px; text-transform: uppercase; }
+.logo b { background: #ffe600; color: #111; padding: 0 6px; }
+nav a { color: #111; text-transform: uppercase; font-weight: 700; font-size: 12px; }
+nav a::after { height: 4px; background: #ffe600; }
+.subscribe { border-radius: 0; border: 3px solid #111; background: #ffe600; color: #111; box-shadow: 4px 4px 0 #111; }
+.subscribe:hover { background: #111; color: #ffe600; }
+.eyebrow { color: #111; background: #ffe600; padding: 2px 6px; width: max-content; }
+.modern-lead { border: 4px solid #111; padding: 18px; box-shadow: 8px 8px 0 #111; }
+.modern-lead h1 { font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: -.02em; line-height: 1; font-size: clamp(28px, 3vw, 46px); }
+.modern-lead:hover h1 { color: #111; background: #ffe600; }
+.lead-img, .card-img, .article-img { border-radius: 0; border: 3px solid #111; filter: grayscale(1) contrast(1.2); }
+.cards { gap: 16px; }
+.cards a { border: 3px solid #111; padding: 10px; box-shadow: 5px 5px 0 #111; }
+.cards a + a::before { display: none; }
+.cards h2 { font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 16px; line-height: 1.15; }
+.cards a:hover h2 { color: #111; background: #ffe600; }
+.today-list { border-top: 4px solid #111; }
+.today-list a { font-size: 14.5px; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid #111; }
+.today-list a:hover { background: #ffe600; color: #111; }
+.today-list .day { background: #111; color: #ffe600; padding: 4px 8px; }
+.today-list .day::after { display: none; }
+.today-more { border: 3px solid #111; border-radius: 0; box-shadow: 4px 4px 0 #111; background: #ffe600; }
+.sponsor-card, .newsletter-box { border: 4px solid #111; border-radius: 0; box-shadow: 8px 8px 0 #111; background: #fff; color: #111; }
+.sponsor-mark { border-radius: 0; background: #111; }
+.newsletter-box::after, .newsletter-box p { color: #333; }
+.newsletter-box input { border: 3px solid #111; border-radius: 0; }
+.newsletter-box button { border-radius: 0; background: #111; color: #ffe600; }
+.article h1 { font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase; }
+.article-body p, .article-body li { font-size: 16px; }
+.article-body > p:first-child::first-letter { color: #111; background: #ffe600; padding: 4px 8px; }
+.article-body ul > li::before { background: #111; }
+.article-body a { text-decoration-color: #111; background: linear-gradient(transparent 60%, #ffe600 60%); }
+footer { border-top: 4px solid #111; color: #111; }

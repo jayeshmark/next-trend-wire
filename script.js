@@ -150,3 +150,81 @@ function showToast(msg) {
     tick();
   }
 })();
+
+/* Design variations (branch design-variations only, for choosing a look).
+   /theme/N or ?theme=N picks one of ten stylesheets in /variations; the
+   choice is remembered while browsing, and the bar at the bottom switches
+   between them. Not for production. */
+(function () {
+  var NAMES = ['Editorial', 'Broadsheet', 'Swiss', 'Terminal', 'Magazine', 'Startup', 'Soft', 'Brutalist', 'Literary', 'Wire service'];
+  var param = Number(new URLSearchParams(location.search).get('theme'));
+  var current = 1;
+  try { current = Number(localStorage.getItem('ntw-variant')) || 1; } catch (e) {}
+  if (param >= 1 && param <= NAMES.length) current = param;
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.id = 'ntw-variant';
+  document.head.appendChild(link);
+
+  var bar = document.createElement('div');
+  bar.setAttribute('role', 'toolbar');
+  bar.setAttribute('aria-label', 'Design variations');
+  bar.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:4px;max-width:calc(100vw - 16px);overflow-x:auto;padding:6px;border-radius:999px;background:rgba(17,17,17,.94);color:#fff;font:600 13px/1 Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.28);backdrop-filter:blur(8px);-webkit-font-smoothing:antialiased;';
+  var label = document.createElement('span');
+  label.style.cssText = 'padding:0 10px 0 12px;white-space:nowrap;color:#bbb;font-weight:500;';
+  var btnCss = 'flex:0 0 auto;min-width:32px;height:32px;padding:0 8px;border:0;border-radius:999px;font:inherit;cursor:pointer;';
+  var arrow = function (text, delta) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = text;
+    b.setAttribute('aria-label', delta < 0 ? 'Previous theme' : 'Next theme');
+    b.style.cssText = btnCss + 'background:transparent;color:#fff;';
+    b.addEventListener('click', function () { set(((current - 1 + delta + NAMES.length) % NAMES.length) + 1); });
+    return b;
+  };
+  var buttons = [];
+  bar.appendChild(arrow('‹', -1));
+  NAMES.forEach(function (name, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = String(i + 1);
+    b.title = (i + 1) + ' · ' + name;
+    b.addEventListener('click', function () { set(i + 1); });
+    buttons.push(b);
+    bar.appendChild(b);
+  });
+  bar.appendChild(arrow('›', 1));
+  bar.appendChild(label);
+
+  function set(n) {
+    current = n;
+    link.href = '/variations/' + (n < 10 ? '0' + n : n) + '.css';
+    try { localStorage.setItem('ntw-variant', String(n)); } catch (e) {}
+    var url = new URL(location.href);
+    url.searchParams.set('theme', String(n));
+    history.replaceState(null, '', url);
+    buttons.forEach(function (b, i) {
+      var on = i + 1 === n;
+      b.style.cssText = btnCss + (on ? 'background:#fff;color:#111;' : 'background:transparent;color:#ddd;');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    label.textContent = n + ' · ' + NAMES[n - 1];
+  }
+  set(current);
+  document.body.appendChild(bar);
+  document.body.style.paddingBottom = '72px';
+  // Keep the choice when following links inside the site.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.target === '_blank') return;
+    var u = new URL(a.getAttribute('href'), location.href);
+    if (u.origin !== location.origin || u.hash && u.pathname === location.pathname) return;
+    u.searchParams.set('theme', String(current));
+    a.href = u.pathname + u.search + u.hash;
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (/input|textarea|select/i.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight') set((current % NAMES.length) + 1);
+    if (e.key === 'ArrowLeft') set(((current - 2 + NAMES.length) % NAMES.length) + 1);
+  });
+})();
