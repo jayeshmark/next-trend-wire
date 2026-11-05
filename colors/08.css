@@ -1,0 +1,13 @@
+/* Color 8 · Highlighter. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #fffef5; --surface: #ffffff;
+  --ink: #111111; --ink-soft: #2a2a2a; --muted: #4d4d4d;
+  --line: #111111; --rule: #111111; --panel: #f5f3dc;
+  --blue: #111111; --accent-ink: #ffe600;
+  --invert-bg: #ffe600; --invert-ink: #111111; --invert-muted: rgba(17,17,17,.7);
+  --input-bg: #ffffff; --input-ink: #111111;
+  --hi: #ffe600; --img-filter: grayscale(1) contrast(1.15);
+  --accent: #111111; --hairline: #111111; --panel-ink: #111111;
+  background: #fffef5; color: #111111;
+}

@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
-<title>Theme 10 · Literary · Next Trend Wire</title>
+<title>Theme 10 · Wire service + Ember · Next Trend Wire</title>
 <script>
-  try { localStorage.setItem('ntw-variant', '10'); } catch (e) {}
-  location.replace('/?theme=10');
+  var q = new URLSearchParams();
+  try { localStorage.setItem('ntw-layout', '10'); localStorage.setItem('ntw-color', '10'); } catch (e) {}
+  q.set('layout', '10'); q.set('color', '10');
+  location.replace('/?' + q.toString());
 </script>
 </head>
-<body><a href="/?theme=10">Open theme 10</a></body>
+<body><a href="/">Open Next Trend Wire</a></body>
 </html>

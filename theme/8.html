@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
-<title>Theme 8 · Soft · Next Trend Wire</title>
+<title>Theme 8 · Brutalist + Highlighter · Next Trend Wire</title>
 <script>
-  try { localStorage.setItem('ntw-variant', '8'); } catch (e) {}
-  location.replace('/?theme=8');
+  var q = new URLSearchParams();
+  try { localStorage.setItem('ntw-layout', '8'); localStorage.setItem('ntw-color', '8'); } catch (e) {}
+  q.set('layout', '8'); q.set('color', '8');
+  location.replace('/?' + q.toString());
 </script>
 </head>
-<body><a href="/?theme=8">Open theme 8</a></body>
+<body><a href="/">Open Next Trend Wire</a></body>
 </html>

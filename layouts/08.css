@@ -1,0 +1,37 @@
+/* Layout 8 · Brutalist. Thick borders, hard offset shadows, monospace text,
+   uppercase display headlines, a highlighter on hover. */
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap");
+:root { --serif: "Space Mono", monospace; --sans: "Space Mono", monospace; font-family: var(--sans); }
+header { border-bottom: 4px solid var(--rule); }
+.logo { font-family: "Archivo Black", sans-serif; font-size: 22px; text-transform: uppercase; }
+.logo b { background: var(--hi); color: var(--ink); padding: 0 6px; }
+nav a { color: var(--ink); text-transform: uppercase; font-weight: 700; font-size: 12px; }
+nav a::after { height: 4px; background: var(--hi); }
+.subscribe { border-radius: 0; border: 3px solid var(--ink); background: var(--hi); color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+.subscribe:hover { background: var(--ink); color: var(--hi); }
+.eyebrow { color: var(--ink); background: var(--hi); padding: 2px 6px; width: max-content; }
+.modern-lead { border: 4px solid var(--ink); padding: 18px; box-shadow: 8px 8px 0 var(--ink); }
+.modern-lead h1 { font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: -.02em; line-height: 1; font-size: clamp(26px, 3vw, 46px); }
+.modern-lead:hover h1 { color: var(--ink); background: var(--hi); }
+.lead-img, .card-img, .article-img { border-radius: 0; border: 3px solid var(--ink); }
+.cards { gap: 16px; }
+.cards a { border: 3px solid var(--ink); padding: 10px; box-shadow: 5px 5px 0 var(--ink); background: var(--surface); }
+.cards a + a::before { display: none; }
+.cards h2 { font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 16px; line-height: 1.15; }
+.cards a:hover h2 { color: var(--ink); background: var(--hi); }
+.today-list { border-top: 4px solid var(--rule); }
+.today-list a { font-size: 14.5px; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid var(--ink); }
+.today-list a:hover { background: var(--hi); color: var(--ink); }
+.today-list .day { background: var(--ink); color: var(--bg); padding: 4px 8px; }
+.today-list .day::after { display: none; }
+.today-more { border: 3px solid var(--ink); border-radius: 0; box-shadow: 4px 4px 0 var(--ink); background: var(--hi); }
+.sponsor-card, .newsletter-box { border: 4px solid var(--ink); border-radius: 0; box-shadow: 8px 8px 0 var(--ink); }
+.sponsor-mark, .newsletter-box input, .newsletter-box button { border-radius: 0; }
+.newsletter-box input { border: 3px solid var(--ink); }
+.article h1 { font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase; }
+.article-body p, .article-body li { font-size: 16px; }
+.article-body > p:first-child::first-letter { color: var(--ink); background: var(--hi); padding: 4px 8px; }
+.article-body ul > li::before { background: var(--ink); }
+.article-body a { text-decoration-color: var(--ink); background: linear-gradient(transparent 60%, var(--hi) 60%); }
+footer { border-top: 4px solid var(--rule); color: var(--ink); }
+@media (max-width: 640px) { .cards a { margin-bottom: 16px; } }

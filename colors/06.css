@@ -1,0 +1,13 @@
+/* Color 6 · Mint. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #ffffff; --surface: #ffffff;
+  --ink: #0f1a13; --ink-soft: #33443a; --muted: #6c7a71;
+  --line: #e3e9e4; --rule: #0f1a13; --panel: #f1f6f2;
+  --blue: #0a8a43; --accent-ink: #ffffff;
+  --invert-bg: #0f2418; --invert-ink: #ffffff; --invert-muted: rgba(255,255,255,.62);
+  --input-bg: #ffffff; --input-ink: #0f1a13;
+  --hi: #cdeedb; --img-filter: none;
+  --accent: #0a8a43; --hairline: #e3e9e4; --panel-ink: #0f1a13;
+  background: #ffffff; color: #0f1a13;
+}

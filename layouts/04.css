@@ -1,0 +1,20 @@
+/* Layout 4 · Terminal. A trading-screen grid: monospace labels and times,
+   compact headlines, chevron rows, square corners. */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..800&display=swap");
+:root { --serif: Inter, sans-serif; }
+.logo, nav, .eyebrow, .date, .today-list a span, .cards span, .modern-lead-meta > span, .article-meta, .today-list .day, footer, .sponsor-label, .article-body h2 { font-family: "JetBrains Mono", monospace; }
+.logo::before { content: "■ "; color: var(--blue); }
+header { border-bottom: 1px solid var(--rule); min-height: 64px; }
+nav a { text-transform: uppercase; font-size: 12px; }
+.subscribe { background: var(--blue); color: var(--accent-ink); border-radius: 2px; }
+.modern-lead h1 { font-weight: 650; letter-spacing: -.035em; font-size: clamp(28px, 3vw, 46px); }
+.modern-lead.has-img { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "meta img" "title img" "bottom img"; }
+.lead-img { aspect-ratio: 4 / 3; }
+.lead-img, .card-img, .article-img, .sponsor-card, .newsletter-box, .newsletter-box input, .newsletter-box button { border-radius: 2px; }
+.cards h2 { font-weight: 600; letter-spacing: -.02em; font-size: 17px; }
+.today-list a { grid-template-columns: auto minmax(0, 1fr) auto; gap: 0 12px; font-family: Inter, sans-serif; font-weight: 500; font-size: 15.5px; padding: 9px 0; letter-spacing: -.01em; }
+.today-list a::before { content: "›"; color: var(--blue); font-family: "JetBrains Mono", monospace; }
+.newsletter-box { border: 1px solid var(--blue); }
+.article-body p, .article-body li { font-family: Inter, sans-serif; font-size: 17.5px; }
+.article-body h2 { color: var(--blue); }
+@media (max-width: 720px) { .modern-lead.has-img { grid-template-columns: 1fr; grid-template-areas: "img" "meta" "title" "bottom"; } }

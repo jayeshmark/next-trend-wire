@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
-<title>Theme 9 · Brutalist · Next Trend Wire</title>
+<title>Theme 9 · Literary + Forest paper · Next Trend Wire</title>
 <script>
-  try { localStorage.setItem('ntw-variant', '9'); } catch (e) {}
-  location.replace('/?theme=9');
+  var q = new URLSearchParams();
+  try { localStorage.setItem('ntw-layout', '9'); localStorage.setItem('ntw-color', '9'); } catch (e) {}
+  q.set('layout', '9'); q.set('color', '9');
+  location.replace('/?' + q.toString());
 </script>
 </head>
-<body><a href="/?theme=9">Open theme 9</a></body>
+<body><a href="/">Open Next Trend Wire</a></body>
 </html>

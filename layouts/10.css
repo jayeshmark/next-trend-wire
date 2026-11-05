@@ -1,19 +1,18 @@
-/* 10 · Wire service. Fast and dense like a news agency: orange accent,
-   small square thumbnails, compact rows, timestamps first. */
-:root { --blue: #e8590c; --serif: Inter, "Helvetica Neue", Arial, sans-serif; --line: #e7e7e7; --rule: #e8590c; }
+/* Layout 10 · Wire service. Dense agency rows: a square lead photo beside the
+   story, two-up thumbnail rows, read time before every headline. */
+:root { --serif: Inter, "Helvetica Neue", Arial, sans-serif; }
 header { min-height: 64px; border-bottom: 3px solid var(--blue); }
 .logo { font-size: 18px; font-weight: 800; }
-.logo::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px rgba(232, 89, 12, .18); }
+.logo::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 20%, transparent); }
 nav { justify-content: flex-start; font-weight: 600; }
-.subscribe { border-radius: 4px; background: var(--blue); }
+.subscribe { border-radius: 4px; background: var(--blue); color: var(--accent-ink); }
 @media (min-width: 961px) { .modern { grid-template-columns: minmax(0, 1fr) 280px; } }
-.modern .date { border-bottom: 1px solid var(--line); }
 .modern-lead.has-img { grid-template-columns: 300px minmax(0, 1fr); grid-template-areas: "img meta" "img title" "img bottom"; gap: 8px 26px; }
 .lead-img { aspect-ratio: 1; border-radius: 4px; }
-.modern-lead h1 { font-weight: 700; font-size: clamp(26px, 2.4vw, 36px); letter-spacing: -.025em; line-height: 1.12; }
+.modern-lead h1 { font-weight: 700; font-size: clamp(24px, 2.4vw, 36px); letter-spacing: -.025em; line-height: 1.12; }
 .dek { font-family: Inter, sans-serif; font-size: 15.5px; }
 .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
-.cards a { display: grid; grid-template-columns: 96px 1fr; grid-template-rows: auto auto 1fr; column-gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.cards a { display: grid; grid-template-columns: 96px minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .cards a::before { display: none !important; }
 .card-img { grid-row: 1 / span 3; margin: 0; aspect-ratio: 1; border-radius: 4px; }
 .cards h2 { margin: 4px 0 6px; font-weight: 650; font-size: 16px; letter-spacing: -.015em; }
@@ -21,13 +20,10 @@ nav { justify-content: flex-start; font-weight: 600; }
 .today-list h2 { color: var(--blue); }
 .today-list a { grid-template-columns: auto minmax(0, 1fr); gap: 16px; padding: 10px 0; font-weight: 550; font-size: 15px; letter-spacing: -.01em; }
 .today-list a span { order: -1; min-width: 46px; color: var(--blue); font-weight: 700; }
-.today-list .day { color: #111; }
-.sponsor-card { border-radius: 4px; }
-.sponsor-mark { background: var(--blue); }
-.newsletter-box { border-radius: 4px; background: #1d1d1d; }
-.newsletter-box button { background: var(--blue); }
+.today-list .day { color: var(--ink); }
+.sponsor-card, .newsletter-box { border-radius: 4px; }
 .article-body p, .article-body li { font-family: Inter, sans-serif; font-size: 17px; }
 .article-body > p:first-child::first-letter { float: none; font-size: inherit; margin: 0; color: inherit; font-weight: inherit; }
 .article-body h2 { border-top-color: var(--blue); color: var(--blue); }
-@media (max-width: 1180px) { .cards { grid-template-columns: 1fr; } }
+@media (max-width: 1180px) { .cards { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 720px) { .modern-lead.has-img { grid-template-columns: 1fr; grid-template-areas: "img" "meta" "title" "bottom"; } .lead-img { aspect-ratio: 16 / 9; } }

@@ -152,79 +152,113 @@ function showToast(msg) {
 })();
 
 /* Design variations (branch design-variations only, for choosing a look).
-   /theme/N or ?theme=N picks one of ten stylesheets in /variations; the
-   choice is remembered while browsing, and the bar at the bottom switches
-   between them. Not for production. */
+   Two independent choices: a layout (structure, positions, type; /layouts)
+   and a colour palette (/colors) that every page follows. Pick them with
+   ?layout=N&color=M, /layout/N, /color/N, or /theme/N (layout N with colour
+   N), or with the bar at the bottom. The choice is remembered while
+   browsing. Not for production. */
 (function () {
-  var NAMES = ['Editorial', 'Broadsheet', 'Swiss', 'Terminal', 'Magazine', 'Startup', 'Soft', 'Brutalist', 'Literary', 'Wire service'];
-  var param = Number(new URLSearchParams(location.search).get('theme'));
-  var current = 1;
-  try { current = Number(localStorage.getItem('ntw-variant')) || 1; } catch (e) {}
-  if (param >= 1 && param <= NAMES.length) current = param;
-  var link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.id = 'ntw-variant';
-  document.head.appendChild(link);
+  var AXES = {
+    layout: { label: 'Layout', dir: '/layouts/', names: ['Editorial', 'Broadsheet', 'Swiss', 'Terminal', 'Magazine cover', 'Startup', 'Soft', 'Brutalist', 'Literary', 'Wire service'] },
+    color: { label: 'Color', dir: '/colors/', names: ['Classic blue', 'Newsprint', 'Signal red', 'Terminal', 'Violet', 'Mint', 'Coral', 'Highlighter', 'Forest paper', 'Ember'],
+      swatch: [['#3047ff', '#ffffff'], ['#b3121f', '#f7f2e7'], ['#e30613', '#ffffff'], ['#ffb000', '#0c0b08'], ['#6d28d9', '#ffffff'], ['#0a8a43', '#ffffff'], ['#e8484f', '#faf6f3'], ['#ffe600', '#111111'], ['#1f5d4a', '#f8f3e8'], ['#e8590c', '#ffffff']] },
+  };
+  var params = new URLSearchParams(location.search);
+  var state = {};
+  Object.keys(AXES).forEach(function (axis) {
+    var n = Number(params.get(axis));
+    var saved = 1;
+    try { saved = Number(localStorage.getItem('ntw-' + axis)) || 1; } catch (e) {}
+    state[axis] = n >= 1 && n <= 10 ? n : saved;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    AXES[axis].link = link;
+    document.head.appendChild(link);
+  });
 
   var bar = document.createElement('div');
-  bar.setAttribute('role', 'toolbar');
   bar.setAttribute('aria-label', 'Design variations');
-  bar.style.cssText = 'position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:4px;max-width:calc(100vw - 16px);overflow-x:auto;padding:6px;border-radius:999px;background:rgba(17,17,17,.94);color:#fff;font:600 13px/1 Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.28);backdrop-filter:blur(8px);-webkit-font-smoothing:antialiased;';
-  var label = document.createElement('span');
-  label.style.cssText = 'padding:0 10px 0 12px;white-space:nowrap;color:#bbb;font-weight:500;';
-  var btnCss = 'flex:0 0 auto;min-width:32px;height:32px;padding:0 8px;border:0;border-radius:999px;font:inherit;cursor:pointer;';
-  var arrow = function (text, delta) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = text;
-    b.setAttribute('aria-label', delta < 0 ? 'Previous theme' : 'Next theme');
-    b.style.cssText = btnCss + 'background:transparent;color:#fff;';
-    b.addEventListener('click', function () { set(((current - 1 + delta + NAMES.length) % NAMES.length) + 1); });
-    return b;
-  };
-  var buttons = [];
-  bar.appendChild(arrow('‹', -1));
-  NAMES.forEach(function (name, i) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = String(i + 1);
-    b.title = (i + 1) + ' · ' + name;
-    b.addEventListener('click', function () { set(i + 1); });
-    buttons.push(b);
-    bar.appendChild(b);
+  bar.style.cssText = 'position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:4px;max-width:calc(100vw - 16px);padding:6px;border-radius:18px;background:rgba(17,17,17,.95);color:#fff;font:600 12.5px/1 Inter,system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.3);-webkit-font-smoothing:antialiased;';
+  var btnCss = 'flex:0 0 auto;min-width:30px;height:30px;padding:0 7px;border:0;border-radius:999px;font:inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;';
+  Object.keys(AXES).forEach(function (axis) {
+    var cfg = AXES[axis];
+    var row = document.createElement('div');
+    row.setAttribute('role', 'toolbar');
+    row.setAttribute('aria-label', cfg.label);
+    row.style.cssText = 'display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;';
+    var title = document.createElement('span');
+    title.textContent = cfg.label;
+    title.style.cssText = 'flex:0 0 58px;padding-left:8px;color:#9a9a9a;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;';
+    row.appendChild(title);
+    var arrow = function (text, delta) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = text;
+      b.setAttribute('aria-label', (delta < 0 ? 'Previous ' : 'Next ') + axis);
+      b.style.cssText = btnCss + 'background:transparent;color:#fff;';
+      b.addEventListener('click', function () { set(axis, ((state[axis] - 1 + delta + 10) % 10) + 1); });
+      return b;
+    };
+    row.appendChild(arrow('‹', -1));
+    cfg.buttons = cfg.names.map(function (name, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.title = (i + 1) + ' · ' + name;
+      if (cfg.swatch) {
+        var dot = document.createElement('span');
+        dot.style.cssText = 'width:10px;height:10px;border-radius:50%;background:' + cfg.swatch[i][0] + ';box-shadow:0 0 0 2px ' + cfg.swatch[i][1] + ';';
+        b.appendChild(dot);
+      }
+      b.appendChild(document.createTextNode(String(i + 1)));
+      b.addEventListener('click', function () { set(axis, i + 1); });
+      row.appendChild(b);
+      return b;
+    });
+    row.appendChild(arrow('›', 1));
+    cfg.nameEl = document.createElement('span');
+    cfg.nameEl.style.cssText = 'flex:0 0 auto;min-width:104px;padding:0 10px 0 6px;white-space:nowrap;color:#ddd;font-weight:500;';
+    row.appendChild(cfg.nameEl);
+    bar.appendChild(row);
   });
-  bar.appendChild(arrow('›', 1));
-  bar.appendChild(label);
 
-  function set(n) {
-    current = n;
-    link.href = '/variations/' + (n < 10 ? '0' + n : n) + '.css';
-    try { localStorage.setItem('ntw-variant', String(n)); } catch (e) {}
+  function set(axis, n) {
+    var cfg = AXES[axis];
+    state[axis] = n;
+    cfg.link.href = cfg.dir + (n < 10 ? '0' + n : n) + '.css';
+    try { localStorage.setItem('ntw-' + axis, String(n)); } catch (e) {}
     var url = new URL(location.href);
-    url.searchParams.set('theme', String(n));
+    url.searchParams.delete('theme');
+    url.searchParams.set('layout', String(state.layout || 1));
+    url.searchParams.set('color', String(state.color || 1));
     history.replaceState(null, '', url);
-    buttons.forEach(function (b, i) {
+    cfg.buttons.forEach(function (b, i) {
       var on = i + 1 === n;
       b.style.cssText = btnCss + (on ? 'background:#fff;color:#111;' : 'background:transparent;color:#ddd;');
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    label.textContent = n + ' · ' + NAMES[n - 1];
+    cfg.nameEl.textContent = n + ' · ' + cfg.names[n - 1];
   }
-  set(current);
+  set('layout', state.layout);
+  set('color', state.color);
   document.body.appendChild(bar);
-  document.body.style.paddingBottom = '72px';
-  // Keep the choice when following links inside the site.
+  document.body.style.paddingBottom = '110px';
+
+  // Keep both choices when following links inside the site.
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a || a.target === '_blank') return;
     var u = new URL(a.getAttribute('href'), location.href);
-    if (u.origin !== location.origin || u.hash && u.pathname === location.pathname) return;
-    u.searchParams.set('theme', String(current));
+    if (u.origin !== location.origin || (u.hash && u.pathname === location.pathname)) return;
+    u.searchParams.set('layout', String(state.layout));
+    u.searchParams.set('color', String(state.color));
     a.href = u.pathname + u.search + u.hash;
   }, true);
+  // Arrow keys change the layout; with Shift they change the colour.
   document.addEventListener('keydown', function (e) {
     if (/input|textarea|select/i.test(e.target.tagName)) return;
-    if (e.key === 'ArrowRight') set((current % NAMES.length) + 1);
-    if (e.key === 'ArrowLeft') set(((current - 2 + NAMES.length) % NAMES.length) + 1);
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var axis = e.shiftKey ? 'color' : 'layout';
+    var delta = e.key === 'ArrowRight' ? 1 : -1;
+    set(axis, ((state[axis] - 1 + delta + 10) % 10) + 1);
   });
 })();

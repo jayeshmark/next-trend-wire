@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
-<title>Theme 6 · Magazine · Next Trend Wire</title>
+<title>Theme 6 · Startup + Mint · Next Trend Wire</title>
 <script>
-  try { localStorage.setItem('ntw-variant', '6'); } catch (e) {}
-  location.replace('/?theme=6');
+  var q = new URLSearchParams();
+  try { localStorage.setItem('ntw-layout', '6'); localStorage.setItem('ntw-color', '6'); } catch (e) {}
+  q.set('layout', '6'); q.set('color', '6');
+  location.replace('/?' + q.toString());
 </script>
 </head>
-<body><a href="/?theme=6">Open theme 6</a></body>
+<body><a href="/">Open Next Trend Wire</a></body>
 </html>

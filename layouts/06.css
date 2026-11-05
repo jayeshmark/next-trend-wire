@@ -1,0 +1,27 @@
+/* Layout 6 · Startup. Geometric sans, bordered cards that lift on hover,
+   pill tags, a badge logo, rounded corners. */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap");
+:root { --serif: "Space Grotesk", Inter, sans-serif; }
+.logo { font-family: "Space Grotesk", sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -.04em; }
+.logo b { background: var(--blue); color: var(--accent-ink); padding: 2px 7px; border-radius: 6px; margin-left: 2px; }
+header { border-bottom: 1px solid var(--line); }
+.subscribe { background: var(--blue); color: var(--accent-ink); }
+.eyebrow { display: inline-block; width: max-content; padding: 4px 9px; border-radius: 99px; background: color-mix(in srgb, var(--blue) 12%, transparent); letter-spacing: .06em; }
+.modern-lead h1, .cards h2, .article h1, .today-list a, .sponsor-card h2 { font-weight: 700; letter-spacing: -.03em; }
+.modern-lead h1 { font-size: clamp(30px, 3.4vw, 50px); }
+.lead-img, .card-img { border-radius: 14px; }
+.cards { gap: 18px; }
+.cards a { padding: 12px 12px 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); transition: transform .2s ease, box-shadow .2s ease; }
+.cards a:hover { transform: translateY(-4px); box-shadow: 0 14px 30px color-mix(in srgb, var(--ink) 12%, transparent); }
+.cards a + a::before { display: none; }
+.cards h2 { font-size: 18px; margin: 10px 4px 12px; }
+.cards .eyebrow, .cards span { margin-left: 4px; }
+.today-list { border-top: 1px solid var(--line); }
+.today-list a { font-size: 17px; }
+.today-list .day { color: var(--ink); }
+.sponsor-card, .newsletter-box, .article-img { border-radius: 18px; }
+.article-body p, .article-body li { font-family: Inter, sans-serif; font-size: 18px; }
+.article-body > p:first-child::first-letter { float: none; font-size: inherit; margin: 0; color: inherit; font-weight: inherit; }
+.article-body ul > li::before { border-radius: 50%; }
+footer { border-top: 1px solid var(--line); }
+@media (max-width: 640px) { .cards a { padding: 12px 12px 16px; margin-bottom: 14px; border-bottom: 1px solid var(--line); } }

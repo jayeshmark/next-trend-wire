@@ -1,0 +1,13 @@
+/* Color 2 · Newsprint. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #f7f2e7; --surface: #fbf8f0;
+  --ink: #1a1712; --ink-soft: #3b352b; --muted: #675e50;
+  --line: #d9d2c3; --rule: #1a1712; --panel: #efe8d8;
+  --blue: #b3121f; --accent-ink: #ffffff;
+  --invert-bg: #1a1712; --invert-ink: #f7f2e7; --invert-muted: rgba(247,242,231,.62);
+  --input-bg: #fbf8f0; --input-ink: #1a1712;
+  --hi: #f3d5c8; --img-filter: sepia(.18) contrast(1.04);
+  --accent: #b3121f; --hairline: #d9d2c3; --panel-ink: #1a1712;
+  background: #f7f2e7; color: #1a1712;
+}

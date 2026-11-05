@@ -1,0 +1,13 @@
+/* Color 9 · Forest paper. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #f8f3e8; --surface: #fcf9f2;
+  --ink: #2b2620; --ink-soft: #4a4238; --muted: #675d4c;
+  --line: #e4dccb; --rule: #2b2620; --panel: #f1ead9;
+  --blue: #1f5d4a; --accent-ink: #ffffff;
+  --invert-bg: #1f5d4a; --invert-ink: #ffffff; --invert-muted: rgba(255,255,255,.7);
+  --input-bg: #fcf9f2; --input-ink: #2b2620;
+  --hi: #d5e8df; --img-filter: none;
+  --accent: #1f5d4a; --hairline: #e4dccb; --panel-ink: #2b2620;
+  background: #f8f3e8; color: #2b2620;
+}

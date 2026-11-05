@@ -1,0 +1,13 @@
+/* Color 3 · Signal red. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #ffffff; --surface: #ffffff;
+  --ink: #0d0d0d; --ink-soft: #333333; --muted: #6a6a6a;
+  --line: #dcdcdc; --rule: #0d0d0d; --panel: #f2f2f2;
+  --blue: #e30613; --accent-ink: #ffffff;
+  --invert-bg: #e30613; --invert-ink: #ffffff; --invert-muted: rgba(255,255,255,.75);
+  --input-bg: #ffffff; --input-ink: #0d0d0d;
+  --hi: #ffd3d6; --img-filter: none;
+  --accent: #e30613; --hairline: #dcdcdc; --panel-ink: #0d0d0d;
+  background: #ffffff; color: #0d0d0d;
+}

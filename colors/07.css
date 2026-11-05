@@ -1,0 +1,13 @@
+/* Color 7 · Coral. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #faf6f3; --surface: #ffffff;
+  --ink: #2a1e1b; --ink-soft: #4d3d38; --muted: #6f5f59;
+  --line: #ece4df; --rule: #2a1e1b; --panel: #f4ece7;
+  --blue: #e8484f; --accent-ink: #ffffff;
+  --invert-bg: #2b1d1a; --invert-ink: #ffffff; --invert-muted: rgba(255,255,255,.62);
+  --input-bg: #ffffff; --input-ink: #2a1e1b;
+  --hi: #ffd9d6; --img-filter: none;
+  --accent: #e8484f; --hairline: #ece4df; --panel-ink: #2a1e1b;
+  background: #faf6f3; color: #2a1e1b;
+}

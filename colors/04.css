@@ -1,0 +1,13 @@
+/* Color 4 · Terminal. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #0c0b08; --surface: #16150f;
+  --ink: #e9e6dd; --ink-soft: #b9b4a6; --muted: #8a8577;
+  --line: #2a2924; --rule: #ffb000; --panel: #16150f;
+  --blue: #ffb000; --accent-ink: #0c0b08;
+  --invert-bg: #16150f; --invert-ink: #e9e6dd; --invert-muted: rgba(233,230,221,.6);
+  --input-bg: #0c0b08; --input-ink: #e9e6dd;
+  --hi: #4a3a10; --img-filter: saturate(.6) contrast(1.1);
+  --accent: #ffb000; --hairline: #2a2924; --panel-ink: #e9e6dd;
+  background: #0c0b08; color: #e9e6dd;
+}

@@ -1,0 +1,13 @@
+/* Color 5 · Violet. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #ffffff; --surface: #ffffff;
+  --ink: #14111f; --ink-soft: #3c3650; --muted: #77718a;
+  --line: #ecebf3; --rule: #14111f; --panel: #f6f4fb;
+  --blue: #6d28d9; --accent-ink: #ffffff;
+  --invert-bg: #6d28d9; --invert-ink: #ffffff; --invert-muted: rgba(255,255,255,.72);
+  --input-bg: #ffffff; --input-ink: #14111f;
+  --hi: #e9dcff; --img-filter: none;
+  --accent: #6d28d9; --hairline: #ecebf3; --panel-ink: #14111f;
+  background: #ffffff; color: #14111f;
+}

@@ -1,0 +1,13 @@
+/* Color 10 · Ember. Palette only: every page reads these tokens, and the
+   Database tables read the aliases at the bottom. */
+:root {
+  --bg: #ffffff; --surface: #ffffff;
+  --ink: #161616; --ink-soft: #3a3a3a; --muted: #737373;
+  --line: #e7e7e7; --rule: #161616; --panel: #f6f6f6;
+  --blue: #e8590c; --accent-ink: #ffffff;
+  --invert-bg: #1d1d1d; --invert-ink: #ffffff; --invert-muted: rgba(255,255,255,.6);
+  --input-bg: #ffffff; --input-ink: #161616;
+  --hi: #ffdcc6; --img-filter: none;
+  --accent: #e8590c; --hairline: #e7e7e7; --panel-ink: #161616;
+  background: #ffffff; color: #161616;
+}
