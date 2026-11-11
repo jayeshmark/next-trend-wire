@@ -377,3 +377,49 @@ body.search-locked { overflow: hidden; }
   .story-card h3 { grid-area: title; font-size: 17px; }
   .story-card > span { grid-area: meta; }
 }
+
+/* Mobile pass (2026-11-11): finger-sized targets, a header that gets out of
+   the way while reading, and room for the Archive/Database dark toggle. */
+@media (max-width: 1320px) {
+  /* Archive and Database carry an extra Dark button: go to two rows earlier. */
+  .site-header:has(.theme-toggle) { flex-wrap: wrap; gap: 0 16px; padding-top: 12px; min-height: 0; }
+  .site-header:has(.theme-toggle) .logo { order: 1; }
+  .site-header:has(.theme-toggle) .header-tools { order: 2; margin-left: auto; }
+  .site-header:has(.theme-toggle) .site-nav { order: 3; flex: 1 0 100%; justify-content: flex-start; margin-top: 8px; padding: 6px 0 8px; overflow-x: auto; scrollbar-width: none; }
+}
+@media (max-width: 1180px) {
+  .site-nav { padding: 0; margin-top: 4px; }
+  .site-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; }
+  .site-nav a::after { bottom: 6px; }
+  .site-header:has(.theme-toggle) .site-nav { padding: 0; margin-top: 4px; }
+  .site-header .logo { display: inline-flex; align-items: center; min-height: 44px; }
+}
+@media (max-width: 760px) {
+  .site-header { transition: transform .25s ease; }
+  .site-header.tucked { transform: translateY(-100%); }
+  .search-open, .site-header .subscribe, .site-header .theme-toggle { min-height: 40px; }
+  .search-open { min-width: 40px; justify-content: center; }
+  .crumbs { gap: 0 8px; }
+  .crumbs a, .crumbs [aria-current] { display: inline-flex; align-items: center; min-height: 36px; }
+  .topic-chips a { min-height: 40px; }
+  .site-footer li a { display: inline-block; padding: 6px 0; }
+  .site-footer ul { gap: 2px; }
+  .tb-all, .section-head a { display: inline-flex; align-items: center; min-height: 40px; }
+  .search-results a { padding-top: 12px; padding-bottom: 12px; }
+}
+@media (max-width: 400px) {
+  .site-header .logo { font-size: 15.5px; }
+  .header-tools { gap: 6px; }
+  .site-header .subscribe { padding: 8px 12px; font-size: 12px; }
+  .site-header .subscribe b { display: none; }
+  .site-header:has(.theme-toggle) .subscribe { display: none; }
+  .site-nav { gap: 16px; }
+}
+@media (pointer: coarse) {
+  .crumbs a, .crumbs [aria-current] { display: inline-flex; align-items: center; min-height: 36px; }
+  .topic-chips a { min-height: 40px; }
+  .site-footer .logo { display: inline-flex; align-items: center; min-height: 40px; }
+  .site-footer li a { display: inline-block; padding: 9px 0; }
+  .site-footer ul { gap: 0; }
+  .site-footer li { line-height: 1.2; }
+}

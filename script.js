@@ -162,6 +162,24 @@ function showToast(msg) {
     current.parentNode.scrollLeft = current.offsetLeft - (current.parentNode.clientWidth - current.offsetWidth) / 2;
   }
 
+  // Phones: slide the header away while scrolling down a story, bring it
+  // back on any scroll up, so it never covers more than it has to.
+  var hdr = document.querySelector('.site-header');
+  if (hdr && window.matchMedia) {
+    var narrow = window.matchMedia('(max-width: 760px)'), lastY = window.scrollY, ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        if (!narrow.matches || y < 160 || y < lastY - 4 || document.body.classList.contains('search-locked')) hdr.classList.remove('tucked');
+        else if (y > lastY + 4) hdr.classList.add('tucked');
+        lastY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
   var openers = document.querySelectorAll('.search-open');
   if (!openers.length) return;
 
