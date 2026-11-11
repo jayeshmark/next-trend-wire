@@ -353,6 +353,35 @@ PAGES = {
                                     "path-robotics-300m-series-e.jpg", "A robotic welding cell in a factory (file photo)"),
     "gta-6-30fps-ps5-pro": ("gta-6-30fps-ps5-pro.md", "Technology", "November 10, 2026",
                             "gta-6-30fps-ps5-pro.jpg", "PlayStation consoles including the PlayStation 5 (file photo)"),
+    # New posts, November 11, 2026 (12:13 run, trends + startup lane)
+    "stacy-keach-dies-85": ("stacy-keach-dies-85.md", "Culture", "November 11, 2026",
+                            "stacy-keach-dies-85.jpg", "Stacy Keach in 2007 (file photo)"),
+    "paul-george-36-celtics-76ers": ("paul-george-36-celtics-76ers.md", "Sports", "November 11, 2026",
+                                     "paul-george-36-celtics-76ers.jpg", "Paul George at a press conference in 2014 (file photo)"),
+    "cfp-rankings-georgia-no-1": ("cfp-rankings-georgia-no-1.md", "Sports", "November 11, 2026",
+                                  "cfp-rankings-georgia-no-1.jpg", "Sanford Stadium during a Georgia game in 2016 (file photo)"),
+    "nidus-30m-defense-robotics": ("nidus-30m-defense-robotics.md", "Business", "November 11, 2026",
+                                   "nidus-30m-defense-robotics.jpg", "Six-axis welding robots at work in a factory (file photo)"),
+    # New posts, November 11, 2026 (18:13 run, trends + startup lane)
+    "coachella-2027-lineup": ("coachella-2027-lineup.md", "Culture", "November 11, 2026",
+                              "coachella-2027-lineup.jpg", "The Coachella main stage with a crowd in front of it (file photo)"),
+    "mark-robinson-bankruptcy-chapter-13": ("mark-robinson-bankruptcy-chapter-13.md", "Politics", "November 11, 2026",
+                                            "mark-robinson-bankruptcy-chapter-13.jpg", "Mark Robinson speaking at a microphone in 2022 (file photo)"),
+    "reflect-orbital-73-5m-funding": ("reflect-orbital-73-5m-funding.md", "Business", "November 11, 2026",
+                                      "reflect-orbital-73-5m-funding.jpg", "An artist's rendering of a satellite above Earth (file photo)"),
+    "vumedi-ai-physician-learning-104m": ("vumedi-ai-physician-learning-104m.md", "Business", "November 11, 2026",
+                                          "vumedi-ai-physician-learning-104m.jpg", "A doctor discussing medical images during a virtual consultation (file photo)"),
+    # New posts, November 11, 2026 (00:13 run, trends + startup lane)
+    "ss-united-states-sinks-artificial-reef": ("ss-united-states-sinks-artificial-reef.md", "Culture", "November 11, 2026",
+                                                "ss-united-states-sinks-artificial-reef.jpg", "The SS United States at Pier 82 in Philadelphia in 2017 (file photo)"),
+    "rex-ryan-arrested-nashville-hit-and-run": ("rex-ryan-arrested-nashville-hit-and-run.md", "Sports", "November 11, 2026",
+                                                "rex-ryan-arrested-nashville-hit-and-run.jpg", "Rex Ryan on the sideline as Buffalo Bills head coach in 2016 (file photo)"),
+    "koah-sharpe-found-alive-buried-dog-crate": ("koah-sharpe-found-alive-buried-dog-crate.md", "Politics", "November 11, 2026",
+                                                 "koah-sharpe-found-alive-buried-dog-crate.jpg", "The Lexington County Courthouse in Lexington, South Carolina (file photo)"),
+    "rox-100m-series-b": ("rox-100m-series-b.md", "Business", "November 11, 2026",
+                          "rox-100m-series-b.jpg", "The San Francisco skyline from Pier 7 (file photo)"),
+    "jack-sabato-fatal-hit-and-run": ("jack-sabato-fatal-hit-and-run.md", "Culture", "November 11, 2026",
+                                      "jack-sabato-fatal-hit-and-run.jpg", "Downtown Anchorage, Alaska, from Delaney Park (file photo)"),
 }
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
