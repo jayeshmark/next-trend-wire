@@ -9,3 +9,7 @@ Design v3.3 copies the Figma Make Modern code: src/App.tsx Modern() structure an
 - Fake interactions: `script.js` (buttons show a "Demo preview" toast)
 
 Live: https://next-trend-wire.vercel.app/
+
+## Navigation layer (2026-11-11)
+
+Vercel runs `node scripts/build-site.mjs` on every deploy and serves `dist/`. The source pages stay exactly as the post pipeline writes them; the build gives every page one header (Latest, the six main topics, Archive, Database, All topics, Search) and one sitemap footer, adds breadcrumbs, previous/next and "More in <topic>" to every post, adds "Browse by topic" to the homepage, and writes `/topics/`, one page per topic, `/search-index.json` and the topic URLs in `sitemap.xml`. Topics come from each post's eyebrow, so a new topic appears the first time a post uses it. Search opens with `/` or Cmd+K. Preview locally: `node scripts/build-site.mjs && npx serve dist`.
