@@ -432,3 +432,249 @@ export function applyHub(html, main) {
   return html.replace('</body>', () => '<script src="/hubs.js" defer></script>\n</body>');
 }
 
+
+// ── Database detail pages (players, teams, seasons, records, letter lists) ──
+// Same idea as the landing pages: the source page is left alone and the built
+// copy gets a hero, breadcrumbs and, for players, headline totals and a
+// season chart worked out from the page's own tables.
+const STAT_NAMES = {
+  'Passing|Yds': 'Passing yards', 'Passing|TD': 'Passing touchdowns', 'Passing|INT': 'Interceptions thrown', 'Passing|Comp': 'Completions',
+  'Rushing|Yds': 'Rushing yards', 'Rushing|TD': 'Rushing touchdowns', 'Rushing|Att': 'Carries',
+  'Receiving|Rec': 'Receptions', 'Receiving|Yds': 'Receiving yards', 'Receiving|TD': 'Receiving touchdowns',
+  'Defense|Solo': 'Solo tackles', 'Defense|Sacks': 'Sacks', 'Defense|INT': 'Interceptions', 'Defense|FF': 'Forced fumbles', 'Defense|PD': 'Passes defended',
+};
+const STAT_ORDER = ['Yds', 'Rec', 'Solo', 'TD', 'Sacks', 'INT', 'FF', 'PD', 'Comp', 'Att'];
+const PRIMARY_GROUP = { QB: 'Passing', RB: 'Rushing', FB: 'Rushing', WR: 'Receiving', TE: 'Receiving' };
+const crumbTrail = (items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map(([href, label], i) => i === items.length - 1 ? `<span aria-current="page">${esc(label)}</span>` : `<a href="${href}">${esc(label)}</a>`).join('<i aria-hidden="true">/</i>')}</nav>`;
+const toNum = (s) => Number(String(s).replace(/,/g, '')) || 0;
+
+export function detailContext(ROOT) {
+  const hubs = readTeams(ROOT);
+  const letterOf = new Map();
+  const dir = path.join(ROOT, 'database', 'players');
+  for (const file of fs.readdirSync(dir).filter((f) => /^index-.+\.html$/.test(f))) {
+    const html = fs.readFileSync(path.join(dir, file), 'utf8');
+    for (const m of html.matchAll(/<li><a href="([^"]+)">/g)) letterOf.set(m[1], file.slice(6, -5));
+  }
+  return { abbrByName: new Map([...hubs.values()].map((h) => [h.name, h.abbr])), nameByAbbr: new Map([...hubs.values()].map((h) => [h.abbr, h.name])), letterOf };
+}
+
+// Column groups from a two-row table head: [{ group, label }] per column.
+function columnsOf(thead) {
+  const rows = [...thead.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map((r) => [...r[1].matchAll(/<th([^>]*)>([\s\S]*?)<\/th>/g)]);
+  if (rows.length < 2) return (rows[0] || []).map((c) => ({ group: '', label: text(c[2]) }));
+  const subs = rows[1].map((c) => text(c[2]));
+  const cols = [];
+  for (const c of rows[0]) {
+    const span = Number((c[1].match(/colspan="(\d+)"/) || [])[1] || 1);
+    if (/rowspan/.test(c[1])) cols.push({ group: '', label: text(c[2]) });
+    else for (let i = 0; i < span; i++) cols.push({ group: text(c[2]), label: subs.shift() || '', start: i === 0 });
+  }
+  return cols;
+}
+
+// Dim the zeros and mark where each column group starts.
+function dressTable(table) {
+  const head = (table.match(/<thead>[\s\S]*?<\/thead>/) || [''])[0];
+  const cols = columnsOf(head);
+  let out = table.replace(/<tr>((?:\s*<td[\s\S]*?<\/td>)+)\s*<\/tr>/g, (row, cells) => {
+    let i = -1;
+    return '<tr>' + cells.replace(/<td([^>]*)>([\s\S]*?)<\/td>/g, (m, attrs, inner) => {
+      i++;
+      const cls = [cols[i] && cols[i].start ? 'gs' : '', /^(0|0\.0)$/.test(inner.trim()) ? 'z' : ''].filter(Boolean).join(' ');
+      return `<td${attrs}${cls ? ` class="${cls}"` : ''}>${inner}</td>`;
+    }) + '</tr>';
+  });
+  let g = 0;
+  out = out.replace(/<th colspan=/g, () => `<th class="gh${g++ ? ' gs' : ' gs'}" colspan=`);
+  let s = -1;
+  const subStarts = new Set(cols.filter((c) => c.group).map((c, i) => (c.start ? i : -1)).filter((i) => i >= 0));
+  out = out.replace(/(<\/tr>\s*<tr>)([\s\S]*?)(<\/tr>\s*<\/thead>)/, (m, a, mid, z) => a + mid.replace(/<th>/g, () => { s++; return subStarts.has(s) ? '<th class="gs">' : '<th>'; }) + z);
+  return { html: out, cols };
+}
+
+function playerPage(html, rel, ctx) {
+  const id = rel.slice('database/players/'.length, -5);
+  const main = (html.match(/<main[^>]*>[\s\S]*?<\/main>/) || [''])[0];
+  const name = text((main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || '');
+  const fact = (k) => text((main.match(new RegExp(`<dt>${k}</dt>\\s*<dd>([\\s\\S]*?)</dd>`)) || [])[1] || '');
+  const pos = fact('Position'), group = fact('Position group'), seasonsText = fact('Seasons'), games = fact('Games');
+  const stints = fact('Teams').split(';').map((s) => s.trim()).filter(Boolean).map((s) => {
+    const m = s.match(/^(.*?)\s+(\d{4}.*)$/);
+    const team = m ? m[1] : s;
+    return { team, years: m ? m[2] : '', abbr: ctx.abbrByName.get(team) };
+  });
+  const tables = [...main.matchAll(/<div class="db-table-wrap"><table class="db-table">[\s\S]*?<\/table><\/div>/g)].map((m) => m[0]);
+  if (tables.length < 2 || !name) return null;
+  const career = dressTable(tables[0]), seasons = dressTable(tables[1]);
+  const cols = career.cols;
+  const careerCells = [...(tables[0].match(/<tbody>[\s\S]*?<\/tbody>/) || [''])[0].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => text(c[1]));
+
+  // Headline totals: the position's own group first, then whatever is biggest.
+  const groups = [...new Set(cols.map((c) => c.group).filter(Boolean))];
+  const weight = (g) => Math.max(0, ...cols.map((c, i) => (c.group === g ? toNum(careerCells[i]) : 0)));
+  const primary = groups.includes(PRIMARY_GROUP[group] || PRIMARY_GROUP[pos]) ? (PRIMARY_GROUP[group] || PRIMARY_GROUP[pos]) : groups.slice().sort((a, b) => weight(b) - weight(a))[0];
+  const ordered = [primary, ...groups.filter((g) => g !== primary).sort((a, b) => weight(b) - weight(a))];
+  const tiles = [];
+  for (const g of ordered) {
+    const picks = cols.map((c, i) => ({ ...c, i })).filter((c) => c.group === g && STAT_NAMES[`${g}|${c.label}`] && toNum(careerCells[c.i]) > 0)
+      .sort((a, b) => STAT_ORDER.indexOf(a.label) - STAT_ORDER.indexOf(b.label));
+    for (const c of picks.slice(0, g === primary ? 3 : 1)) tiles.push({ label: STAT_NAMES[`${g}|${c.label}`], value: careerCells[c.i], i: c.i });
+    if (tiles.length >= 4) break;
+  }
+
+  // Season chart for the first headline stat.
+  let chart = '';
+  const lead = tiles[0];
+  if (lead) {
+    const rows = [...(tables[1].match(/<tbody>[\s\S]*?<\/tbody>/) || [''])[0].matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map((r) => {
+      const cells = [...r[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => c[1]);
+      return { year: text(cells[0]), abbr: text(cells[1]), href: (cells[1].match(/href="([^"]+)"/) || [])[1], value: text(cells[lead.i] || '0') };
+    }).filter((r) => /^\d{4}$/.test(r.year));
+    const max = Math.max(...rows.map((r) => toNum(r.value)), 1);
+    if (rows.length > 1) {
+      chart = `<div class="pc"><div class="mc-head"><h2>${esc(lead.label)} by season</h2><p class="mc-readout">Best: ${esc(rows.slice().sort((a, b) => toNum(b.value) - toNum(a.value))[0].value)} in ${rows.slice().sort((a, b) => toNum(b.value) - toNum(a.value))[0].year}</p></div>
+        <div class="pc-plot">${rows.map((r) => `<a class="pc-bar${toNum(r.value) === max ? ' top' : ''}" href="${r.href ? '/database/teams/' + r.href.replace(/^.*teams\//, '') : '#'}" style="--h:${Math.max(3, Math.round((Math.max(0, toNum(r.value)) / max) * 100))}%;--c:${NFL_COLORS[r.abbr] || '#8a8a86'}" data-tip="${esc(`${r.year} ${r.abbr}: ${r.value}`)}" aria-label="${esc(`${r.year}, ${r.abbr}: ${r.value} ${lead.label.toLowerCase()}`)}"><i></i><span>${r.year.slice(2)}</span></a>`).join('')}</div>
+      </div>`;
+    }
+  }
+
+  const letter = ctx.letterOf.get(id);
+  const trail = [['/database/', 'Database'], ['/database/#players', 'Players'], ...(letter ? [[`/database/players/index-${letter}`, letter]] : []), [`/database/players/${id}`, name]];
+  const hero = `<section class="hub-hero d-hero">
+      <div class="hub-hero-bg" aria-hidden="true"></div>
+      ${crumbTrail(trail)}
+      <p class="eyebrow">NFL stats · Player</p>
+      <h1>${esc(name)}</h1>
+      <p class="d-chips">${pos ? `<span class="d-pos">${esc(pos)}</span>` : ''}${seasonsText ? `<span>${esc(seasonsText)}</span>` : ''}${stints.map((s) => s.abbr ? `<a href="/database/teams/${s.abbr}" style="--c:${NFL_COLORS[s.abbr] || '#8a8a86'}"><i></i>${esc(s.team)} <small>${esc(s.years)}</small></a>` : `<span>${esc(s.team)} <small>${esc(s.years)}</small></span>`).join('')}</p>
+      <dl class="hub-stats">
+        ${games ? `<div><dt>Games</dt><dd>${esc(games)}</dd></div>` : ''}
+        ${tiles.map((t) => `<div><dt>${esc(t.label)}</dt><dd>${esc(t.value)}</dd></div>`).join('\n        ')}
+      </dl>
+      ${chart}
+    </section>`;
+
+  let body = (main.match(/<div class="article-body">[\s\S]*<\/div>\s*(?=<p class="article-back">|<\/main>)/) || [''])[0];
+  body = body.replace(tables[0], () => career.html).replace(tables[1], () => seasons.html);
+  body = body.replace(/<h2>Newsletter<\/h2>/, '<h2 class="sr-only">Newsletter</h2>');
+  // Super Bowl appearances: one card per game with the result.
+  body = body.replace(/<li>(<a href="[^"]*archive\/[^"]+">[^<]+<\/a>), ([^<]*?), with the ([^:<]+): ([^<]+?)\.<\/li>/g, (m, link, when, team, score) => {
+    const sm = score.match(/^(.+?) (\d+), (.+?) (\d+)$/);
+    const won = sm ? (sm[1] === team ? Number(sm[2]) > Number(sm[4]) : Number(sm[4]) > Number(sm[2])) : null;
+    return `<li class="sb"><span class="sb-res ${won ? 'w' : 'l'}">${won === null ? '' : won ? 'Won' : 'Lost'}</span><strong>${link}</strong><span class="sb-score">${esc(unesc(score))}</span><small>${esc(unesc(when))} · ${esc(unesc(team))}</small></li>`;
+  });
+  return html.replace(main, () => `<main class="page db-page hub db-detail db-player">
+    ${hero}
+    ${body}
+  </main>`);
+}
+
+
+// Team season: record and points in the hero, a win/loss strip for every
+// game, totals and leaders as cards, the roster as a grid.
+function teamSeasonPage(html, rel, ctx, ROOT) {
+  const file = rel.split('/').pop().slice(0, -5);
+  const [abbr, year] = file.split('-');
+  const main = (html.match(/<main[^>]*>[\s\S]*?<\/main>/) || [''])[0];
+  const h1 = text((main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || '');
+  const fact = (k) => text((main.match(new RegExp(`<dt>${k}</dt>\\s*<dd>([\\s\\S]*?)</dd>`)) || [])[1] || '');
+  const record = fact('Regular season record'), pf = fact('Points for'), pa = fact('Points against'), coach = fact('Head coach'), stadium = fact('Home stadium'), finish = fact('Playoff finish');
+  if (!h1 || !record) return null;
+  const teamName = ctx.nameByAbbr.get(abbr) || abbr;
+  const section = (title) => {
+    const m = main.match(new RegExp(`<h2>${title}</h2>[\\s\\S]*?(<div class="db-table-wrap">[\\s\\S]*?</table></div>)`));
+    if (!m) return null;
+    const rows = [...(m[1].match(/<tbody>[\s\S]*?<\/tbody>/) || [''])[0].matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map((r) => [...r[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => c[1]));
+    return { wrap: m[1], rows };
+  };
+  let body = main;
+
+  const totals = section('Team totals');
+  if (totals) {
+    const groups = new Map();
+    for (const [cat, stat, val] of totals.rows) { if (!groups.has(cat)) groups.set(cat, []); groups.get(cat).push([stat, val]); }
+    body = body.replace(totals.wrap, () => `<div class="ts-cards">${[...groups].map(([cat, list]) => `<section class="ts-card"><h3>${cat}</h3><dl>${list.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></section>`).join('')}</div>`);
+  }
+  const leaders = section('Season leaders');
+  if (leaders) {
+    body = body.replace(leaders.wrap, () => `<div class="ts-leaders">${leaders.rows.map(([cat, player, line]) => `<div class="ts-leader"><span>${cat}</span><strong>${player}</strong><p>${line}</p></div>`).join('')}</div>`);
+  }
+  const games = section('Game by game results');
+  let strip = '';
+  if (games) {
+    const cells = games.rows.map((r) => r.map(text));
+    strip = `<div class="gs-strip"><div class="mc-head"><h2>Every game, in order</h2><p class="mc-readout">${cells.filter((c) => c[5] === 'W').length} wins, ${cells.filter((c) => c[5] === 'L').length} losses${cells.some((c) => c[5] === 'T') ? `, ${cells.filter((c) => c[5] === 'T').length} ties` : ''} including the playoffs</p></div><div class="gs-row">${cells.map((c) => {
+      const post = !/^Week/i.test(c[2]);
+      const opp = (c[3].match(/\(([A-Z]+)\)/) || [])[1] || c[3];
+      return `<span class="gs-g ${c[5] === 'W' ? 'w' : c[5] === 'T' ? 't' : 'l'}${post ? ' post' : ''}" data-tip="${esc(`${c[2]} ${c[4] === 'Away' ? 'at' : 'vs'} ${opp}: ${c[5]} ${c[6]}`)}"><b>${esc(c[5])}</b><small>${esc(opp)}</small></span>`;
+    }).join('')}</div></div>`;
+    body = body.replace(games.wrap, () => games.wrap.replace(/<td>(W|L|T)<\/td>/g, (m, r) => `<td><span class="res ${r.toLowerCase()}">${r}</span></td>`));
+  }
+  const roster = section('Roster');
+  if (roster) {
+    body = body.replace(roster.wrap, () => `<ul class="ts-roster">${roster.rows.map(([player, pos]) => `<li><span>${text(pos)}</span>${player}</li>`).join('')}</ul>`);
+  }
+  body = body.replace(/<section class="facts"[\s\S]*?<\/section>\s*/, '');
+
+  const y = Number(year);
+  const near = (n) => fs.existsSync(path.join(ROOT, 'database', 'teams', `${abbr}-${n}.html`)) ? `<a href="/database/teams/${abbr}-${n}">${n < y ? '&larr; ' : ''}${n}${n > y ? ' &rarr;' : ''}</a>` : '';
+  const diff = toNum(pf) - toNum(pa);
+  const won = /^Won Super Bowl/.test(finish);
+  const hero = `<section class="hub-hero d-hero" style="--c:${NFL_COLORS[abbr] || 'transparent'}">
+      <div class="hub-hero-bg" aria-hidden="true"></div>
+      ${crumbTrail([['/database/', 'Database'], ['/database/#teams', 'Teams'], [`/database/teams/${abbr}`, teamName], [`/database/teams/${file}`, year]])}
+      <p class="eyebrow">NFL database · ${esc(year)} season</p>
+      <h1>${esc(h1)}</h1>
+      <p class="d-chips"><a href="/database/teams/${abbr}" style="--c:${NFL_COLORS[abbr] || '#8a8a86'}"><i></i>${esc(teamName)} <small>all seasons</small></a>${coach ? `<span><small>Coach</small> ${esc(coach)}</span>` : ''}${stadium ? `<span><small>Home</small> ${esc(stadium)}</span>` : ''}${near(y - 1)}${near(y + 1)}</p>
+      <dl class="hub-stats">
+        <div><dt>Regular season</dt><dd>${esc(record)}</dd></div>
+        <div><dt>Points for</dt><dd>${esc(pf)}</dd></div>
+        <div><dt>Points against</dt><dd>${esc(pa)}</dd></div>
+        <div><dt>Point difference</dt><dd>${diff > 0 ? '+' : ''}${diff}</dd></div>
+        <div class="ts-finish${won ? ' won' : ''}"><dt>Playoffs</dt><dd>${esc(finish)}</dd></div>
+      </dl>
+      ${strip}
+    </section>`;
+  body = body.replace(/(<main[^>]*>)[\s\S]*?(?=<div class="article-body">)/, () => `<main class="page db-page hub db-detail db-season">\n    ${hero}\n    `);
+  return html.replace(main, () => body);
+}
+
+function genericDetail(html, rel, ctx) {
+  const file = rel.split('/').pop().slice(0, -5);
+  let trail = [['/database/', 'Database']], color = '';
+  if (rel.startsWith('database/teams/')) {
+    const [abbr, year] = file.split('-');
+    color = NFL_COLORS[abbr] || '';
+    const teamName = ctx.nameByAbbr.get(abbr) || abbr;
+    trail.push(['/database/#teams', 'Teams']);
+    if (year) trail.push([`/database/teams/${abbr}`, teamName], [`/database/teams/${file}`, year]);
+    else trail.push([`/database/teams/${abbr}`, teamName]);
+  } else if (rel.startsWith('database/players/index-')) {
+    trail.push(['/database/#players', 'Players'], [`/database/players/${file}`, file.slice(6)]);
+  } else if (file.startsWith('records-')) {
+    trail.push(['/database/#records', 'Records'], [`/database/${file}`, file.slice(8).replace(/^./, (c) => c.toUpperCase())]);
+  } else return null;
+  const m = html.match(/(<main[^>]*>)\s*(<p class="eyebrow">[\s\S]*?<\/p>\s*<h1[^>]*>[\s\S]*?<\/h1>)\s*(<p class="(?:article-meta|db-intro)">[\s\S]*?<\/p>)?/);
+  if (!m) return null;
+  const lede = m[3] ? m[3].replace(/class="(?:article-meta|db-intro)"/, 'class="lede"') : '';
+  html = html.replace(m[0], () => `<main class="page db-page hub db-detail">
+    <section class="hub-hero d-hero"${color ? ` style="--c:${color}"` : ''}>
+      <div class="hub-hero-bg" aria-hidden="true"></div>
+      ${crumbTrail(trail)}
+      ${m[2]}
+      ${lede}
+    </section>`);
+  // Dim zeros in the tables.
+  return html.replace(/<td>(0|0\.0)<\/td>/g, '<td class="z">$1</td>');
+}
+
+export function detailPage(html, rel, ctx, ROOT) {
+  if (!rel.startsWith('database/') || rel === 'database/index.html') return html;
+  const isPlayer = rel.startsWith('database/players/') && !rel.includes('/index-');
+  const isSeason = /^database\/teams\/[A-Z]+-\d{4}\.html$/.test(rel);
+  const out = isPlayer ? playerPage(html, rel, ctx) : (isSeason && teamSeasonPage(html, rel, ctx, ROOT)) || genericDetail(html, rel, ctx);
+  if (!out) return html;
+  return out.replace('</head>', () => `<link rel="stylesheet" href="/hubs.css">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('ntw-theme')||'light')}catch(e){}</script>
+</head>`);
+}

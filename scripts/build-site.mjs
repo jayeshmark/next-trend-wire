@@ -19,7 +19,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { archiveHub, databaseHub, applyHub } from './hubs.mjs';
+import { archiveHub, databaseHub, applyHub, detailContext, detailPage } from './hubs.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const OUT = path.resolve(ROOT, process.argv[2] || 'dist');
@@ -309,6 +309,8 @@ const dbHub = databaseHub(ROOT);
 const hubMain = { 'archive/index.html': archiveHub(ROOT), 'database/index.html': dbHub.main };
 fs.writeFileSync(path.join(OUT, 'database', 'players.json'), JSON.stringify(dbHub.players));
 
+const detailCtx = detailContext(ROOT);
+
 let rewritten = 0;
 (function walk(dir) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -320,6 +322,7 @@ let rewritten = 0;
     if (!/<header|<footer/.test(html)) continue;
     html = chrome(html, rel);
     if (hubMain[rel]) html = applyHub(html, hubMain[rel]);
+    else if (rel.startsWith('database/')) html = detailPage(html, rel, detailCtx, ROOT);
     if (rel === 'index.html') html = enhanceHome(html);
     else if (rel.startsWith('posts/') && postBySlug.has(rel.slice(6, -5))) html = enhancePost(html, postBySlug.get(rel.slice(6, -5)));
     fs.writeFileSync(full, html);
