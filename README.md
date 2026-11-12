@@ -13,3 +13,7 @@ Live: https://next-trend-wire.vercel.app/
 ## Navigation layer (2026-11-11)
 
 Vercel runs `node scripts/build-site.mjs` on every deploy and serves `dist/`. The source pages stay exactly as the post pipeline writes them; the build gives every page one header (Latest, the six main topics, Archive, Database, All topics, Search) and one sitemap footer, adds breadcrumbs, previous/next and "More in <topic>" to every post, adds "Browse by topic" to the homepage, and writes `/topics/`, one page per topic, `/search-index.json` and the topic URLs in `sitemap.xml`. Topics come from each post's eyebrow, so a new topic appears the first time a post uses it. Search opens with `/` or Cmd+K. Preview locally: `node scripts/build-site.mjs && npx serve dist`.
+
+## Archive and Database landing pages (2026-11-12)
+
+The build also rebuilds `/archive/` and `/database/` (`scripts/hubs.mjs`, styles `hubs.css`, behaviour `hubs.js`). The source `archive/index.html` and `database/index.html` stay as the pipeline writes them: the Archive page is generated from the game cards in `archive/index.html` plus each game page's facts panel, the Database page from the team hubs, the five records pages and the player letter indexes, so a new game, season or player shows up on the next deploy. The player search loads `/database/players.json`, written by the build.

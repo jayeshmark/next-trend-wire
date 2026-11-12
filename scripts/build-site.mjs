@@ -9,7 +9,9 @@
 //   - adds breadcrumbs, previous/next and "More in <topic>" to every post;
 //   - adds "Browse by topic" to the homepage;
 //   - writes /topics/ and one page per topic, plus /search-index.json;
-//   - adds the topic pages to sitemap.xml.
+//   - adds the topic pages to sitemap.xml;
+//   - rebuilds the Archive and Database landing pages from the games, teams,
+//     records and players already in the repo (scripts/hubs.mjs).
 // Topics come from each post's eyebrow ("Business · November 11, 2026"), so
 // a new topic appears on its own the first time a post uses it.
 //
@@ -17,6 +19,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { archiveHub, databaseHub, applyHub } from './hubs.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const OUT = path.resolve(ROOT, process.argv[2] || 'dist');
@@ -301,6 +304,11 @@ for (const name of fs.readdirSync(ROOT)) {
   fs.cpSync(path.join(ROOT, name), path.join(OUT, name), { recursive: true });
 }
 
+// Archive and Database landing pages, generated from the source data.
+const dbHub = databaseHub(ROOT);
+const hubMain = { 'archive/index.html': archiveHub(ROOT), 'database/index.html': dbHub.main };
+fs.writeFileSync(path.join(OUT, 'database', 'players.json'), JSON.stringify(dbHub.players));
+
 let rewritten = 0;
 (function walk(dir) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -311,6 +319,7 @@ let rewritten = 0;
     let html = fs.readFileSync(full, 'utf8');
     if (!/<header|<footer/.test(html)) continue;
     html = chrome(html, rel);
+    if (hubMain[rel]) html = applyHub(html, hubMain[rel]);
     if (rel === 'index.html') html = enhanceHome(html);
     else if (rel.startsWith('posts/') && postBySlug.has(rel.slice(6, -5))) html = enhancePost(html, postBySlug.get(rel.slice(6, -5)));
     fs.writeFileSync(full, html);
