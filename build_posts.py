@@ -382,6 +382,37 @@ PAGES = {
                           "rox-100m-series-b.jpg", "The San Francisco skyline from Pier 7 (file photo)"),
     "jack-sabato-fatal-hit-and-run": ("jack-sabato-fatal-hit-and-run.md", "Culture", "November 11, 2026",
                                       "jack-sabato-fatal-hit-and-run.jpg", "Downtown Anchorage, Alaska, from Delaney Park (file photo)"),
+    # New posts, November 12, 2026 (06:13 run, trends + startup lane)
+    "nvidia-huang-powell-affair": ("nvidia-huang-powell-affair.md", "Business", "November 12, 2026",
+                                   "nvidia-huang-powell-report.jpg", "Jensen Huang, founder and CEO of Nvidia, with students at Stanford University in April 2026 (file photo)"),
+    "brooklyn-building-collapse-flatbush": ("brooklyn-building-collapse-flatbush.md", "Politics", "November 12, 2026",
+                                           "brooklyn-building-collapse-flatbush.jpg", "A mosaic Flatbush Avenue sign in the Brooklyn subway (file photo)"),
+    "fractile-720m-series-c": ("fractile-720m-series-c.md", "Business", "November 12, 2026",
+                               "fractile-720m-series-c.jpg", "The Bristol skyline, where Fractile is based (file photo)"),
+    "irma-p-hall-dies-91": ("irma-p-hall-dies-91.md", "Culture", "November 12, 2026",
+                            "irma-p-hall-dies-91.jpg", "The Dallas skyline (file photo)"),
+    "yella-beezy-guilty-mo3-murder": ("yella-beezy-guilty-mo3-murder.md", "Culture", "November 12, 2026",
+                                      "yella-beezy-guilty-mo3-murder-life.jpg", "Yella Beezy in 2025 (file photo)"),
+    "frankie-muniz-daytona-crash": ("frankie-muniz-daytona-crash.md", "Sports", "November 12, 2026",
+                                    "frankie-muniz-daytona-crash-hospitalized.jpg", "Frankie Muniz's No. 33 Ford truck at Las Vegas Motor Speedway in 2025 (file photo)"),
+    # New posts, November 12, 2026 (12:13 run, trends + startup lane)
+    "stephen-curry-abdominal-injury-rockets": ("stephen-curry-abdominal-injury-rockets.md", "Sports", "November 12, 2026",
+                                               "stephen-curry-abdominal-injury-rockets.jpg", "Stephen Curry shooting in a Golden State Warriors warmup (file photo)"),
+    "hegseth-tomb-unknown-soldier-reprimand": ("hegseth-tomb-unknown-soldier-reprimand.md", "Politics", "November 12, 2026",
+                                               "hegseth-tomb-unknown-soldier-reprimand.jpg", "Secretary of Defense Pete Hegseth in his official portrait"),
+    "anthony-clark-dies-62": ("anthony-clark-dies-62.md", "Culture", "November 12, 2026",
+                              "anthony-clark-dies-62.jpg", "A television broadcast camera (file photo)"),
+    "airexplore-shuts-down": ("airexplore-shuts-down.md", "Business", "November 12, 2026",
+                              "airexplore-shuts-down.jpg", "An AirExplore Boeing 737-800 in flight (file photo)"),
+    "biomatter-18m-series-a": ("biomatter-18m-series-a.md", "Business", "November 12, 2026",
+                               "biomatter-18m-series-a.jpg", "A scientist at work in a laboratory (file photo)"),
+    # New posts, November 12, 2026 (18:13 run, trends + startup lane)
+    "uforce-700m-series-a-6b-valuation": ("uforce-700m-series-a-6b-valuation.md", "Business", "November 12, 2026",
+                                          "uforce-700m-series-a.jpg", "A Mojave unmanned aircraft on the flight deck of HMS Prince of Wales in 2023 (file photo)"),
+    "se3-30m-series-a-accel": ("se3-30m-series-a-accel.md", "Business", "November 12, 2026",
+                               "se3-30m-series-a.jpg", "A quadcopter drone in flight (file photo)"),
+    "steph-curry-defends-ayesha-podcasters": ("steph-curry-defends-ayesha-podcasters.md", "Sports", "November 12, 2026",
+                                             "steph-curry-defends-ayesha.jpg", "Stephen Curry playing for Team USA at the Paris 2024 Olympics (file photo)"),
 }
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
