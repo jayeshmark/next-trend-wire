@@ -27,6 +27,9 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "z4wdrb84h6");
 </script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+</style>
 </head>
 <body>
 <div class="shell">
@@ -47,7 +50,8 @@
     <p class="db-back"><a href="./">&larr; Back to the NFL stats section</a></p>
     <section><h2>Career kickoff return yards</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-1" data-filename="records-returns-1.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-1">
 <thead><tr><th>Rank</th><th>Player</th><th>Kickoff return yards</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0023176">Josh Cribbs</a></td><td>11,287</td><td>2005 to 2014</td></tr>
@@ -79,7 +83,8 @@
 </table></div>    </section>
     <section><h2>Career punt return yards</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-2" data-filename="records-returns-2.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-2">
 <thead><tr><th>Rank</th><th>Player</th><th>Punt return yards</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0024272">Devin Hester</a></td><td>3,787</td><td>2006 to 2016</td></tr>
@@ -111,7 +116,8 @@
 </table></div>    </section>
     <section><h2>Career combined return yards</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value. Combined return yards are kickoff return yards plus punt return yards.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-3" data-filename="records-returns-3.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-3">
 <thead><tr><th>Rank</th><th>Player</th><th>Combined return yards</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0014071">Allen Rossum</a></td><td>14,391</td><td>1999 to 2009</td></tr>
@@ -143,7 +149,8 @@
 </table></div>    </section>
     <section><h2>Career special teams touchdowns</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value. Special teams touchdowns include kickoff return and punt return touchdowns.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-4" data-filename="records-returns-4.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-4">
 <thead><tr><th>Rank</th><th>Player</th><th>Special teams touchdowns</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0024272">Devin Hester</a></td><td>21</td><td>2006 to 2016</td></tr>
@@ -180,7 +187,8 @@
 </table></div>    </section>
     <section><h2>Single season kickoff return yards</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-5" data-filename="records-returns-5.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-5">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Kickoff return yards</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0008357">MarTay Jenkins</a></td><td>2000</td><td>ARI</td><td>2,166</td></tr>
@@ -212,7 +220,8 @@
 </table></div>    </section>
     <section><h2>Single season punt return yards</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-6" data-filename="records-returns-6.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-6">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Punt return yards</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0021999">Nate Burleson</a></td><td>2007</td><td>SEA</td><td>742</td></tr>
@@ -244,7 +253,8 @@
 </table></div>    </section>
     <section><h2>Single season combined return yards</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value. Combined return yards are kickoff return yards plus punt return yards.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-7" data-filename="records-returns-7.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-7">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Combined return yards</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0019600">Michael L. Lewis</a></td><td>2002</td><td>NO</td><td>2,432</td></tr>
@@ -276,7 +286,8 @@
 </table></div>    </section>
     <section><h2>Single season special teams touchdowns</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value. Special teams touchdowns include kickoff return and punt return touchdowns.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-8" data-filename="records-returns-8.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-8">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Special teams touchdowns</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0024272">Devin Hester</a></td><td>2006</td><td>CHI</td><td>7</td></tr>
@@ -313,7 +324,8 @@
 </table></div>    </section>
     <section><h2>Single game kickoff return yards</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-9" data-filename="records-returns-9.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-9">
 <thead><tr><th>Rank</th><th>Player</th><th>Kickoff return yards</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0025396">Ted Ginn</a></td><td>299</td><td>MIA</td><td>NYJ</td><td>Nov 1, 2009, Week 8</td></tr>
@@ -347,7 +359,8 @@
 </table></div>    </section>
     <section><h2>Single game punt return yards</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-10" data-filename="records-returns-10.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-10">
 <thead><tr><th>Rank</th><th>Player</th><th>Punt return yards</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0020692">Eddie Drummond</a></td><td>199</td><td>DET</td><td>JAX</td><td>Nov 14, 2004, Week 10</td></tr>
@@ -380,7 +393,8 @@
 </table></div>    </section>
     <section><h2>Single game combined return yards</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value. Combined return yards are kickoff return yards plus punt return yards.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-11" data-filename="records-returns-11.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-11">
 <thead><tr><th>Rank</th><th>Player</th><th>Combined return yards</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0024272">Devin Hester</a></td><td>314</td><td>CHI</td><td>DET</td><td>Sep 30, 2007, Week 4</td></tr>
@@ -412,7 +426,8 @@
 </table></div>    </section>
     <section><h2>Single game special teams touchdowns</h2>
     <p>Every game with 2 or more special teams touchdowns. Games with 1 special teams touchdown are not listed. Special teams touchdowns include kickoff return and punt return touchdowns.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-12" data-filename="records-returns-12.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-12">
 <thead><tr><th>Rank</th><th>Player</th><th>Special teams touchdowns</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0009869">Jermaine Lewis</a></td><td>2</td><td>BAL</td><td>NYJ</td><td>Dec 24, 2000, Week 17</td></tr>
@@ -459,6 +474,47 @@
   toggle.addEventListener('click', function () {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
+})();
+</script>
+<script>
+(function () {
+  function csvEscape(v) {
+    var s = String(v);
+    if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf(String.fromCharCode(10)) !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+  function tableToCsv(table) {
+    var lines = [];
+    var rows = table.querySelectorAll("tr");
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].querySelectorAll("th, td");
+      var vals = [];
+      for (var j = 0; j < cells.length; j++) {
+        vals.push(csvEscape(cells[j].textContent.replace(/^\s+|\s+$/g, "")));
+      }
+      lines.push(vals.join(","));
+    }
+    return lines.join(String.fromCharCode(10)) + String.fromCharCode(10);
+  }
+  var buttons = document.querySelectorAll(".csv-btn");
+  for (var b = 0; b < buttons.length; b++) {
+    buttons[b].addEventListener("click", function () {
+      var table = document.getElementById(this.getAttribute("data-table"));
+      if (!table) { return; }
+      var csv = tableToCsv(table);
+      var blob = new Blob([csv], { type: "text/csv" });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = this.getAttribute("data-filename") || "ratings.csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  }
 })();
 </script>
 </body>

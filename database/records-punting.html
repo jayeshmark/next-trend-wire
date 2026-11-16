@@ -27,6 +27,9 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "z4wdrb84h6");
 </script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+</style>
 </head>
 <body>
 <div class="shell">
@@ -47,7 +50,8 @@
     <p class="db-back"><a href="./">&larr; Back to the NFL stats section</a></p>
     <section><h2>Career punts</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-1" data-filename="records-punting-1.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-1">
 <thead><tr><th>Rank</th><th>Player</th><th>Punts</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0022824">Andy Lee</a></td><td>1,507</td><td>2004 to 2022</td></tr>
@@ -79,7 +83,8 @@
 </table></div>    </section>
     <section><h2>Career punt yards</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-2" data-filename="records-punting-2.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-2">
 <thead><tr><th>Rank</th><th>Player</th><th>Punt yards</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0019714">Shane Lechler</a></td><td>70,807</td><td>2000 to 2017</td></tr>
@@ -111,7 +116,8 @@
 </table></div>    </section>
     <section><h2>Career punt average</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value. Minimum 250 punts. Averages are in yards per punt.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-3" data-filename="records-punting-3.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-3">
 <thead><tr><th>Rank</th><th>Player</th><th>Punt average</th><th>Punts</th><th>Punt yards</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0035190">AJ Cole</a></td><td>48.6</td><td>481</td><td>23,374</td><td>2019 to 2026</td></tr>
@@ -143,7 +149,8 @@
 </table></div>    </section>
     <section><h2>Career longest punt</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value. Distances are in yards.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-4" data-filename="records-punting-4.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-4">
 <thead><tr><th>Rank</th><th>Player</th><th>Longest punt</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0017923">Rodney Williams</a></td><td>90</td><td>2001</td></tr>
@@ -175,7 +182,8 @@
 </table></div>    </section>
     <section><h2>Career punts inside the 20</h2>
     <p>Top 25 career totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-5" data-filename="records-punting-5.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-5">
 <thead><tr><th>Rank</th><th>Player</th><th>Punts inside the 20</th><th>Seasons</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0023534">Dustin Colquitt</a></td><td>499</td><td>2005 to 2021</td></tr>
@@ -207,7 +215,8 @@
 </table></div>    </section>
     <section><h2>Single season punts</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-6" data-filename="records-punting-6.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-6">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Punts</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0013682">Kyle Richardson</a></td><td>2000</td><td>BAL</td><td>119</td></tr>
@@ -241,7 +250,8 @@
 </table></div>    </section>
     <section><h2>Single season punt yards</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-7" data-filename="records-punting-7.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-7">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Punt yards</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0026516">Britton Colquitt</a></td><td>2011</td><td>DEN</td><td>5,219</td></tr>
@@ -273,7 +283,8 @@
 </table></div>    </section>
     <section><h2>Single season punt average</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value. Minimum 40 punts. Averages are in yards per punt.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-8" data-filename="records-punting-8.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-8">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Punt average</th><th>Punts</th><th>Punt yards</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0037607">Ryan Stonehouse</a></td><td>2022</td><td>TEN</td><td>53.1</td><td>90</td><td>4,779</td></tr>
@@ -305,7 +316,8 @@
 </table></div>    </section>
     <section><h2>Single season longest punt</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value. Distances are in yards.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-9" data-filename="records-punting-9.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-9">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Longest punt</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0017923">Rodney Williams</a></td><td>2001</td><td>NYG</td><td>90</td></tr>
@@ -340,7 +352,8 @@
 </table></div>    </section>
     <section><h2>Single season punts inside the 20</h2>
     <p>Top 25 single season totals, plus every player tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-10" data-filename="records-punting-10.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-10">
 <thead><tr><th>Rank</th><th>Player</th><th>Season</th><th>Team</th><th>Punts inside the 20</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0028872">Johnny Hekker</a></td><td>2016</td><td>LA</td><td>51</td></tr>
@@ -376,7 +389,8 @@
 </table></div>    </section>
     <section><h2>Single game punts</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-11" data-filename="records-punting-11.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-11">
 <thead><tr><th>Rank</th><th>Player</th><th>Punts</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0035042">Jamie Gillan</a></td><td>13</td><td>NYG</td><td>NYJ</td><td>Oct 29, 2023, Week 8</td></tr>
@@ -418,7 +432,8 @@
 </table></div>    </section>
     <section><h2>Single game punt yards</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-12" data-filename="records-punting-12.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-12">
 <thead><tr><th>Rank</th><th>Player</th><th>Punt yards</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0025612">Brandon Fields</a></td><td>564</td><td>MIA</td><td>NYJ</td><td>Dec 12, 2010, Week 14</td></tr>
@@ -450,7 +465,8 @@
 </table></div>    </section>
     <section><h2>Single game punt average</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value. Minimum 4 punts. Averages are in yards per punt.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-13" data-filename="records-punting-13.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-13">
 <thead><tr><th>Rank</th><th>Player</th><th>Punt average</th><th>Punts</th><th>Punt yards</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0039323">Ryan Rehkow</a></td><td>64.5</td><td>4</td><td>258</td><td>CIN</td><td>NE</td><td>Sep 8, 2024, Week 1</td></tr>
@@ -482,7 +498,8 @@
 </table></div>    </section>
     <section><h2>Single game longest punt</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value. Distances are in yards.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-14" data-filename="records-punting-14.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-14">
 <thead><tr><th>Rank</th><th>Player</th><th>Longest punt</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0017923">Rodney Williams</a></td><td>90</td><td>NYG</td><td>DEN</td><td>Sep 10, 2001, Week 1</td></tr>
@@ -517,7 +534,8 @@
 </table></div>    </section>
     <section><h2>Single game punts inside the 20</h2>
     <p>Top 25 single game performances, plus every performance tied at the cutoff value.</p>
-<div class="db-table-wrap"><table class="db-table">
+<p><button type="button" class="csv-btn" data-table="tbl-15" data-filename="records-punting-15.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-15">
 <thead><tr><th>Rank</th><th>Player</th><th>Punts inside the 20</th><th>Team</th><th>Opponent</th><th>Date and week</th></tr></thead>
 <tbody>
     <tr><td>1</td><td><a href="players/00-0000754">Bryan Barker</a></td><td>8</td><td>JAX</td><td>BAL</td><td>Nov 14, 1999, Week 10</td></tr>
@@ -595,6 +613,47 @@
   toggle.addEventListener('click', function () {
     setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
+})();
+</script>
+<script>
+(function () {
+  function csvEscape(v) {
+    var s = String(v);
+    if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf(String.fromCharCode(10)) !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+  function tableToCsv(table) {
+    var lines = [];
+    var rows = table.querySelectorAll("tr");
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].querySelectorAll("th, td");
+      var vals = [];
+      for (var j = 0; j < cells.length; j++) {
+        vals.push(csvEscape(cells[j].textContent.replace(/^\s+|\s+$/g, "")));
+      }
+      lines.push(vals.join(","));
+    }
+    return lines.join(String.fromCharCode(10)) + String.fromCharCode(10);
+  }
+  var buttons = document.querySelectorAll(".csv-btn");
+  for (var b = 0; b < buttons.length; b++) {
+    buttons[b].addEventListener("click", function () {
+      var table = document.getElementById(this.getAttribute("data-table"));
+      if (!table) { return; }
+      var csv = tableToCsv(table);
+      var blob = new Blob([csv], { type: "text/csv" });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = this.getAttribute("data-filename") || "ratings.csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  }
 })();
 </script>
 </body>
