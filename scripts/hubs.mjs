@@ -268,21 +268,26 @@ function readRecords(ROOT) {
 
 function readPlayers(ROOT) {
   const dir = path.join(ROOT, 'database', 'players');
-  const letters = [], players = [];
+  const letters = [], players = [], playersSearch = [];
   for (const file of fs.readdirSync(dir).filter((f) => /^index-.+\.html$/.test(f)).sort()) {
     const html = fs.readFileSync(path.join(dir, file), 'utf8');
     let count = 0;
     for (const m of html.matchAll(/<li><a href="([^"]+)">([^<]+)<\/a>(?: \(([^)]*)\))? <span class="db-years">([^<]*)<\/span><\/li>/g)) {
       const ys = (m[4].match(/\d{4}/g) || []).map(Number);
-      players.push([m[1], unesc(m[2]), m[3] || '', ys[0] || 0, ys[ys.length - 1] || 0]);
+      const id = m[1].replace(/^.*\//, '').replace(/\.html$/, '');
+      const name = unesc(m[2]), pos = m[3] || '';
+      // players.json keeps the homepage search format: [name, url, position].
+      players.push([name, 'database/players/' + id, pos]);
+      // The database hub search needs years too: [id, name, position, first, last].
+      playersSearch.push([id, name, pos, ys[0] || 0, ys[ys.length - 1] || 0]);
       count++;
     }
     letters.push({ letter: file.slice(6, -5), count });
   }
-  return { letters, players };
+  return { letters, players, playersSearch };
 }
 
-function teamTile(team, hubs) {
+function teamTile(team, hubs, lastYear) {
   const old = hubs.get(PREDECESSOR[team.abbr]);
   const seasons = [...(old ? old.seasons : []), ...team.seasons].sort((a, b) => a.year - b.year);
   const sum = (k) => seasons.reduce((n, s) => n + s[k], 0);
@@ -292,7 +297,7 @@ function teamTile(team, hubs) {
   const trips = seasons.filter((s) => s.level > 0).length;
   const byYear = new Map(seasons.map((s) => [s.year, s]));
   let spark = '';
-  for (let y = 1999; y <= 2025; y++) {
+  for (let y = 1999; y <= lastYear; y++) {
     const s = byYear.get(y);
     if (!s) { spark += '<span class="sp-gap"></span>'; continue; }
     const p = (s.w + s.t / 2) / Math.max(1, s.w + s.l + s.t);
@@ -302,7 +307,7 @@ function teamTile(team, hubs) {
   return `<article class="tm" data-abbr="${team.abbr}" data-name="${esc(team.name)}" data-pct="${pct.toFixed(4)}" data-titles="${titles}" data-trips="${trips}" data-pf="${sum('pf')}" style="--c:${NFL_COLORS[team.abbr] || '#8a8a86'}">
             <a class="tm-head" href="/database/teams/${team.abbr}"><span class="tm-chip">${team.abbr}</span><span class="tm-name">${esc(team.name)}</span><span class="tm-rank" aria-hidden="true"></span></a>
             <div class="tm-spark">${spark}</div>
-            <p class="tm-meta"><span><b>${w}-${l}${t ? '-' + t : ''}</b> ${pct.toFixed(3).replace(/^0/, '')}</span><span>${trips} playoff ${trips === 1 ? 'trip' : 'trips'}</span>${titles ? `<span class="tm-titles" title="Super Bowl wins, 1999 to 2025">${'<i></i>'.repeat(titles)}${titles}</span>` : ''}</p>
+            <p class="tm-meta"><span><b>${w}-${l}${t ? '-' + t : ''}</b> ${pct.toFixed(3).replace(/^0/, '')}</span><span>${trips} playoff ${trips === 1 ? 'trip' : 'trips'}</span>${titles ? `<span class="tm-titles" title="Super Bowl wins, 1999 to ${lastYear}">${'<i></i>'.repeat(titles)}${titles}</span>` : ''}</p>
             ${old ? `<p class="tm-note">Includes the <a href="/database/teams/${old.abbr}">${esc(old.name)}</a>, ${old.seasons[0].year} to ${old.seasons[old.seasons.length - 1].year}</p>` : ''}
           </article>`;
 }
@@ -310,7 +315,7 @@ function teamTile(team, hubs) {
 export function databaseHub(ROOT) {
   const hubs = readTeams(ROOT);
   const records = readRecords(ROOT);
-  const { letters, players } = readPlayers(ROOT);
+  const { letters, players, playersSearch } = readPlayers(ROOT);
   const teamSeasons = [...hubs.values()].reduce((n, h) => n + h.seasons.length, 0);
   const allYears = [...hubs.values()].flatMap((h) => h.seasons.map((s) => s.year));
   const first = Math.min(...allYears), last = Math.max(...allYears);
@@ -339,7 +344,7 @@ export function databaseHub(ROOT) {
 
   const division = ([conf, div, abbrs]) => `<section class="tm-div" data-conf="${conf}">
           <h3><span>${conf}</span> ${div}</h3>
-          ${abbrs.filter((a) => hubs.has(a)).map((a) => teamTile(hubs.get(a), hubs)).join('\n          ')}
+          ${abbrs.filter((a) => hubs.has(a)).map((a) => teamTile(hubs.get(a), hubs, last)).join('\n          ')}
         </section>`;
 
   const main = `<main class="page hub hub-db">
@@ -350,7 +355,7 @@ export function databaseHub(ROOT) {
           <p class="eyebrow">NFL stats database</p>
           <h1>NFL stats, <em>${first} to ${last}.</em></h1>
           <p class="lede">Team seasons, player careers and records in plain tables. No paywall, no ads and no login.</p>
-          <div class="db-search" id="db-search" data-src="/database/players.json">
+          <div class="db-search" id="db-search" data-src="/database/players-search.json">
             <label class="db-search-field">${ICON_SEARCH}<span class="sr-only">Search the database</span><input id="db-q" type="search" placeholder="Search ${num(players.length)} players and ${hubs.size} teams" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="db-results" aria-autocomplete="list"><kbd>Enter</kbd></label>
             <div class="db-results" id="db-results" role="listbox" hidden></div>
           </div>
@@ -394,7 +399,7 @@ export function databaseHub(ROOT) {
       </div>
       <div class="tm-grid" id="tm-grid">
         ${DIVISIONS.map(division).join('\n        ')}
-        ${others.length ? `<section class="tm-div"><h3>Other teams</h3>${others.map((a) => teamTile(hubs.get(a), hubs)).join('')}</section>` : ''}
+        ${others.length ? `<section class="tm-div"><h3>Other teams</h3>${others.map((a) => teamTile(hubs.get(a), hubs, last)).join('')}</section>` : ''}
       </div>
       <div class="tm-ranked" id="tm-ranked" hidden></div>
       ${historical.length ? `<p class="tm-hist"><span>Earlier homes</span>${historical.map((a) => { const h = hubs.get(a); return `<a href="/database/teams/${a}">${esc(h.name)} <small>${h.seasons[0].year} to ${h.seasons[h.seasons.length - 1].year}</small></a>`; }).join('')}</p>` : ''}
@@ -417,7 +422,7 @@ export function databaseHub(ROOT) {
     </section>
   </main>`;
 
-  return { main, players };
+  return { main, players, playersSearch };
 }
 
 // Swap <main>, load hubs.css and hubs.js, and set the theme before first paint.
@@ -554,7 +559,13 @@ function playerPage(html, rel, ctx) {
       ${chart}
     </section>`;
 
-  let body = (main.match(/<div class="article-body">[\s\S]*<\/div>\s*(?=<p class="article-back">|<\/main>)/) || [''])[0];
+  // Body: everything from the article body to the end of <main>, so the
+  // internal-links paragraph after the body is kept too. Never wipe a page
+  // we cannot parse: an empty body leaves the page untouched.
+  let body = (main.match(/<div class="article-body">[\s\S]*?(?=<\/main>)/) || [''])[0];
+  if (!body) return null;
+  const photo = (main.match(/<figure class="player-photo">[\s\S]*?<\/figure>/) || [''])[0];
+  const summary = (main.match(/<p class="db-summary">[\s\S]*?<\/p>/) || [''])[0];
   body = body.replace(tables[0], () => career.html).replace(tables[1], () => seasons.html);
   body = body.replace(/<h2>Newsletter<\/h2>/, '<h2 class="sr-only">Newsletter</h2>');
   // Super Bowl appearances: one card per game with the result.
@@ -565,6 +576,8 @@ function playerPage(html, rel, ctx) {
   });
   return html.replace(main, () => `<main class="page db-page hub db-detail db-player">
     ${hero}
+    ${photo}
+    ${summary}
     ${body}
   </main>`);
 }
@@ -579,6 +592,7 @@ function teamSeasonPage(html, rel, ctx, ROOT) {
   const h1 = text((main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || '');
   const fact = (k) => text((main.match(new RegExp(`<dt>${k}</dt>\\s*<dd>([\\s\\S]*?)</dd>`)) || [])[1] || '');
   const record = fact('Regular season record'), pf = fact('Points for'), pa = fact('Points against'), coach = fact('Head coach'), stadium = fact('Home stadium'), finish = fact('Playoff finish');
+  const summary = (main.match(/<p class="db-intro[^"]*">[\s\S]*?<\/p>/) || [''])[0];
   if (!h1 || !record) return null;
   const teamName = ctx.nameByAbbr.get(abbr) || abbr;
   const section = (title) => {
@@ -635,7 +649,7 @@ function teamSeasonPage(html, rel, ctx, ROOT) {
       </dl>
       ${strip}
     </section>`;
-  body = body.replace(/(<main[^>]*>)[\s\S]*?(?=<div class="article-body">)/, () => `<main class="page db-page hub db-detail db-season">\n    ${hero}\n    `);
+  body = body.replace(/(<main[^>]*>)[\s\S]*?(?=<div class="article-body">)/, () => `<main class="page db-page hub db-detail db-season">\n    ${hero}\n    ${summary}\n    `);
   return html.replace(main, () => body);
 }
 
