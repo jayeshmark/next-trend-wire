@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Players like Barry Sanders | Next Trend Wire</title>
+<meta name="description" content="Why no similarity list for Barry Sanders can be computed from play by play data: the career ended in 1998 and the data starts in 1999. Method stated, no list invented.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/similarity/like-barry-sanders">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+.formula-box { border: 1px solid var(--hairline); padding: 12px 16px; margin: 16px 0; }
+.formula-box p { margin: 8px 0; }
+.weight-row { display: grid; grid-template-columns: 220px 1fr 52px; gap: 12px; align-items: center; margin: 10px 0; max-width: 760px; }
+.weight-row label { font-size: 14px; }
+.weight-row input[type="range"] { width: 100%; }
+.weight-row output { font-size: 14px; text-align: right; }
+.tool-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; max-width: 760px; }
+.tool-controls label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.tool-controls select, .tool-controls input[type="text"] { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+@media (max-width: 640px) { .tool-controls { grid-template-columns: 1fr; } .weight-row { grid-template-columns: 1fr; gap: 4px; } .weight-row output { text-align: left; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+<p class="eyebrow">NFL stats database</p>
+    <h1>Players like Barry Sanders</h1>
+    <p class="db-intro">Fans ask who the modern equivalent of Barry Sanders is. This page gives the honest answer this data allows: no similarity list for Sanders can be computed, because he retired after the 1998 season and the play by play data starts in 1999.</p>
+    <p class="db-note">2026 data covers Weeks 1 to 10. Week 10 is partial: 13 of 14 games are scored. All scored games have play by play data. Not in this data: LAC at BAL (2026-11-16). Teams with a Week 10 bye: CHI, DEN, PHI, TB. Data pulled on November 16, 2026. Similarity on this site covers career totals, 1999 to 2026, from play by play data. Players who retired before 1999 have no plays in this data.</p>
+    <p class="db-back"><a href="./">&larr; Back to the similarity finder</a></p>
+    <section><h2>Why there is no list on this page</h2>
+    <p>Barry Sanders played the last season of an NFL career in 1998 and retired before the 1999 season. The play by play data behind every similarity list on this site starts in 1999. There are no plays for Barry Sanders in this data, so there is no feature vector, no era baseline, and no distance to compute. A list printed here would be invented, not measured.</p>
+    <p>This site will not invent a list. Similarity here is a statistical model over stated inputs, and a model with no inputs is not a model. The honest page is this explanation, plus the tool, where every list can be checked against the published data file.</p>
+    <p>A starting point, stated plainly as a suggestion and not as an answer: <a href="./?player=00-0020536">open LaDainian Tomlinson in the similarity finder</a>. LaDainian Tomlinson is one of the earliest qualifying running backs in this data. The list that page shows is LaDainian Tomlinson's list, not Barry Sanders's list. It is a way to start exploring early era running backs, nothing more.</p>
+    </section>
+    <section><h2>How similarity is measured</h2>
+    <p>Similarity here is a statistical model over the inputs stated below. It is not a fact about two players, and it is not a claim that two players played the same way. It says only that two players produced similar numbers on these inputs, after adjusting for era. Cross era comparison is approximate: the era adjustment removes the average difference between eras, not every difference between them. Two players with a high similarity score can still have played very different styles of football.</p>
+    <div class="formula-box"><p><b>Method.</b> Each player's career rate on every input is first expressed relative to the player's own era: the raw value minus the era baseline for that input. The era baseline is the average of the season averages across the player's era window, which runs from five years before to five years after the midpoint of the player's own seasons in this data, clamped to 1999 to 2026. Each season average is computed across that season's qualifiers. Then each era-adjusted input is standardized within the position group: the standardized value is the adjusted value minus the pool average of adjusted values, divided by the pool spread, where the pool is all qualifying players in that position and the spread is the population standard deviation. Distance between two players is the Euclidean distance over the standardized adjusted inputs: the square root of the sum of the squared differences. The similarity score is 100 divided by 1 plus the distance, shown to one decimal. A distance of zero scores 100. The ten most similar players are the ten smallest distances, excluding the player themself. Ties break by more plays, then by name.</p>
+    <p><b>Volume.</b> Volume enters as a per game rate, never as a raw career total, so longevity does not dominate the comparison. A player with a long career is not called similar to another player just for playing a long time.</p>
+    <p><b>Standardization and weights.</b> Standardization puts every input on the same scale, so no input dominates just because its numbers are bigger. In the tool, the reader can change the weight of each input. Weights are rescaled so the average weight is 1, and the weighted distance is the square root of the sum of rescaled weight times squared difference. Equal weights reproduce the precomputed pages exactly.</p></div>
+    <p><b>Running back inputs.</b> EPA per touch, Success rate, Yards per touch, TD rate, Fumbles lost per touch, Touches per game. Threshold: at least 500 touches and 250 rush attempts.</p>
+    <p><b>What counts as a play.</b> A touch is a rush attempt where the player is the rusher, or a target where the player is the intended receiver. Games are games with at least one rush attempt or target. Kneels, spikes, and no plays are excluded, and plays with no EPA value are excluded.</p>
+    <p><b>Expected points added (EPA)</b> measures how much a play improved the team's expected points, given down, distance, field position, and score. A positive number means the play helped; a negative number means it hurt. <b>Success rate</b> is the share of plays with positive EPA: plays that improved the team's expected points at all.</p>
+    <p><b>Seasons covered.</b> 1999 to 2026. Play by play data starts in 1999, so players whose careers began earlier are shown with only their 1999 onward plays, and players who retired before 1999 have no similarity list in this data at all. Career totals combine the regular season and the postseason, including the partial 2026 season.</p>
+    <p><b>Left out on purpose.</b> Completion probability, air yards, and yards after catch are not recorded in the play by play data before 2006. A method that used them could not cover 1999 onward with one set of rules, so none of them is an input here. There is no defensive similarity: the open data has no coverage data and no snap denominators before 2012, so no honest defensive formula exists from this data alone. There is no kicking or punting similarity either.</p>
+    <p><b>One data repair.</b> In the 2003 to 2008 play by play files, the intended receiver is missing from the usual receiver field on incomplete passes. The receiver is taken from the backup receiver field in those seasons instead. The two fields agree wherever both are present, and without this repair the 2003 to 2008 target counts would count completions only.</p>
+    <p><b>What similarity does not measure.</b> It does not separate a player from teammates, coaching, or scheme. It does not adjust for opponent strength beyond the era baseline. It uses only what the play by play record shows, so it covers no blocking, no routes run, no coverage, and no pressure data. It describes past play only. It is not a prediction about any future game, and it is not a ranking of who was better: two average players can be highly similar to each other.</p>
+    <p><b>Reproduce it.</b> Every number behind the tool is in <a href="similarity-data.json">similarity-data.json</a>: raw inputs, era windows, era baselines, adjusted inputs, standardized values, and pool averages and spreads for every qualifying player. Anyone with the same play by play data gets the same lists.</p>
+    </section>
+    <p class="db-source">Source: nflverse play by play data, 1999 to 2026, regular season and postseason combined. Figures are presented in this site's own layout. See the <a href="../../data-sources">data sources page</a> for credits.</p>
+    <p class="db-back db-links">More in the database: <a href="./">Similarity finder</a> &middot; <a href="like-tom-brady">Players like Tom Brady</a> &middot; <a href="like-peyton-manning">Players like Peyton Manning</a> &middot; <a href="like-john-elway">Players like John Elway</a> &middot; <a href="like-adrian-peterson">Players like Adrian Peterson</a> &middot; <a href="like-jerry-rice">Players like Jerry Rice</a> &middot; <a href="like-randy-moss">Players like Randy Moss</a> &middot; <a href="like-tony-gonzalez">Players like Tony Gonzalez</a> &middot; <a href="../">NFL stats hub</a> &middot; <a href="../leaderboards/">Stats leaders hub</a> &middot; <a href="../ratings/">Open formula ratings</a> &middot; <a href="../compare/">Compare players</a></p>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>

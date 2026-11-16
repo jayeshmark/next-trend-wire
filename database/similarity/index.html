@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Similarity finder | Next Trend Wire</title>
+<meta name="description" content="Find players like any NFL player: the 10 most similar quarterbacks, running backs, wide receivers, and tight ends, era-adjusted, career 1999 to 2026. Method, inputs, and era baselines published on the page.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/similarity/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+.formula-box { border: 1px solid var(--hairline); padding: 12px 16px; margin: 16px 0; }
+.formula-box p { margin: 8px 0; }
+.weight-row { display: grid; grid-template-columns: 220px 1fr 52px; gap: 12px; align-items: center; margin: 10px 0; max-width: 760px; }
+.weight-row label { font-size: 14px; }
+.weight-row input[type="range"] { width: 100%; }
+.weight-row output { font-size: 14px; text-align: right; }
+.tool-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; max-width: 760px; }
+.tool-controls label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.tool-controls select, .tool-controls input[type="text"] { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+@media (max-width: 640px) { .tool-controls { grid-template-columns: 1fr; } .weight-row { grid-template-columns: 1fr; gap: 4px; } .weight-row output { text-align: left; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+<p class="eyebrow">NFL stats database</p>
+    <h1>Similarity finder</h1>
+    <p class="db-intro">Find players like any player. Pick a player and get the 10 most similar players in the same position, with the similarity inputs shown and every number adjusted for era. 896 qualifying players: 133 quarterbacks, 255 running backs, 359 wide receivers, and 149 tight ends. Career numbers, 1999 to 2026.</p>
+    <p class="db-note">2026 data covers Weeks 1 to 10. Week 10 is partial: 13 of 14 games are scored. All scored games have play by play data. Not in this data: LAC at BAL (2026-11-16). Teams with a Week 10 bye: CHI, DEN, PHI, TB. Data pulled on November 16, 2026. Career totals combine the regular season and the postseason, 1999 to 2026, including the partial 2026 season. Players whose careers began before 1999 are shown with only their 1999 onward plays.</p>
+    <p class="db-back"><a href="../">&larr; Back to the NFL stats section</a></p>
+    <section><h2>Find players like</h2>
+    <p>Type a name to search the qualifying players in one position, then pick the player from the list. Results update as soon as a player is picked. The address bar holds the current player, era setting, and weights, so the link can be shared.</p>
+    <div class="tool-controls">
+      <div><label for="pos-select">Position</label><select id="pos-select"><option value="QB">Quarterback</option><option value="RB">Running back</option><option value="WR">Wide receiver</option><option value="TE">Tight end</option></select></div>
+      <div><label for="player-input">Player</label><input type="text" id="player-input" list="player-list" placeholder="Start typing a name" autocomplete="off"><datalist id="player-list"></datalist></div>
+      <div><label for="era-select">Era adjustment</label><select id="era-select"><option value="adjusted">Era adjusted (recommended)</option><option value="raw">Raw rates, no era adjustment</option></select></div>
+      <div><label>&nbsp;</label><p><button type="button" class="csv-btn" id="find-btn">Find similar players</button> <button type="button" class="csv-btn" id="copy-link">Copy link to these results</button></p><p id="share-status"></p></div>
+    </div>
+    </section>
+    <section><h2>Weights</h2>
+    <p>Move a slider to give an input more or less weight. Weights are rescaled so the average weight is 1. Equal weights reproduce the precomputed pages exactly.</p>
+    <div id="weight-controls"></div>
+    <p><button type="button" class="csv-btn" id="reset-weights">Reset to equal weights</button> <button type="button" class="csv-btn" id="download-csv" style="display: none;">Download CSV</button></p>
+    </section>
+    <section><h2>Selected player</h2>
+    <div id="selected-summary"></div>
+    </section>
+    <section><h2>Most similar players</h2>
+    <p id="results-status">Loading similarity data.</p>
+    <div id="results-wrap"></div>
+    </section>
+    <section><h2>Players like</h2>
+    <p>Precomputed lists for eight well known players, with the same method as the tool and equal weights.</p>
+    <ul class="db-link-list">
+      <li><a href="like-tom-brady">Players like Tom Brady</a> <span>Most similar: Rich Gannon (score 62.3). Top 10 with inputs and era-adjusted numbers.</span></li><li><a href="like-peyton-manning">Players like Peyton Manning</a> <span>Most similar: Patrick Mahomes (score 51.9). Top 10 with inputs and era-adjusted numbers.</span></li><li><a href="like-john-elway">Players like John Elway</a> <span>No similarity list can be computed: this player retired before the 1999 start of play by play data. The page explains why, honestly.</span></li><li><a href="like-barry-sanders">Players like Barry Sanders</a> <span>No similarity list can be computed: this player retired before the 1999 start of play by play data. The page explains why, honestly.</span></li><li><a href="like-adrian-peterson">Players like Adrian Peterson</a> <span>Most similar: Domanick Williams (score 52.6). Top 10 with inputs and era-adjusted numbers.</span></li><li><a href="like-jerry-rice">Players like Jerry Rice</a> <span>Most similar: Tim Brown (score 59.3). Top 10 with inputs and era-adjusted numbers.</span></li><li><a href="like-randy-moss">Players like Randy Moss</a> <span>Most similar: Terrell Owens (score 44.1). Top 10 with inputs and era-adjusted numbers.</span></li><li><a href="like-tony-gonzalez">Players like Tony Gonzalez</a> <span>Most similar: Travis Kelce (score 49.2). Top 10 with inputs and era-adjusted numbers.</span></li>
+    </ul>
+    </section>
+    <section><h2>How similarity is measured</h2>
+    <p>Similarity here is a statistical model over the inputs stated below. It is not a fact about two players, and it is not a claim that two players played the same way. It says only that two players produced similar numbers on these inputs, after adjusting for era. Cross era comparison is approximate: the era adjustment removes the average difference between eras, not every difference between them. Two players with a high similarity score can still have played very different styles of football.</p>
+    <div class="formula-box"><p><b>Method.</b> Each player's career rate on every input is first expressed relative to the player's own era: the raw value minus the era baseline for that input. The era baseline is the average of the season averages across the player's era window, which runs from five years before to five years after the midpoint of the player's own seasons in this data, clamped to 1999 to 2026. Each season average is computed across that season's qualifiers. Then each era-adjusted input is standardized within the position group: the standardized value is the adjusted value minus the pool average of adjusted values, divided by the pool spread, where the pool is all qualifying players in that position and the spread is the population standard deviation. Distance between two players is the Euclidean distance over the standardized adjusted inputs: the square root of the sum of the squared differences. The similarity score is 100 divided by 1 plus the distance, shown to one decimal. A distance of zero scores 100. The ten most similar players are the ten smallest distances, excluding the player themself. Ties break by more plays, then by name.</p>
+    <p><b>Volume.</b> Volume enters as a per game rate, never as a raw career total, so longevity does not dominate the comparison. A player with a long career is not called similar to another player just for playing a long time.</p>
+    <p><b>Standardization and weights.</b> Standardization puts every input on the same scale, so no input dominates just because its numbers are bigger. In the tool, the reader can change the weight of each input. Weights are rescaled so the average weight is 1, and the weighted distance is the square root of the sum of rescaled weight times squared difference. Equal weights reproduce the precomputed pages exactly.</p></div>
+    <p><b>Quarterback.</b> EPA per dropback, Success rate, Yards per attempt, Passing TD rate, Interception rate, Dropbacks per game. Threshold: at least 1,000 dropbacks.</p><p><b>Running back.</b> EPA per touch, Success rate, Yards per touch, TD rate, Fumbles lost per touch, Touches per game. Threshold: at least 500 touches and 250 rush attempts.</p><p><b>Wide receiver.</b> EPA per target, Catch rate, Yards per target, Receiving TD rate, Targets per game. Threshold: at least 250 targets.</p><p><b>Tight end.</b> EPA per target, Catch rate, Yards per target, Receiving TD rate, Targets per game. Threshold: at least 200 targets.</p>
+    <p><b>What counts as a play.</b> A dropback is a pass play where the player is the passer, including sacks. Attempts exclude sacks. A touch is a rush attempt where the player is the rusher, or a target where the player is the intended receiver. A target is a pass play where the player is the intended receiver. Games are games with at least one play in the role. Kneels, spikes, and no plays are excluded, and plays with no EPA value are excluded.</p>
+    <p><b>Expected points added (EPA)</b> measures how much a play improved the team's expected points, given down, distance, field position, and score. A positive number means the play helped; a negative number means it hurt. <b>Success rate</b> is the share of plays with positive EPA: plays that improved the team's expected points at all.</p>
+    <p><b>Seasons covered.</b> 1999 to 2026. Play by play data starts in 1999, so players whose careers began earlier are shown with only their 1999 onward plays, and players who retired before 1999 have no similarity list in this data at all. Career totals combine the regular season and the postseason, including the partial 2026 season.</p>
+    <p><b>Left out on purpose.</b> Completion probability, air yards, and yards after catch are not recorded in the play by play data before 2006. A method that used them could not cover 1999 onward with one set of rules, so none of them is an input here. There is no defensive similarity: the open data has no coverage data and no snap denominators before 2012, so no honest defensive formula exists from this data alone. There is no kicking or punting similarity either.</p>
+    <p><b>One data repair.</b> In the 2003 to 2008 play by play files, the intended receiver is missing from the usual receiver field on incomplete passes. The receiver is taken from the backup receiver field in those seasons instead. The two fields agree wherever both are present, and without this repair the 2003 to 2008 target counts would count completions only.</p>
+    <p><b>What similarity does not measure.</b> It does not separate a player from teammates, coaching, or scheme. It does not adjust for opponent strength beyond the era baseline. It uses only what the play by play record shows, so it covers no blocking, no routes run, no coverage, and no pressure data. It describes past play only. It is not a prediction about any future game, and it is not a ranking of who was better: two average players can be highly similar to each other.</p>
+    <p><b>Reproduce it.</b> Every number behind the tool is in <a href="similarity-data.json">similarity-data.json</a>: raw inputs, era windows, era baselines, adjusted inputs, standardized values, and pool averages and spreads for every qualifying player. Anyone with the same play by play data gets the same lists.</p>
+    </section>
+    <section><h2>What is not compared here</h2>
+    <p>There is no defensive similarity. The open data has no coverage data and no snap denominators before 2012, so no honest defensive formula exists from this data alone. Shipping a defensive similarity list would reward playing time over quality and mix roles that cannot be compared on the same inputs. There is no kicking or punting similarity either. Those skills need a different method design, and they are not part of this build.</p>
+    </section>
+    <p class="db-source">Source: nflverse play by play data, 1999 to 2026, regular season and postseason combined. Figures are presented in this site's own layout. See the <a href="../../data-sources">data sources page</a> for credits.</p>
+    <p class="db-back db-links">More in the database: <a href="like-tom-brady">Players like Tom Brady</a> &middot; <a href="like-peyton-manning">Players like Peyton Manning</a> &middot; <a href="like-john-elway">Players like John Elway</a> &middot; <a href="like-barry-sanders">Players like Barry Sanders</a> &middot; <a href="like-adrian-peterson">Players like Adrian Peterson</a> &middot; <a href="like-jerry-rice">Players like Jerry Rice</a> &middot; <a href="like-randy-moss">Players like Randy Moss</a> &middot; <a href="like-tony-gonzalez">Players like Tony Gonzalez</a> &middot; <a href="../">NFL stats hub</a> &middot; <a href="../leaderboards/">Stats leaders hub</a> &middot; <a href="../ratings/">Open formula ratings</a> &middot; <a href="../compare/">Compare players</a></p><script>
+(function () {
+  var data = null;
+  var byId = {};
+  var byLabel = {};
+  var state = { pos: "QB", playerId: null, era: "adjusted", weights: {} };
+  var currentRows = null;
+  var currentAnchor = null;
+  var posSel = document.getElementById("pos-select");
+  var playerInput = document.getElementById("player-input");
+  var playerList = document.getElementById("player-list");
+  var eraSel = document.getElementById("era-select");
+  var findBtn = document.getElementById("find-btn");
+  var weightBox = document.getElementById("weight-controls");
+  var resetBtn = document.getElementById("reset-weights");
+  var summaryEl = document.getElementById("selected-summary");
+  var statusEl = document.getElementById("results-status");
+  var tableWrap = document.getElementById("results-wrap");
+  var csvBtn = document.getElementById("download-csv");
+  var copyBtn = document.getElementById("copy-link");
+  var shareEl = document.getElementById("share-status");
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function fmtInt(n) { return Number(n).toLocaleString("en-US"); }
+  function fmtRaw(fmt, v) {
+    var x = Number(v);
+    if (fmt === "epa") { return (x < 0 ? "-" : "+") + Math.abs(x).toFixed(3); }
+    if (fmt === "rate") { return (100 * x).toFixed(1) + "%"; }
+    if (fmt === "yards") { return x.toFixed(2); }
+    return x.toFixed(1);
+  }
+  function fmtAdj(fmt, v) {
+    var x = Number(v);
+    if (fmt === "epa") { return (x < 0 ? "-" : "+") + Math.abs(x).toFixed(3); }
+    if (fmt === "rate") { return (x < 0 ? "-" : "+") + Math.abs(100 * x).toFixed(1) + " pts"; }
+    if (fmt === "yards") { return (x < 0 ? "-" : "+") + Math.abs(x).toFixed(2); }
+    return (x < 0 ? "-" : "+") + Math.abs(x).toFixed(1);
+  }
+  function fmtZ(v) {
+    var x = Number(v);
+    return (x < 0 ? "-" : "+") + Math.abs(x).toFixed(2);
+  }
+  function seasonsText(p) {
+    if (p.seasons[0] === p.seasons[1]) { return String(p.seasons[0]); }
+    return p.seasons[0] + " to " + p.seasons[1];
+  }
+  function labelFor(p) {
+    return p.name + " (" + p.pos + ", " + seasonsText(p) + ")";
+  }
+  function features() {
+    return data.meta.positions[state.pos].features;
+  }
+  function defaultWeights() {
+    var w = {};
+    var feats = features();
+    for (var i = 0; i < feats.length; i++) { w[feats[i].key] = 100; }
+    return w;
+  }
+  function buildMaps() {
+    byId = {};
+    byLabel = {};
+    for (var i = 0; i < data.players.length; i++) {
+      var p = data.players[i];
+      byId[p.id] = p;
+      byLabel[labelFor(p)] = p;
+    }
+  }
+  function computeSimilar(playerId, weights, era) {
+    var anchor = byId[playerId];
+    if (!anchor) { return null; }
+    var feats = data.meta.positions[anchor.pos].features;
+    var keys = [];
+    for (var i = 0; i < feats.length; i++) { keys.push(feats[i].key); }
+    var zkey = era === "raw" ? "z_raw" : "z";
+    var total = 0;
+    var wvals = [];
+    for (var j = 0; j < keys.length; j++) {
+      var wv = Number(weights[keys[j]]) || 0;
+      wvals.push(wv);
+      total += wv;
+    }
+    if (total <= 0) { return null; }
+    var meanW = total / keys.length;
+    var rows = [];
+    for (var k = 0; k < data.players.length; k++) {
+      var p = data.players[k];
+      if (p.pos !== anchor.pos || p.id === playerId) { continue; }
+      var sum = 0;
+      for (var m = 0; m < keys.length; m++) {
+        var diff = Number(anchor[zkey][keys[m]]) - Number(p[zkey][keys[m]]);
+        sum += (wvals[m] / meanW) * diff * diff;
+      }
+      var d = Math.sqrt(sum);
+      rows.push({ p: p, distance: d, score: 100 / (1 + d) });
+    }
+    rows.sort(function (a, b) {
+      if (a.distance !== b.distance) { return a.distance - b.distance; }
+      if (b.p.plays !== a.p.plays) { return b.p.plays - a.p.plays; }
+      if (a.p.name < b.p.name) { return -1; }
+      if (a.p.name > b.p.name) { return 1; }
+      return 0;
+    });
+    return { anchor: anchor, rows: rows.slice(0, 10) };
+  }
+  function buildCsv(result) {
+    var feats = data.meta.positions[result.anchor.pos].features;
+    var head = ["Rank", "Player", "Teams", "Seasons", "Plays", "Games", "Similarity score", "Distance"];
+    for (var i = 0; i < feats.length; i++) {
+      head.push(feats[i].label + " (career value)");
+      head.push(feats[i].label + " (vs era)");
+      head.push(feats[i].label + " (standardized)");
+    }
+    function q(v) {
+      var s = String(v);
+      if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf(String.fromCharCode(10)) !== -1) {
+        return '"' + s.replace(/"/g, '""') + '"';
+      }
+      return s;
+    }
+    var lines = [head.map(q).join(",")];
+    for (var r = 0; r < result.rows.length; r++) {
+      var row = result.rows[r];
+      var vals = [r + 1, row.p.name, row.p.teams.join(", "), seasonsText(row.p), row.p.plays, row.p.games, row.score.toFixed(1), row.distance.toFixed(4)];
+      for (var k = 0; k < feats.length; k++) {
+        var key = feats[k].key;
+        vals.push(row.p.raw[key]);
+        vals.push(row.p.adjusted[key]);
+        vals.push(row.p.z[key]);
+      }
+      lines.push(vals.map(q).join(","));
+    }
+    return lines.join(String.fromCharCode(10)) + String.fromCharCode(10);
+  }
+  function syncUrl() {
+    try {
+      var params = new URLSearchParams();
+      if (state.playerId) { params.set("player", state.playerId); }
+      params.set("era", state.era);
+      var feats = features();
+      for (var i = 0; i < feats.length; i++) {
+        params.set("w_" + feats[i].key, String(state.weights[feats[i].key]));
+      }
+      window.history.replaceState(null, "", window.location.pathname + "?" + params.toString());
+    } catch (e) {}
+  }
+  function renderWeights() {
+    var feats = features();
+    var h = [];
+    for (var i = 0; i < feats.length; i++) {
+      var key = feats[i].key;
+      h.push('<div class="weight-row"><label for="w-' + key + '">' + esc(feats[i].label) + '</label>' +
+        '<input type="range" id="w-' + key + '" data-key="' + key + '" min="0" max="100" step="5" value="' + Number(state.weights[key] || 0) + '">' +
+        '<output id="wout-' + key + '">' + Number(state.weights[key] || 0) + '</output></div>');
+    }
+    weightBox.innerHTML = h.join("");
+    var inputs = weightBox.querySelectorAll("input[type=range]");
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].addEventListener("input", function () {
+        var key = this.getAttribute("data-key");
+        state.weights[key] = Number(this.value);
+        document.getElementById("wout-" + key).textContent = this.value;
+        syncUrl();
+        render();
+      });
+    }
+  }
+  function renderPlayerOptions() {
+    var opts = [];
+    for (var i = 0; i < data.players.length; i++) {
+      var p = data.players[i];
+      if (p.pos !== state.pos) { continue; }
+      opts.push({ p: p, label: labelFor(p) });
+    }
+    opts.sort(function (a, b) {
+      if (a.p.name < b.p.name) { return -1; }
+      if (a.p.name > b.p.name) { return 1; }
+      return 0;
+    });
+    var h = [];
+    for (var j = 0; j < opts.length; j++) {
+      h.push("<option value=\"" + esc(opts[j].label) + "\"></option>");
+    }
+    playerList.innerHTML = h.join("");
+  }
+  function resolvePlayer() {
+    var v = playerInput.value;
+    var p = byLabel[v] || null;
+    if (p && p.pos !== state.pos) { return null; }
+    return p;
+  }
+  function renderSummary(anchor) {
+    var feats = data.meta.positions[anchor.pos].features;
+    var h = [];
+    h.push("<p>" + esc(anchor.name) + ", " + esc(anchor.teams.join(", ")) + ", " + seasonsText(anchor) +
+      ". " + fmtInt(anchor.plays) + " " + esc(data.meta.positions[anchor.pos].unit) +
+      " in " + fmtInt(anchor.games) + " games. Era window " + anchor.era.window[0] + " to " + anchor.era.window[1] + ".</p>");
+    h.push('<div class="db-table-wrap"><table class="db-table">');
+    h.push("<thead><tr><th>Input</th><th>Career value</th><th>Era baseline</th><th>Value vs era</th><th>Standardized value</th></tr></thead><tbody>");
+    for (var i = 0; i < feats.length; i++) {
+      var key = feats[i].key;
+      var fmt = feats[i].fmt;
+      h.push("<tr><td>" + esc(feats[i].label) + "</td><td>" + fmtRaw(fmt, anchor.raw[key]) + "</td><td>" +
+        fmtRaw(fmt, anchor.era.baseline[key]) + "</td><td>" + fmtAdj(fmt, anchor.adjusted[key]) + "</td><td>" +
+        fmtZ(anchor.z[key]) + "</td></tr>");
+    }
+    h.push("</tbody></table></div>");
+    summaryEl.innerHTML = h.join("");
+  }
+  function render() {
+    var p = resolvePlayer();
+    if (p) { state.playerId = p.id; }
+    if (!state.playerId || !byId[state.playerId]) {
+      statusEl.textContent = "Pick a player from the list to see the 10 most similar players.";
+      summaryEl.innerHTML = "";
+      tableWrap.innerHTML = "";
+      csvBtn.style.display = "none";
+      currentRows = null;
+      currentAnchor = null;
+      return;
+    }
+    var result = computeSimilar(state.playerId, state.weights, state.era);
+    if (!result) {
+      statusEl.textContent = "Set at least one weight above zero to see similar players.";
+      tableWrap.innerHTML = "";
+      csvBtn.style.display = "none";
+      currentRows = null;
+      return;
+    }
+    currentRows = result.rows;
+    currentAnchor = result.anchor;
+    renderSummary(result.anchor);
+    var feats = data.meta.positions[result.anchor.pos].features;
+    var unit = data.meta.positions[result.anchor.pos].unit;
+    var modeNote = state.era === "raw"
+      ? "Raw rates, no era adjustment. Numbers below are career values only."
+      : "Era adjusted. Numbers in parentheses are the difference from each player's own era baseline.";
+    statusEl.textContent = "10 most similar " + data.meta.positions[result.anchor.pos].label.toLowerCase() +
+      "s to " + result.anchor.name + ". " + modeNote;
+    var h = [];
+    h.push('<div class="db-table-wrap"><table class="db-table">');
+    h.push("<thead><tr><th>Rank</th><th>Player</th><th>Seasons</th><th>" + esc(unit.charAt(0).toUpperCase() + unit.slice(1)) + "</th><th>Similarity score</th>");
+    for (var i = 0; i < feats.length; i++) {
+      h.push("<th>" + esc(feats[i].label) + "</th>");
+    }
+    h.push("</tr></thead><tbody>");
+    for (var r = 0; r < result.rows.length; r++) {
+      var row = result.rows[r];
+      var pl = row.p;
+      var name = pl.has_page ? '<a href="../players/' + esc(pl.id) + '">' + esc(pl.name) + '</a>' : esc(pl.name);
+      h.push("<tr><td>" + (r + 1) + "</td><td>" + name + "</td><td>" + seasonsText(pl) + "</td><td>" + fmtInt(pl.plays) + "</td><td>" + row.score.toFixed(1) + "</td>");
+      for (var k = 0; k < feats.length; k++) {
+        var key = feats[k].key;
+        var fmt = feats[k].fmt;
+        var cell = fmtRaw(fmt, pl.raw[key]);
+        if (state.era !== "raw") { cell += " (" + fmtAdj(fmt, pl.adjusted[key]) + ")"; }
+        h.push("<td>" + cell + "</td>");
+      }
+      h.push("</tr>");
+    }
+    h.push("</tbody></table></div>");
+    tableWrap.innerHTML = h.join("");
+    csvBtn.style.display = "";
+  }
+  function readParams() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var pid = params.get("player");
+      var era = params.get("era");
+      if (pid && byId[pid]) {
+        state.playerId = pid;
+        state.pos = byId[pid].pos;
+      }
+      if (era === "raw" || era === "adjusted") { state.era = era; }
+      state.weights = defaultWeights();
+      var feats = features();
+      for (var i = 0; i < feats.length; i++) {
+        var v = params.get("w_" + feats[i].key);
+        if (v !== null && v !== "" && !isNaN(Number(v))) {
+          state.weights[feats[i].key] = Math.max(0, Math.min(100, Number(v)));
+        }
+      }
+    } catch (e) {
+      state.weights = defaultWeights();
+    }
+    if (!state.playerId) {
+      for (var j = 0; j < data.players.length; j++) {
+        if (data.players[j].name === "Tom Brady") { state.playerId = data.players[j].id; state.pos = "QB"; break; }
+      }
+      if (!state.playerId && data.players.length) {
+        state.playerId = data.players[0].id;
+        state.pos = data.players[0].pos;
+      }
+      state.weights = defaultWeights();
+    }
+  }
+  posSel.addEventListener("change", function () {
+    state.pos = posSel.value;
+    state.playerId = null;
+    playerInput.value = "";
+    state.weights = defaultWeights();
+    renderPlayerOptions();
+    renderWeights();
+    syncUrl();
+    render();
+  });
+  eraSel.addEventListener("change", function () {
+    state.era = eraSel.value;
+    syncUrl();
+    render();
+  });
+  playerInput.addEventListener("input", function () {
+    var p = resolvePlayer();
+    if (p) {
+      state.playerId = p.id;
+      syncUrl();
+      render();
+    }
+  });
+  playerInput.addEventListener("change", function () {
+    var p = resolvePlayer();
+    if (p) {
+      state.playerId = p.id;
+      syncUrl();
+      render();
+    } else if (playerInput.value) {
+      statusEl.textContent = "No qualifying player matches that text. Pick a name from the list.";
+      tableWrap.innerHTML = "";
+      csvBtn.style.display = "none";
+    }
+  });
+  findBtn.addEventListener("click", function () {
+    var p = resolvePlayer();
+    if (p) {
+      state.playerId = p.id;
+      syncUrl();
+      render();
+    } else {
+      statusEl.textContent = "Pick a player from the list first.";
+    }
+  });
+  resetBtn.addEventListener("click", function () {
+    state.weights = defaultWeights();
+    syncUrl();
+    renderWeights();
+    render();
+  });
+  csvBtn.addEventListener("click", function () {
+    if (!currentRows || !currentAnchor) { return; }
+    var csv = buildCsv({ anchor: currentAnchor, rows: currentRows });
+    var blob = new Blob([csv], { type: "text/csv" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "similar-to-" + currentAnchor.id + ".csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  });
+  copyBtn.addEventListener("click", function () {
+    syncUrl();
+    var href = window.location.href;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(href).then(function () {
+          shareEl.textContent = "Link copied.";
+        }, function () {
+          shareEl.textContent = "Copy the address from the browser address bar.";
+        });
+      } else {
+        shareEl.textContent = "Copy the address from the browser address bar.";
+      }
+    } catch (e) {
+      shareEl.textContent = "Copy the address from the browser address bar.";
+    }
+  });
+  statusEl.textContent = "Loading similarity data.";
+  fetch("similarity-data.json").then(function (resp) {
+    if (!resp.ok) { throw new Error("Similarity data did not load."); }
+    return resp.json();
+  }).then(function (json) {
+    data = json;
+    buildMaps();
+    readParams();
+    posSel.value = state.pos;
+    eraSel.value = state.era;
+    if (state.playerId && byId[state.playerId]) {
+      playerInput.value = labelFor(byId[state.playerId]);
+    }
+    renderPlayerOptions();
+    renderWeights();
+    syncUrl();
+    render();
+  }).catch(function () {
+    statusEl.textContent = "Similarity data did not load. Please reload the page.";
+  });
+  window.NTW_SIMILARITY_TEST = {
+    compute: function (playerId, weights, era) {
+      if (!data) { return null; }
+      var result = computeSimilar(playerId, weights, era || "adjusted");
+      if (!result) { return null; }
+      var out = [];
+      for (var i = 0; i < result.rows.length; i++) {
+        out.push({ id: result.rows[i].p.id, name: result.rows[i].p.name,
+          distance: result.rows[i].distance, score: result.rows[i].score });
+      }
+      return out;
+    },
+    csv: function (playerId, weights, era) {
+      if (!data) { return null; }
+      var result = computeSimilar(playerId, weights, era || "adjusted");
+      if (!result) { return null; }
+      return buildCsv(result);
+    },
+    ready: function () { return !!data; },
+    setData: function (json) {
+      data = json;
+      buildMaps();
+      state.weights = defaultWeights();
+    }
+  };
+})();
+</script>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
