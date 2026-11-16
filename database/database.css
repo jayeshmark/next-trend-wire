@@ -64,3 +64,8 @@ html[data-theme="dark"] {
 .db-page .prev-next a { color: var(--accent); }
 .db-page .prev-next .next { margin-left: auto; text-align: right; }
 .db-page .article-meta { color: var(--muted); font-size: 12px; margin: 0 0 24px; }
+
+/* Player photo. One image per player page, after the article meta. */
+.player-photo { margin: 0 0 24px; max-width: 760px; }
+.player-photo img { display: block; width: 100%; height: auto; }
+.player-photo figcaption { color: var(--muted); font-size: 12px; margin-top: 8px; }
