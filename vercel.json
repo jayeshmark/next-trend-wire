@@ -1,1 +1,1 @@
-{"cleanUrls":true,"redirects":[{"destination":"/","source":"/index.html","statusCode":301},{"destination":"/$1","source":"/(.*)/index.html","statusCode":301},{"destination":"/$1","source":"/(.*).html","statusCode":301}]}
+{"cleanUrls":true}
