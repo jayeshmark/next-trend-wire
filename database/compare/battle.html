@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player battle | Next Trend Wire</title>
+<meta name="description" content="Choose any two NFL players and battle across passing, rushing, receiving, defense, kicking, punting, and return totals. Career totals, 1999 to 2026, with a winner in each category.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/compare/battle">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.compare-pickers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; max-width: 760px; }
+.compare-pickers label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.compare-pickers input { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+.compare-actions { margin: 0 0 16px; }
+.compare-actions button { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; margin-right: 8px; }
+.battle-score { color: var(--ink); font-size: 17px; font-weight: 600; }
+.db-table td.winner-cell { font-weight: 600; }
+@media (max-width: 640px) { .compare-pickers { grid-template-columns: 1fr; } }
+</style>
+
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+    <p class="eyebrow">NFL stats database</p>
+    <h1>Player battle</h1>
+    <p class="db-intro">Choose any two players and battle across their career totals. Each category has a winner, and the player who wins the most categories wins the battle.</p>
+    <p class="db-note">Career totals cover regular season and postseason combined, 1999 to 2026. 2026 statistics are through Week 10, including 13 of 14 scheduled Week 10 games; the season is in progress, so totals will change as more games are played. Totals only. No rate stats are shown. Every player with a page in this database can battle.</p>
+    <p class="db-back"><a href="./">&larr; Back to the compare tool</a></p>
+    <section><h2>Choose two players</h2>
+    <p>Type a name and choose a player from the list. The battle link updates as you choose, so the address bar link can be shared and will show the same battle.</p>
+    <div class="compare-pickers">
+      <div><label for="player-a">First player</label><input id="player-a" list="players-a" placeholder="Type a player name" autocomplete="off"><datalist id="players-a"></datalist></div>
+      <div><label for="player-b">Second player</label><input id="player-b" list="players-b" placeholder="Type a player name" autocomplete="off"><datalist id="players-b"></datalist></div>
+    </div>
+    <p class="compare-actions"><button id="swap-players" type="button">Swap players</button><button id="download-csv" type="button" style="display: none;">Download CSV</button><button id="copy-link" type="button" style="display: none;">Copy battle link</button></p>
+    <p id="battle-status">Loading player data.</p>
+    <p id="battle-score" class="battle-score"></p>
+    <div id="battle-result"></div>
+    <p id="battle-notes"></p>
+    <p id="battle-share" style="display: none;">Share this battle: <a id="share-link" href="">Battle link</a></p>
+    </section>
+    <section><h2>How the battle is scored</h2>
+    <p>A category counts toward the overall score only when both players have stats in that category. Inside a counted category, each stat row goes to the higher total, except interceptions thrown, which goes to the lower total, and only when both players attempted a pass. A tied row goes to neither player. The category winner is the player who wins the most rows in that category. A category where only one player has stats is shown in the table but does not count toward the overall score, and a category where neither player has stats is listed below the table.</p>
+    <p>The battle scores yards and touchdowns, receptions, tackles, sacks, interceptions, field goals, punts, and returns. Attempts and targets are not scored here. For the full side by side table with attempts and targets, use the <a href="./">compare tool</a>.</p>
+    <p>Returns combine punt returns and kickoff returns. Tackles combine solo tackles and assisted tackles. This is a stats battle over career totals. It is not a prediction about any game.</p>
+    </section>
+    <section><h2>More ways to compare</h2>
+    <ul class="db-link-list">
+      <li><a href="build-a-player">Build a player</a> <span>Choose a real player for each trait and build a fantasy composite.</span></li>
+      <li><a href="./">Compare players</a> <span>See any two players side by side with the full career totals table.</span></li>
+    </ul>
+    </section>
+    <p class="db-source">Source: nflverse player stats, 1999 to 2026, regular season and postseason combined. 2026 statistics are through Week 10, including 13 of 14 scheduled Week 10 games; the season is in progress, so totals will change as more games are played. Figures are presented in this site's own layout.</p>
+    <p class="db-back db-links">More in the database: <a href="../">NFL stats hub</a> &middot; <a href="../records-passing">NFL passing records</a> &middot; <a href="../records-rushing">NFL rushing records</a> &middot; <a href="../records-receiving">NFL receiving records</a> &middot; <a href="../records-scoring">NFL scoring records</a> &middot; <a href="../records-defense">NFL defensive records</a></p>
+<script>
+(function () {
+  var players = [];
+  var byId = {};
+  var byLabel = {};
+  var inputA = document.getElementById("player-a");
+  var inputB = document.getElementById("player-b");
+  var listA = document.getElementById("players-a");
+  var listB = document.getElementById("players-b");
+  var statusEl = document.getElementById("battle-status");
+  var scoreEl = document.getElementById("battle-score");
+  var resultEl = document.getElementById("battle-result");
+  var notesEl = document.getElementById("battle-notes");
+  var shareEl = document.getElementById("battle-share");
+  var shareLink = document.getElementById("share-link");
+  var csvBtn = document.getElementById("download-csv");
+  var copyBtn = document.getElementById("copy-link");
+  var currentRows = null;
+  var currentA = null;
+  var currentB = null;
+
+  function fmt(n) {
+    return Number(n).toLocaleString("en-US");
+  }
+  function fmtSacks(v) {
+    var n = Number(v);
+    if (n === Math.floor(n)) { return fmt(n); }
+    return n.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function num(p, group, key) {
+    if (!p[group] || p[group][key] === undefined || p[group][key] === null) { return 0; }
+    return Number(p[group][key]);
+  }
+  function tackles(p) {
+    return num(p, "defense", "solo") + num(p, "defense", "ast");
+  }
+  function yearsText(p) {
+    if (!p.years || p.years.length !== 2) { return "No stats in this data"; }
+    if (p.years[0] === p.years[1]) { return String(p.years[0]); }
+    return p.years[0] + " to " + p.years[1];
+  }
+  function labelFor(p) {
+    var parts = [p.pos, yearsText(p)];
+    if (p.teams && p.teams.length) { parts.push(p.teams.join(", ")); }
+    return p.name + " (" + parts.join(", ") + ")";
+  }
+  function slug(s) {
+    return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+
+  var CATEGORIES = [
+    { name: "Passing", noun: "passing",
+      has: [["passing", "comp"], ["passing", "att"], ["passing", "yds"], ["passing", "td"], ["passing", "int"]],
+      rows: [
+        { label: "Completions", get: function (p) { return num(p, "passing", "comp"); }, fmt: fmt },
+        { label: "Passing yards", get: function (p) { return num(p, "passing", "yds"); }, fmt: fmt },
+        { label: "Passing touchdowns", get: function (p) { return num(p, "passing", "td"); }, fmt: fmt },
+        { label: "Interceptions thrown", get: function (p) { return num(p, "passing", "int"); }, fmt: fmt, lower: true, needsAttempts: true }
+      ] },
+    { name: "Rushing", noun: "rushing",
+      has: [["rushing", "att"], ["rushing", "yds"], ["rushing", "td"]],
+      rows: [
+        { label: "Rushing yards", get: function (p) { return num(p, "rushing", "yds"); }, fmt: fmt },
+        { label: "Rushing touchdowns", get: function (p) { return num(p, "rushing", "td"); }, fmt: fmt }
+      ] },
+    { name: "Receiving", noun: "receiving",
+      has: [["receiving", "rec"], ["receiving", "tgt"], ["receiving", "yds"], ["receiving", "td"]],
+      rows: [
+        { label: "Receptions", get: function (p) { return num(p, "receiving", "rec"); }, fmt: fmt },
+        { label: "Receiving yards", get: function (p) { return num(p, "receiving", "yds"); }, fmt: fmt },
+        { label: "Receiving touchdowns", get: function (p) { return num(p, "receiving", "td"); }, fmt: fmt }
+      ] },
+    { name: "Defense", noun: "defensive",
+      has: [["defense", "solo"], ["defense", "ast"], ["defense", "sacks"], ["defense", "int"]],
+      rows: [
+        { label: "Tackles", get: tackles, fmt: fmt },
+        { label: "Sacks", get: function (p) { return num(p, "defense", "sacks"); }, fmt: fmtSacks },
+        { label: "Interceptions", get: function (p) { return num(p, "defense", "int"); }, fmt: fmt }
+      ] },
+    { name: "Kicking", noun: "kicking",
+      has: [["kicking", "fgm"], ["kicking", "fga"], ["kicking", "patm"]],
+      rows: [
+        { label: "Field goals made", get: function (p) { return num(p, "kicking", "fgm"); }, fmt: fmt },
+        { label: "Extra points made", get: function (p) { return num(p, "kicking", "patm"); }, fmt: fmt }
+      ] },
+    { name: "Punting", noun: "punting",
+      has: [["punting", "punts"], ["punting", "yds"]],
+      rows: [
+        { label: "Punts", get: function (p) { return num(p, "punting", "punts"); }, fmt: fmt },
+        { label: "Punting yards", get: function (p) { return num(p, "punting", "yds"); }, fmt: fmt }
+      ] },
+    { name: "Returns", noun: "return",
+      has: [["returns", "ret"], ["returns", "yds"]],
+      rows: [
+        { label: "Returns", get: function (p) { return num(p, "returns", "ret"); }, fmt: fmt },
+        { label: "Return yards", get: function (p) { return num(p, "returns", "yds"); }, fmt: fmt }
+      ] }
+  ];
+
+  function hasData(p, cat) {
+    for (var i = 0; i < cat.has.length; i++) {
+      if (num(p, cat.has[i][0], cat.has[i][1]) !== 0) { return true; }
+    }
+    return false;
+  }
+
+  function computeBattle(a, b) {
+    var rows = [];
+    rows.push({ kind: "info", category: "Info", label: "Position", a: a.pos, b: b.pos, winner: "" });
+    rows.push({ kind: "info", category: "Info", label: "Seasons", a: yearsText(a), b: yearsText(b), winner: "" });
+    rows.push({ kind: "info", category: "Info", label: "Teams", a: (a.teams || []).join(", "), b: (b.teams || []).join(", "), winner: "" });
+    rows.push({ kind: "info", category: "Info", label: "Games", a: fmt(a.games), b: fmt(b.games), winner: "" });
+    var scoreA = 0;
+    var scoreB = 0;
+    var contested = 0;
+    var emptyCats = [];
+    var oneSided = [];
+    for (var g = 0; g < CATEGORIES.length; g++) {
+      var cat = CATEGORIES[g];
+      var ha = hasData(a, cat);
+      var hb = hasData(b, cat);
+      if (!ha && !hb) { emptyCats.push(cat.name); continue; }
+      var counted = ha && hb;
+      if (counted) { contested++; }
+      var winsA = 0;
+      var winsB = 0;
+      var catRows = [];
+      for (var k = 0; k < cat.rows.length; k++) {
+        var row = cat.rows[k];
+        var va = row.get(a);
+        var vb = row.get(b);
+        var scored = counted;
+        if (row.needsAttempts && (num(a, "passing", "att") === 0 || num(b, "passing", "att") === 0)) { scored = false; }
+        var winner = "";
+        if (scored) {
+          if (va === vb) { winner = "Tie"; }
+          else if (row.lower) { winner = va < vb ? "A" : "B"; }
+          else { winner = va > vb ? "A" : "B"; }
+          if (winner === "A") { winsA++; }
+          if (winner === "B") { winsB++; }
+        } else {
+          winner = "Not scored";
+        }
+        catRows.push({ kind: "row", category: cat.name, label: row.label, a: row.fmt(va), b: row.fmt(vb), winner: winner });
+      }
+      var full;
+      var short;
+      if (!counted) {
+        var only = ha ? a : b;
+        full = "Not counted: only " + only.name + " has " + cat.noun + " stats in this data.";
+        short = "Not counted";
+        oneSided.push(full);
+      } else if (winsA === winsB) {
+        full = "Tie, " + winsA + " to " + winsB + ".";
+        short = "Tie, " + winsA + " to " + winsB;
+      } else {
+        var w = winsA > winsB ? a : b;
+        full = "Winner: " + w.name + ", " + Math.max(winsA, winsB) + " to " + Math.min(winsA, winsB) + ".";
+        short = "Winner: " + w.name + ", " + Math.max(winsA, winsB) + " to " + Math.min(winsA, winsB);
+        if (winsA > winsB) { scoreA++; } else { scoreB++; }
+      }
+      rows.push({ kind: "group", category: cat.name, label: cat.name, a: "", b: "", winner: full, short: short });
+      for (var m = 0; m < catRows.length; m++) { rows.push(catRows[m]); }
+    }
+    return { rows: rows, scoreA: scoreA, scoreB: scoreB, contested: contested, emptyCats: emptyCats, oneSided: oneSided };
+  }
+
+  function winnerText(winner, a, b) {
+    if (winner === "A") { return a.name; }
+    if (winner === "B") { return b.name; }
+    return winner;
+  }
+
+  function renderTable(a, b, battle) {
+    var h = [];
+    h.push('<div class="db-table-wrap"><table class="db-table">');
+    h.push('<thead><tr><th>Stat</th><th><a href="../players/' + esc(a.id) + '">' + esc(a.name) + '</a></th><th><a href="../players/' + esc(b.id) + '">' + esc(b.name) + '</a></th><th>Winner</th></tr></thead>');
+    h.push("<tbody>");
+    for (var i = 0; i < battle.rows.length; i++) {
+      var r = battle.rows[i];
+      if (r.kind === "group") {
+        h.push('<tr><th colspan="4">' + esc(r.label) + " (" + esc(r.short) + ")</th></tr>");
+      } else {
+        var w = winnerText(r.winner, a, b);
+        var cls = (r.winner === "A" || r.winner === "B") ? ' class="winner-cell"' : "";
+        h.push("<tr><td>" + esc(r.label) + "</td><td>" + esc(r.a) + "</td><td>" + esc(r.b) + "</td><td" + cls + ">" + esc(w) + "</td></tr>");
+      }
+    }
+    h.push("</tbody></table></div>");
+    return h.join("");
+  }
+
+  function csvEscape(v) {
+    var s = String(v);
+    if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf("\n") !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+
+  function buildCsv(a, b, battle) {
+    var lines = [];
+    lines.push(["Category", "Stat", a.name, b.name, "Winner"].map(csvEscape).join(","));
+    for (var i = 0; i < battle.rows.length; i++) {
+      var r = battle.rows[i];
+      var w = r.kind === "group" ? r.winner : winnerText(r.winner, a, b);
+      lines.push([r.category, r.label, r.a, r.b, w].map(csvEscape).join(","));
+    }
+    return lines.join("\n") + "\n";
+  }
+
+  function resolve(input) {
+    var v = input.value;
+    if (byLabel[v]) { return byLabel[v]; }
+    return null;
+  }
+  function updateUrl(a, b) {
+    try {
+      var params = new URLSearchParams();
+      if (a) { params.set("p1", a.id); }
+      if (b) { params.set("p2", b.id); }
+      var q = params.toString();
+      var url = window.location.pathname + (q ? "?" + q : "");
+      window.history.replaceState(null, "", url);
+    } catch (e) {}
+  }
+  function render() {
+    var a = resolve(inputA);
+    var b = resolve(inputB);
+    updateUrl(a, b);
+    currentRows = null;
+    currentA = null;
+    currentB = null;
+    scoreEl.textContent = "";
+    notesEl.innerHTML = "";
+    csvBtn.style.display = "none";
+    copyBtn.style.display = "none";
+    shareEl.style.display = "none";
+    if (!a || !b) {
+      resultEl.innerHTML = "";
+      if (inputA.value && !a) { statusEl.textContent = "First choice: choose a player from the list."; }
+      else if (inputB.value && !b) { statusEl.textContent = "Second choice: choose a player from the list."; }
+      else { statusEl.textContent = "Choose two players to see the battle."; }
+      return;
+    }
+    if (a.id === b.id) {
+      resultEl.innerHTML = "";
+      statusEl.textContent = "Choose two different players to battle.";
+      return;
+    }
+    statusEl.textContent = "";
+    var battle = computeBattle(a, b);
+    currentRows = battle;
+    currentA = a;
+    currentB = b;
+    resultEl.innerHTML = renderTable(a, b, battle);
+    if (battle.contested === 0) {
+      scoreEl.textContent = "These two players share no stat category with data for both, so there is no overall winner.";
+    } else if (battle.scoreA === battle.scoreB) {
+      var word = battle.scoreA === 1 ? "category" : "categories";
+      scoreEl.textContent = "The battle is tied at " + battle.scoreA + " " + word + " each.";
+    } else {
+      var winner = battle.scoreA > battle.scoreB ? a : b;
+      var high = Math.max(battle.scoreA, battle.scoreB);
+      var low = Math.min(battle.scoreA, battle.scoreB);
+      var w2 = high === 1 ? "category" : "categories";
+      scoreEl.textContent = winner.name + " wins the battle, " + high + " " + w2 + " to " + low + ".";
+    }
+    var notes = [];
+    for (var i = 0; i < battle.oneSided.length; i++) { notes.push(battle.oneSided[i]); }
+    if (battle.emptyCats.length) {
+      notes.push("No stats for either player in: " + battle.emptyCats.join(", ") + ".");
+    }
+    notesEl.textContent = notes.join(" ");
+    shareLink.href = window.location.href;
+    shareEl.style.display = "";
+    csvBtn.style.display = "";
+    copyBtn.style.display = "";
+  }
+
+  inputA.addEventListener("change", render);
+  inputB.addEventListener("change", render);
+  inputA.addEventListener("input", render);
+  inputB.addEventListener("input", render);
+  document.getElementById("swap-players").addEventListener("click", function () {
+    var tmp = inputA.value;
+    inputA.value = inputB.value;
+    inputB.value = tmp;
+    render();
+  });
+  csvBtn.addEventListener("click", function () {
+    if (!currentRows || !currentA || !currentB) { return; }
+    var csv = buildCsv(currentA, currentB, currentRows);
+    var blob = new Blob([csv], { type: "text/csv" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "battle-" + slug(currentA.name) + "-vs-" + slug(currentB.name) + ".csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  });
+  copyBtn.addEventListener("click", function () {
+    var done = function () { statusEl.textContent = "Battle link copied."; };
+    var fail = function () { statusEl.textContent = "Copy the link from the address bar."; };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(window.location.href).then(done, fail);
+      } else { fail(); }
+    } catch (e) { fail(); }
+  });
+
+  statusEl.textContent = "Loading player data.";
+  inputA.disabled = true;
+  inputB.disabled = true;
+  fetch("compare-data.json").then(function (resp) {
+    if (!resp.ok) { throw new Error("Player data did not load."); }
+    return resp.json();
+  }).then(function (data) {
+    players = data;
+    var opts = [];
+    for (var i = 0; i < players.length; i++) {
+      var p = players[i];
+      var label = labelFor(p);
+      if (byLabel[label]) { label = label + " [" + p.id + "]"; }
+      byId[p.id] = p;
+      byLabel[label] = p;
+      p._label = label;
+      opts.push('<option value="' + esc(label) + '"></option>');
+    }
+    var joined = opts.join("");
+    listA.innerHTML = joined;
+    listB.innerHTML = joined;
+    inputA.disabled = false;
+    inputB.disabled = false;
+    var params = new URLSearchParams(window.location.search);
+    var a = byId[params.get("p1")];
+    var b = byId[params.get("p2")];
+    if (a) { inputA.value = a._label; }
+    if (b) { inputB.value = b._label; }
+    render();
+  }).catch(function () {
+    statusEl.textContent = "Player data did not load. Please reload the page.";
+  });
+})();
+</script>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>

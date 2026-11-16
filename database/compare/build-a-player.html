@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a player | Next Trend Wire</title>
+<meta name="description" content="Build a fantasy composite player by choosing a real player for each trait, from passing yards to sacks. Every trait is credited to its player. Career totals, 1999 to 2026.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/compare/build-a-player">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.mixer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; max-width: 760px; }
+.mixer-grid label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.mixer-grid input { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+.mixer-actions { margin: 0 0 16px; }
+.mixer-actions button { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; margin-right: 8px; }
+.mixer-warning { color: var(--ink); font-weight: 600; }
+@media (max-width: 640px) { .mixer-grid { grid-template-columns: 1fr; } }
+</style>
+
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+    <p class="eyebrow">NFL stats database</p>
+    <h1>Build a player</h1>
+    <p class="db-intro">Choose a real player for each trait and build a fantasy composite. Every trait is credited to the player it came from.</p>
+    <p class="mixer-warning">This is a mixer, not a real player. The totals below belong to different real players. They were never combined on the field, and the composite is not any one player's stats.</p>
+    <p class="db-note">Career totals cover regular season and postseason combined, 1999 to 2026. 2026 statistics are through Week 10, including 13 of 14 scheduled Week 10 games; the season is in progress, so totals will change as more games are played. Totals only. No rate stats are shown. Every player with a page in this database can be chosen for any trait.</p>
+    <p class="db-back"><a href="./">&larr; Back to the compare tool</a></p>
+    <section><h2>Choose a player for each trait</h2>
+    <p>Type a name and choose a player from the list. Choose as many traits as you like. The mixer link updates as you choose, so the address bar link can be shared and will show the same composite.</p>
+    <div class="mixer-grid" id="mixer-grid"></div>
+    <datalist id="players-list"></datalist>
+    <p class="mixer-actions"><button id="fill-leaders" type="button">Fill with career leaders</button><button id="clear-all" type="button">Clear all</button><button id="download-csv" type="button" style="display: none;">Download CSV</button><button id="copy-link" type="button" style="display: none;">Copy mixer link</button></p>
+    <p id="mixer-status">Loading player data.</p>
+    <div id="mixer-result"></div>
+    <p id="mixer-share" style="display: none;">Share this composite: <a id="share-link" href="">Mixer link</a></p>
+    </section>
+    <section><h2>What each trait means</h2>
+    <p>Each trait is one career total from the player chosen for it: passing yards and passing touchdowns, rushing yards and rushing touchdowns, receptions, receiving yards and receiving touchdowns, tackles, sacks, defensive interceptions, field goals made, punting yards, and return yards. Returns combine punt returns and kickoff returns. Tackles combine solo tackles and assisted tackles, and the table shows the split.</p>
+    <p>The career leaders button fills every trait with the player who holds the highest career total in that trait. When two players tie, the first in alphabetical order is used.</p>
+    </section>
+    <section><h2>More ways to compare</h2>
+    <ul class="db-link-list">
+      <li><a href="battle">Player battle</a> <span>Battle any two players across categories, with a winner in each category.</span></li>
+      <li><a href="./">Compare players</a> <span>See any two players side by side with the full career totals table.</span></li>
+    </ul>
+    </section>
+    <p class="db-source">Source: nflverse player stats, 1999 to 2026, regular season and postseason combined. 2026 statistics are through Week 10, including 13 of 14 scheduled Week 10 games; the season is in progress, so totals will change as more games are played. Figures are presented in this site's own layout.</p>
+    <p class="db-back db-links">More in the database: <a href="../">NFL stats hub</a> &middot; <a href="../records-passing">NFL passing records</a> &middot; <a href="../records-rushing">NFL rushing records</a> &middot; <a href="../records-receiving">NFL receiving records</a> &middot; <a href="../records-scoring">NFL scoring records</a> &middot; <a href="../records-defense">NFL defensive records</a></p>
+<script>
+(function () {
+  var players = [];
+  var byId = {};
+  var byLabel = {};
+  var grid = document.getElementById("mixer-grid");
+  var listEl = document.getElementById("players-list");
+  var statusEl = document.getElementById("mixer-status");
+  var resultEl = document.getElementById("mixer-result");
+  var shareEl = document.getElementById("mixer-share");
+  var shareLink = document.getElementById("share-link");
+  var csvBtn = document.getElementById("download-csv");
+  var copyBtn = document.getElementById("copy-link");
+  var currentRows = null;
+
+  function fmt(n) {
+    return Number(n).toLocaleString("en-US");
+  }
+  function fmtSacks(v) {
+    var n = Number(v);
+    if (n === Math.floor(n)) { return fmt(n); }
+    return n.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function num(p, group, key) {
+    if (!p[group] || p[group][key] === undefined || p[group][key] === null) { return 0; }
+    return Number(p[group][key]);
+  }
+  function tackles(p) {
+    return num(p, "defense", "solo") + num(p, "defense", "ast");
+  }
+  function yearsText(p) {
+    if (!p.years || p.years.length !== 2) { return "No stats in this data"; }
+    if (p.years[0] === p.years[1]) { return String(p.years[0]); }
+    return p.years[0] + " to " + p.years[1];
+  }
+  function labelFor(p) {
+    var parts = [p.pos, yearsText(p)];
+    if (p.teams && p.teams.length) { parts.push(p.teams.join(", ")); }
+    return p.name + " (" + parts.join(", ") + ")";
+  }
+
+  var TRAITS = [
+    { key: "py", label: "Passing yards", get: function (p) { return num(p, "passing", "yds"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "ptd", label: "Passing touchdowns", get: function (p) { return num(p, "passing", "td"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "ry", label: "Rushing yards", get: function (p) { return num(p, "rushing", "yds"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "rtd", label: "Rushing touchdowns", get: function (p) { return num(p, "rushing", "td"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "rec", label: "Receptions", get: function (p) { return num(p, "receiving", "rec"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "recy", label: "Receiving yards", get: function (p) { return num(p, "receiving", "yds"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "rectd", label: "Receiving touchdowns", get: function (p) { return num(p, "receiving", "td"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "tck", label: "Tackles", get: tackles, fmt: fmt, note: function (p) { return fmt(num(p, "defense", "solo")) + " solo, " + fmt(num(p, "defense", "ast")) + " assisted"; } },
+    { key: "sk", label: "Sacks", get: function (p) { return num(p, "defense", "sacks"); }, fmt: fmtSacks, note: function (p) { return ""; } },
+    { key: "di", label: "Defensive interceptions", get: function (p) { return num(p, "defense", "int"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "fg", label: "Field goals made", get: function (p) { return num(p, "kicking", "fgm"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "punt", label: "Punting yards", get: function (p) { return num(p, "punting", "yds"); }, fmt: fmt, note: function (p) { return ""; } },
+    { key: "ret", label: "Return yards", get: function (p) { return num(p, "returns", "yds"); }, fmt: fmt, note: function (p) { return ""; } }
+  ];
+  var inputs = {};
+
+  function buildInputs() {
+    for (var i = 0; i < TRAITS.length; i++) {
+      var t = TRAITS[i];
+      var wrap = document.createElement("div");
+      var label = document.createElement("label");
+      label.setAttribute("for", "trait-" + t.key);
+      label.textContent = t.label;
+      var input = document.createElement("input");
+      input.id = "trait-" + t.key;
+      input.setAttribute("list", "players-list");
+      input.setAttribute("placeholder", "Type a player name");
+      input.setAttribute("autocomplete", "off");
+      input.disabled = true;
+      wrap.appendChild(label);
+      wrap.appendChild(input);
+      grid.appendChild(wrap);
+      inputs[t.key] = input;
+    }
+  }
+  buildInputs();
+
+  function resolve(input) {
+    var v = input.value;
+    if (byLabel[v]) { return byLabel[v]; }
+    return null;
+  }
+  function updateUrl() {
+    try {
+      var params = new URLSearchParams();
+      for (var i = 0; i < TRAITS.length; i++) {
+        var p = resolve(inputs[TRAITS[i].key]);
+        if (p) { params.set(TRAITS[i].key, p.id); }
+      }
+      var q = params.toString();
+      var url = window.location.pathname + (q ? "?" + q : "");
+      window.history.replaceState(null, "", url);
+    } catch (e) {}
+  }
+  function computeRows() {
+    var rows = [];
+    for (var i = 0; i < TRAITS.length; i++) {
+      var t = TRAITS[i];
+      var p = resolve(inputs[t.key]);
+      if (!p) { continue; }
+      rows.push({ trait: t.label, player: p, pos: p.pos, total: t.fmt(t.get(p)), note: t.note(p) });
+    }
+    return rows;
+  }
+  function renderTable(rows) {
+    var h = [];
+    h.push('<p class="mixer-warning">Fantasy composite. Each total below belongs to the player named on its row. This is not one player.</p>');
+    h.push('<div class="db-table-wrap"><table class="db-table">');
+    h.push("<thead><tr><th>Trait</th><th>Player</th><th>Position</th><th>Career total</th><th>Note</th></tr></thead>");
+    h.push("<tbody>");
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      h.push("<tr><td>" + esc(r.trait) + '</td><td><a href="../players/' + esc(r.player.id) + '">' + esc(r.player.name) + "</a></td><td>" + esc(r.pos) + "</td><td>" + esc(r.total) + "</td><td>" + esc(r.note) + "</td></tr>");
+    }
+    h.push("</tbody></table></div>");
+    return h.join("");
+  }
+  function csvEscape(v) {
+    var s = String(v);
+    if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf("\n") !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+  function buildCsv(rows) {
+    var lines = [];
+    lines.push(["Trait", "Player", "Position", "Career total", "Note"].map(csvEscape).join(","));
+    for (var i = 0; i < rows.length; i++) {
+      lines.push([rows[i].trait, rows[i].player.name, rows[i].pos, rows[i].total, rows[i].note].map(csvEscape).join(","));
+    }
+    return lines.join("\n") + "\n";
+  }
+  function render() {
+    updateUrl();
+    var rows = computeRows();
+    currentRows = rows;
+    var bad = null;
+    for (var i = 0; i < TRAITS.length; i++) {
+      var input = inputs[TRAITS[i].key];
+      if (input.value && !resolve(input)) { bad = TRAITS[i].label; break; }
+    }
+    if (rows.length === 0) {
+      resultEl.innerHTML = "";
+      csvBtn.style.display = "none";
+      copyBtn.style.display = "none";
+      shareEl.style.display = "none";
+      if (bad) { statusEl.textContent = bad + ": choose a player from the list."; }
+      else { statusEl.textContent = "Choose a player for at least one trait to see the composite."; }
+      return;
+    }
+    if (bad) { statusEl.textContent = bad + ": choose a player from the list."; }
+    else { statusEl.textContent = ""; }
+    resultEl.innerHTML = renderTable(rows);
+    shareLink.href = window.location.href;
+    shareEl.style.display = "";
+    csvBtn.style.display = "";
+    copyBtn.style.display = "";
+  }
+
+  for (var j = 0; j < TRAITS.length; j++) {
+    inputs[TRAITS[j].key].addEventListener("change", render);
+    inputs[TRAITS[j].key].addEventListener("input", render);
+  }
+  document.getElementById("fill-leaders").addEventListener("click", function () {
+    for (var i = 0; i < TRAITS.length; i++) {
+      var t = TRAITS[i];
+      var best = null;
+      var bestVal = null;
+      for (var k = 0; k < players.length; k++) {
+        var v = t.get(players[k]);
+        if (bestVal === null || v > bestVal) { bestVal = v; best = players[k]; }
+      }
+      if (best) { inputs[t.key].value = best._label; }
+    }
+    render();
+  });
+  document.getElementById("clear-all").addEventListener("click", function () {
+    for (var i = 0; i < TRAITS.length; i++) { inputs[TRAITS[i].key].value = ""; }
+    render();
+  });
+  csvBtn.addEventListener("click", function () {
+    if (!currentRows || !currentRows.length) { return; }
+    var csv = buildCsv(currentRows);
+    var blob = new Blob([csv], { type: "text/csv" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "build-a-player.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  });
+  copyBtn.addEventListener("click", function () {
+    var done = function () { statusEl.textContent = "Mixer link copied."; };
+    var fail = function () { statusEl.textContent = "Copy the link from the address bar."; };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(window.location.href).then(done, fail);
+      } else { fail(); }
+    } catch (e) { fail(); }
+  });
+
+  statusEl.textContent = "Loading player data.";
+  fetch("compare-data.json").then(function (resp) {
+    if (!resp.ok) { throw new Error("Player data did not load."); }
+    return resp.json();
+  }).then(function (data) {
+    players = data;
+    var opts = [];
+    for (var i = 0; i < players.length; i++) {
+      var p = players[i];
+      var label = labelFor(p);
+      if (byLabel[label]) { label = label + " [" + p.id + "]"; }
+      byId[p.id] = p;
+      byLabel[label] = p;
+      p._label = label;
+      opts.push('<option value="' + esc(label) + '"></option>');
+    }
+    listEl.innerHTML = opts.join("");
+    for (var j = 0; j < TRAITS.length; j++) { inputs[TRAITS[j].key].disabled = false; }
+    var params = new URLSearchParams(window.location.search);
+    for (var k = 0; k < TRAITS.length; k++) {
+      var p = byId[params.get(TRAITS[k].key)];
+      if (p) { inputs[TRAITS[k].key].value = p._label; }
+    }
+    render();
+  }).catch(function () {
+    statusEl.textContent = "Player data did not load. Please reload the page.";
+  });
+})();
+</script>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
