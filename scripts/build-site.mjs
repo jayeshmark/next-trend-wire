@@ -122,7 +122,7 @@ const footer = `<footer class="site-footer">
       </div>
       <div>
         <h2>Database</h2>
-        <ul><li><a href="/database/">Players and teams</a></li><li><a href="/database/leaderboards/">Leaderboards</a></li><li><a href="/database/records">Records</a></li><li><a href="/database/head-to-head/">Head-to-head</a></li><li><a href="/database/compare/">Compare players</a></li><li><a href="/database/usage/">Usage and red zone</a></li></ul>
+        <ul><li><a href="/database/">Players and teams</a></li><li><a href="/database/leaderboards/">Leaderboards</a></li><li><a href="/database/records">Records</a></li><li><a href="/database/head-to-head/">Head-to-head</a></li><li><a href="/database/compare/">Compare players</a></li><li><a href="/database/usage/">Usage and red zone</a></li><li><a href="/database/ratings/">Ratings</a></li><li><a href="/database/depth-charts/">Depth charts</a></li><li><a href="/database/races/">Races</a></li><li><a href="/database/similarity/">Similarity</a></li><li><a href="/database/comebacks/">Comebacks</a></li></ul>
       </div>
       <div>
         <h2>Explore</h2>
