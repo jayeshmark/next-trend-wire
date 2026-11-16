@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFL usage stats | Next Trend Wire</title>
+<meta name="description" content="NFL usage stats: targets, target share, air yards, snap share, and red zone touches, updated through the season. Regular season only.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/usage/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+    <p class="eyebrow">NFL stats database</p>
+    <h1>NFL usage stats</h1>
+    <p class="db-intro">Targets, air yards, snaps, and red zone touches for the 2026 and 2025 seasons.</p>
+    <p class="db-note">These pages refresh on the Tuesday and Friday update cycle during the season. When a week is only partly in the data, the affected tables say so on the page and totals update as the remaining games arrive. All figures are regular season only.</p>
+    <p class="db-back"><a href="../">&larr; Back to the NFL stats section</a></p>
+    <p>Usage stats measure involvement rather than production: who gets targeted, who stays on the field, and who gets the ball near the goal line. A target is a pass thrown to a player. Air yards measure the depth of those throws. Snap share shows how much a player was on the field. Red zone touches count carries and targets inside the opponent's 20 yard line. Together they show opportunity, which changes week to week during the season.</p>
+    <h2>Usage pages</h2>
+    <ul class="db-link-list">
+      <li><a href="targets">Targets leaders</a> <span>Targets and target share leaders for 2026 and 2025.</span></li>
+      <li><a href="snap-share">Snap share leaders</a> <span>Offensive, defensive, and skill position snap counts and snap shares.</span></li>
+      <li><a href="air-yards">Air yards leaders</a> <span>Air yards and air yards share leaders for 2026 and 2025.</span></li>
+      <li><a href="red-zone">Red zone stats</a> <span>Red zone touches, carries, targets, and touchdowns from play-by-play data.</span></li>
+    </ul>
+
+    <p class="db-source">Source: nflverse data releases, regular season only. Figures are presented in this site's own layout. Last updated November 16, 2026.</p>
+    <p class="db-back db-links">More in the database: <a href="../">NFL stats hub</a> &middot; <a href="./">Usage stats hub</a> &middot; <a href="targets">Targets leaders</a> &middot; <a href="snap-share">Snap share leaders</a> &middot; <a href="air-yards">Air yards leaders</a> &middot; <a href="red-zone">Red zone stats</a> &middot; <a href="../leaderboards">NFL leaderboards</a> &middot; <a href="../records-passing">NFL passing records</a> &middot; <a href="../records-rushing">NFL rushing records</a> &middot; <a href="../records-receiving">NFL receiving records</a> &middot; <a href="../records-scoring">NFL scoring records</a> &middot; <a href="../records-defense">NFL defensive records</a></p>
+
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>

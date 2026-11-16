@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFL stats leaders | Next Trend Wire</title>
+<meta name="description" content="NFL stats leaders: 2026 leaders through Week 10 and career leaders for passing, rushing, receiving, snaps, and team stats.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/leaderboards/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+    <p class="eyebrow">NFL stats database</p>
+    <h1>NFL stats leaders</h1>
+    <p class="db-intro">2026 leaders through Week 10 and career leaders, 1999 to 2026, for passing, rushing, receiving, snap counts, depth charts, and team stats.</p>
+    <p class="db-note">2026 totals are partial, through Week 10. Twelve of the fourteen Week 10 games are in the data. The Chargers at Ravens game and the Steelers at Bengals game had no player stats in this pull, so the Ravens, Bengals, Chargers, and Steelers are each missing one game. The Bears, Broncos, Eagles, and Buccaneers had a bye in Week 10. Data pulled on November 16, 2026. Career totals combine regular season and postseason, 1999 to 2026, including the partial 2026 season. Players whose careers began before 1999 are shown with only their 1999 onward totals, because earlier seasons are not in this data.</p>
+    <p class="db-back"><a href="../">&larr; Back to the NFL stats section</a></p>
+    <h2>Leaderboards</h2>
+    <ul class="db-link-list">
+      <li><a href="passing">NFL QB passing leaders</a> <span>Jordan Love leads 2026 with 2,838 passing yards; Tom Brady leads career totals with 102,616 yards.</span></li>
+      <li><a href="rushing">NFL rushing leaders</a> <span>Jahmyr Gibbs leads 2026 with 1,000 rushing yards; Frank Gore leads career totals with 16,668 yards.</span></li>
+      <li><a href="receiving">NFL receiving leaders</a> <span>Jaxon Smith-Njigba leads 2026 with 1,207 receiving yards; Larry Fitzgerald leads career totals with 18,435 yards.</span></li>
+      <li><a href="snap-counts">NFL snap counts leaders</a> <span>Darnell Wright and Joe Thuney share the 2026 offense lead with 660 snaps; Alex Singleton leads 2026 defense with 647 snaps.</span></li>
+      <li><a href="depth-charts">NFL depth charts</a> <span>All 32 teams from the November 15, 2026 snapshot, with starters and backups at quarterback, running back, receiver, tight end, and on defense.</span></li>
+      <li><a href="team-stats">NFL team stats leaders</a> <span>Buffalo Bills leads 2026 with 287 points scored. All 32 teams, with points, yards, passing, rushing, sacks, and interceptions.</span></li>
+      <li><a href="all-time-rushing">NFL all time rushing leaders</a> <span>Frank Gore leads career totals with 16,668 rushing yards, 1999 to 2026. Top 50 totals.</span></li>
+    </ul>
+    <p class="db-source">Source: nflverse player stats, team stats, snap counts, and depth charts, 1999 to 2026. Figures are presented in this site's own layout. See the <a href="../../data-sources">data sources page</a> for credits.</p>
+    <p class="db-back db-links">More in the database: <a href="../">NFL stats hub</a> &middot; <a href="passing">Passing leaders</a> &middot; <a href="rushing">Rushing leaders</a> &middot; <a href="receiving">Receiving leaders</a> &middot; <a href="snap-counts">Snap counts leaders</a> &middot; <a href="depth-charts">Depth charts</a> &middot; <a href="team-stats">Team stats leaders</a> &middot; <a href="all-time-rushing">All time rushing leaders</a> &middot; <a href="../records-passing">NFL passing records</a> &middot; <a href="../records-rushing">NFL rushing records</a> &middot; <a href="../records-receiving">NFL receiving records</a> &middot; <a href="../records-scoring">NFL scoring records</a> &middot; <a href="../records-defense">NFL defensive records</a></p>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
