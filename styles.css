@@ -125,3 +125,47 @@ footer { padding: 35px 0 45px; display: flex; justify-content: space-between; co
   .article-body p { font-size: 16px; }
   .today-list a { flex-direction: column; gap: 2px; }
 }
+
+/* Homepage database-first sections (index.html only). All selectors are
+   scoped to .db- classes so no other page changes appearance. */
+.db-hero { padding: clamp(30px, 4vw, 56px); border-radius: 4px; background: #f2f2ef; }
+.db-hero h1 { max-width: 780px; margin: 18px 0 20px; font-size: clamp(40px, 4.6vw, 64px); font-weight: 450; line-height: .98; letter-spacing: -.06em; }
+.db-intro { max-width: 610px; color: #555; font-size: 17px; line-height: 1.55; }
+.db-search { position: relative; max-width: 560px; margin-top: 28px; }
+.db-search input { width: 100%; padding: 14px 16px; border: 1px solid #101010; border-radius: 4px; outline: none; background: white; color: #101010; font: inherit; font-size: 15px; }
+.db-search input:focus { border-color: var(--blue); }
+.db-search input::placeholder { color: #999; }
+.db-results { position: absolute; top: 100%; left: 0; right: 0; z-index: 10; list-style: none; background: white; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 4px 4px; }
+.db-results:empty { display: none; }
+.db-results li a { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 500; }
+.db-results li:last-child a { border-bottom: 0; }
+.db-results li a:hover { color: var(--blue); background: #f2f2ef; }
+.db-results .db-pos { color: #888; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.db-result-note { padding: 11px 16px; color: #888; font-size: 13px; }
+.db-hero-links { margin-top: 20px; font-size: 13px; font-weight: 700; }
+.db-hero-links a { padding-bottom: 3px; border-bottom: 1px solid; }
+.db-hero-links a:hover { color: var(--blue); }
+.db-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); }
+.db-heading { margin: 0 0 16px; color: #111; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.db-letters { display: flex; flex-wrap: wrap; gap: 2px; }
+.db-letters a { padding: 8px 11px; border-radius: 4px; font-size: 14px; font-weight: 600; }
+.db-letters a:hover { color: var(--blue); background: #f2f2ef; }
+.db-teams { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 32px; }
+.db-teams a { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 500; }
+.db-teams a:hover { color: var(--blue); }
+.db-teams a span { color: #888; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.db-records a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 500; }
+.db-records a:hover { color: var(--blue); }
+.db-records a span { color: #888; font-size: 11px; white-space: nowrap; }
+.db-archive { margin: 36px 0 10px; color: #555; font-size: 14px; }
+.db-archive a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 900px) {
+  .db-teams { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .db-hero { padding: 28px 22px; }
+  .db-hero h1 { font-size: 38px; }
+  .db-intro { font-size: 15px; }
+  .db-teams { grid-template-columns: 1fr; }
+  .db-records a { flex-direction: column; gap: 2px; }
+}
