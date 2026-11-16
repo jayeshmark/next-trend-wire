@@ -1,1 +1,1 @@
-{"cleanUrls":true}
+{"cleanUrls":true,"buildCommand":"node scripts/build-site.mjs","outputDirectory":"dist"}
