@@ -96,12 +96,15 @@ function header(current, { themeToggle = false, extraClass = '' } = {}) {
   return `<header class="site-header${extraClass ? ' ' + extraClass : ''}">
     <a class="logo" href="/" aria-label="Next Trend Wire, home">NEXT TREND <b>WIRE</b></a>
     <nav class="site-nav" aria-label="Sections">
-      ${link('/', 'Latest', 'latest')}
-      ${navTopics.map((t) => link('/topics/' + t.slug, t.name, 'topic:' + t.slug)).join('\n      ')}
+      ${link('/', 'Database', 'database')}
+      ${link('/database/leaderboards/', 'Leaderboards', 'leaderboards')}
+      ${link('/database/records', 'Records', 'records')}
+      ${link('/database/head-to-head/', 'Head-to-Head', 'head-to-head')}
+      ${link('/database/compare/', 'Compare', 'compare')}
+      ${link('/database/usage/', 'Usage', 'usage')}
       <span class="nav-sep" aria-hidden="true"></span>
       ${link('/archive/', 'Archive', 'archive')}
-      ${link('/database/', 'Database', 'database')}
-      ${link('/topics/', 'All topics', 'topics')}
+      ${link('/topics/', 'Stories', 'topics')}
     </nav>
     <div class="header-tools">
       <button class="search-open" type="button" aria-label="Search stories" aria-haspopup="dialog">${ICON_SEARCH}<span>Search</span><kbd>/</kbd></button>
@@ -114,16 +117,16 @@ const footer = `<footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="logo" href="/">NEXT TREND <b>WIRE</b></a>
-        <p>New and noteworthy. The stories people are searching for, explained in a few minutes.</p>
-        <button class="search-open footer-search" type="button" aria-haspopup="dialog">${ICON_SEARCH}<span>Search ${posts.length} stories</span></button>
+        <p>Every player, team, and record in one place. Free, no paywall, no login.</p>
+        <button class="search-open footer-search" type="button" aria-haspopup="dialog">${ICON_SEARCH}<span>Search stories</span></button>
       </div>
       <div>
-        <h2>Topics</h2>
-        <ul>${allTopics.map((t) => `<li><a href="/topics/${t.slug}">${esc(t.name)}</a> <span>${t.posts.length}</span></li>`).join('')}</ul>
+        <h2>Database</h2>
+        <ul><li><a href="/database/">Players and teams</a></li><li><a href="/database/leaderboards/">Leaderboards</a></li><li><a href="/database/records">Records</a></li><li><a href="/database/head-to-head/">Head-to-head</a></li><li><a href="/database/compare/">Compare players</a></li><li><a href="/database/usage/">Usage and red zone</a></li></ul>
       </div>
       <div>
         <h2>Explore</h2>
-        <ul><li><a href="/">Latest stories</a></li><li><a href="/topics/">All topics</a></li><li><a href="/archive/">Sports archive</a></li><li><a href="/database/">NFL database</a></li><li><a href="/feed.xml">RSS feed</a></li></ul>
+        <ul><li><a href="/archive/">Sports archive</a></li><li><a href="/topics/">All stories</a></li><li><a href="/data-sources">Data sources</a></li><li><a href="/feed.xml">RSS feed</a></li></ul>
       </div>
       <div>
         <h2>Next Trend Wire</h2>
@@ -155,11 +158,16 @@ function dayGroupedList(list) {
 
 // ── Page rewriting ──────────────────────────────────────────────────────────
 function sectionFor(rel) {
-  if (rel === 'index.html') return 'latest';
+  if (rel === 'index.html') return 'database';
+  if (rel === 'data-sources.html') return 'database';
   if (rel.startsWith('archive/')) return 'archive';
+  if (rel.startsWith('database/leaderboards/')) return 'leaderboards';
+  if (rel.startsWith('database/head-to-head/')) return 'head-to-head';
+  if (rel.startsWith('database/compare/')) return 'compare';
+  if (rel.startsWith('database/usage/')) return 'usage';
+  if (rel.startsWith('database/records')) return 'records';
   if (rel.startsWith('database/')) return 'database';
-  if (rel.startsWith('topics/')) return rel === 'topics/index.html' ? 'topics' : 'topic:' + rel.slice(7, -5);
-  if (rel.startsWith('posts/')) { const p = postBySlug.get(rel.slice(6, -5)); return p ? 'topic:' + p.topicSlug : ''; }
+  if (rel.startsWith('topics/') || rel.startsWith('posts/')) return 'topics';
   return '';
 }
 
@@ -308,6 +316,7 @@ for (const name of fs.readdirSync(ROOT)) {
 const dbHub = databaseHub(ROOT);
 const hubMain = { 'archive/index.html': archiveHub(ROOT), 'database/index.html': dbHub.main };
 fs.writeFileSync(path.join(OUT, 'database', 'players.json'), JSON.stringify(dbHub.players));
+fs.writeFileSync(path.join(OUT, 'database', 'players-search.json'), JSON.stringify(dbHub.playersSearch));
 
 const detailCtx = detailContext(ROOT);
 
