@@ -372,6 +372,7 @@ export function databaseHub(ROOT) {
         <div><dt>Record tables</dt><dd data-count="${records.reduce((n, c) => n + c.panels.length, 0)}">${records.reduce((n, c) => n + c.panels.length, 0)}</dd></div>
       </dl>
       <nav class="hub-jump" aria-label="On this page"><a href="#records">Records</a><a href="#teams">Teams</a><a href="#players">Players</a><a href="#about-data">About the data</a></nav>
+      <nav class="hub-jump" aria-label="Database sections"><a href="/database/leaderboards/">Leaderboards</a><a href="/database/ratings/">Ratings</a><a href="/database/depth-charts/">Depth charts</a><a href="/database/races/">Races</a><a href="/database/head-to-head/">Head-to-head</a><a href="/database/compare/">Compare</a><a href="/database/usage/">Usage</a><a href="/database/similarity/">Similarity</a><a href="/database/comebacks/">Comebacks</a><a href="/data-sources">Data sources</a></nav>
     </section>
 
     <section class="hub-sec rb" id="records">
