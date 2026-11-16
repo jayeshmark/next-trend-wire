@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stat leader races, pace projections | Next Trend Wire</title>
+<meta name="description" content="2026 NFL stat leader races through Week 10: passing, rushing, and receiving yards, touchdowns, receptions, and sacks, with pace projected final totals and catch math for every chaser.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/races/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+.formula-box { border: 1px solid var(--hairline); padding: 12px 16px; margin: 16px 0; }
+.formula-box p { margin: 8px 0; }
+.calc-box { border: 1px solid var(--hairline); padding: 12px 16px; margin: 16px 0; max-width: 760px; }
+.calc-box label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin: 12px 0 8px; }
+.calc-box label:first-child { margin-top: 0; }
+.calc-box select, .calc-box input { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+.calc-result { font-size: 16px; margin: 12px 0 4px; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+<p class="eyebrow">NFL stats database</p>
+    <h1>Stat leader races</h1>
+    <p class="db-intro">Who leads each 2026 stat race, who is closing in, and what the pace math says about the finish. Eight races, each with the top 5, a pace projected final total for every player, and the rate each chaser needs per game to catch the leader.</p>
+    <p class="db-note">2026 races cover Weeks 1 to 10. Week 10 is partial: 13 of 14 games are scored and have player stats. Not in this data yet: LAC at BAL (2026-11-16). Teams with a Week 10 bye: CHI, DEN, PHI, TB. Data pulled on November 16, 2026.</p>
+    <p class="db-back"><a href="../">&larr; Back to the NFL stats section</a></p>
+    <h2>Races</h2>
+    <ul class="db-link-list">
+      <li><a href="passing-yards">Passing yards race</a> <span>Jordan Love leads with 2,838 passing yards in 10 games; projected final total 4,825. Pace projection and catch math on the page.</span></li><li><a href="rushing-yards">Rushing yards race</a> <span>Jahmyr Gibbs leads with 1,000 rushing yards in 9 games; projected final total 1,889. Pace projection and catch math on the page.</span></li><li><a href="receiving-yards">Receiving yards race</a> <span>Jaxon Smith-Njigba leads with 1,207 receiving yards in 10 games; projected final total 2,052. Pace projection and catch math on the page.</span></li><li><a href="passing-touchdowns">Passing touchdowns race</a> <span>Joe Burrow leads with 27 passing touchdowns in 9 games; projected final total 51. Pace projection and catch math on the page.</span></li><li><a href="rushing-touchdowns">Rushing touchdowns race</a> <span>Jahmyr Gibbs and Josh Allen share the lead with 11 rushing touchdowns in 9 games each; projected final total 21 each. Pace projection and catch math on the page.</span></li><li><a href="receiving-touchdowns">Receiving touchdowns race</a> <span>Jaxon Smith-Njigba leads with 10 receiving touchdowns in 10 games; projected final total 17. Pace projection and catch math on the page.</span></li><li><a href="receptions">Receptions race</a> <span>Jaxon Smith-Njigba leads with 79 receptions in 10 games; projected final total 134. Pace projection and catch math on the page.</span></li><li><a href="sacks">Sacks race</a> <span>Will Anderson Jr. leads with 10.5 sacks in 9 games; projected final total 19.8. Pace projection and catch math on the page.</span></li>
+    </ul>
+    <section><h2>How the projections work</h2>
+    <div class="formula-box"><p><b>Formula.</b> Projected final total equals current total divided by games played, times 17.</p></div>
+    <p><b>Games played</b> counts the games with a weekly data row for that player. A bye week or a missed game does not count, so a player who missed time is judged on the games actually played, not on the league week number. <b>Team games remaining</b> is 17 minus the games the player's team has already played, from the schedules file. The regular season is 17 games per team. Postseason games are not included anywhere in this section.</p>
+    <p>Players tied on current total share a rank, and every player tied at the fifth place total is shown, so some race tables hold six rows. Each race page also has a what if calculator: choose a player, enter a rate per game from here, and it adds that rate times the player's remaining team games to the current total. The calculator is arithmetic, not a forecast.</p>
+    <p>A projection is arithmetic from past games. It is not a prediction, a pick, or odds, and it does not account for injuries, matchups, or playing time changes.</p>
+    </section>
+    <p class="db-source">Source: nflverse weekly player stats and schedules, 2026 regular season. Figures are presented in this site's own layout. See the <a href="../../data-sources">data sources page</a> for credits.</p>
+    <p class="db-back db-links">More in the database: <a href="../">NFL stats hub</a> &middot; <a href="../leaderboards/">Stats leaders hub</a> &middot; <a href="../ratings/">Player ratings</a> &middot; <a href="../records">All records</a> &middot; <a href="../compare/">Compare players</a></p>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
