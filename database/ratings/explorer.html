@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rating explorer | Next Trend Wire</title>
+<meta name="description" content="Rating explorer: re-weight the open formula NFL player ratings for quarterbacks, running backs, wide receivers, and tight ends, 2026 through Week 10 and career. Same formula, your weights.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/ratings/explorer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+.formula-box { border: 1px solid var(--hairline); padding: 12px 16px; margin: 16px 0; }
+.formula-box p { margin: 8px 0; }
+.weight-row { display: grid; grid-template-columns: 220px 1fr 52px; gap: 12px; align-items: center; margin: 10px 0; max-width: 760px; }
+.weight-row label { font-size: 14px; }
+.weight-row input[type="range"] { width: 100%; }
+.weight-row output { font-size: 14px; text-align: right; }
+.explorer-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; max-width: 760px; }
+.explorer-controls label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.explorer-controls select { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+@media (max-width: 640px) { .explorer-controls { grid-template-columns: 1fr; } .weight-row { grid-template-columns: 1fr; gap: 4px; } .weight-row output { text-align: left; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+<p class="eyebrow">NFL stats database</p>
+    <h1>Rating explorer</h1>
+    <p class="db-intro">Change the weights and watch the rankings move. This is the same open formula as the published rankings, re-weighted with your weights. The default weights reproduce the published rankings exactly.</p>
+    <p class="db-note">2026 ratings cover Weeks 1 to 10. Week 10 is partial: 13 of 14 games are scored. All scored games have play by play data. Not in this data: LAC at BAL (2026-11-16). Teams with a Week 10 bye: CHI, DEN, PHI, TB. Data pulled on November 16, 2026. Career ratings combine the regular season and the postseason, 1999 to 2026, including the partial 2026 season.</p>
+    <p class="db-back"><a href="./">&larr; Back to the ratings hub</a></p>
+    <section><h2>Choose a position and span</h2>
+    <div class="explorer-controls">
+      <div><label for="pos-select">Position</label><select id="pos-select"><option value="QB">Quarterback</option><option value="RB">Running back</option><option value="WR">Wide receiver</option><option value="TE">Tight end</option></select></div>
+      <div><label for="scope-select">Span</label><select id="scope-select"><option value="2026">2026 season</option><option value="career">Career, 1999 to 2026</option></select></div>
+    </div>
+    </section>
+    <section><h2>Weights</h2>
+    <p>Move a slider to give an input more or less weight. Weights are scaled so they always add to 100 percent.</p>
+    <div id="weight-controls"></div>
+    <p><button type="button" class="csv-btn" id="reset-weights">Reset to published weights</button> <button type="button" class="csv-btn" id="download-csv" style="display: none;">Download CSV</button></p>
+    </section>
+    <section><h2>Formula with your weights</h2>
+    <div class="formula-box"><p id="formula-text">Loading.</p></div>
+    <div id="pool-table"></div>
+    </section>
+    <section><h2>Ranking</h2>
+    <p id="ratings-status">Loading rating data.</p>
+    <div id="ratings-table-wrap"></div>
+    </section>
+    <section><h2>How to check this page</h2>
+    <p>Every number on this page comes from <a href="ratings-data.json">ratings-data.json</a>, which holds the published inputs, the pool averages and spreads, and the published weights for every qualifying player. The ranking above is computed in your browser from that file. The full methodology, including thresholds, limitations, and what the rating does not measure, is published on each position page: <a href="quarterback">quarterback</a>, <a href="running-back">running back</a>, <a href="wide-receiver">wide receiver</a>, <a href="tight-end">tight end</a>.</p>
+    </section>
+    <p class="db-source">Source: nflverse play by play data, 1999 to 2026, regular season and postseason combined. Figures are presented in this site's own layout. See the <a href="../../data-sources">data sources page</a> for credits.</p>
+    <p class="db-back db-links">More in the database: <a href="./">Ratings hub</a> &middot; <a href="quarterback">Quarterback ratings</a> &middot; <a href="running-back">Running back ratings</a> &middot; <a href="wide-receiver">Wide receiver ratings</a> &middot; <a href="tight-end">Tight end ratings</a> &middot; <a href="../">NFL stats hub</a> &middot; <a href="../leaderboards/">Stats leaders hub</a></p><script>
+(function () {
+  var data = null;
+  var state = { pos: "QB", scope: "2026", weights: {} };
+  var posSel = document.getElementById("pos-select");
+  var scopeSel = document.getElementById("scope-select");
+  var weightBox = document.getElementById("weight-controls");
+  var formulaEl = document.getElementById("formula-text");
+  var poolEl = document.getElementById("pool-table");
+  var statusEl = document.getElementById("ratings-status");
+  var tableWrap = document.getElementById("ratings-table-wrap");
+  var csvBtn = document.getElementById("download-csv");
+  var resetBtn = document.getElementById("reset-weights");
+  var currentRows = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function fmtInt(n) { return Number(n).toLocaleString("en-US"); }
+  function fmtEpa(x) {
+    var v = Number(x);
+    var s = Math.abs(v).toFixed(3);
+    return (v < 0 ? "-" : "+") + s;
+  }
+  function fmtPct(x) { return (100 * Number(x)).toFixed(1) + "%"; }
+  function fmtVal(key, x) {
+    if (key === "epa") { return fmtEpa(x); }
+    return fmtPct(x);
+  }
+  function fmtRating(x) { return Number(x).toFixed(1); }
+  function fmtShare(x) {
+    var v = 100 * x;
+    if (Math.abs(v - Math.round(v)) < 0.05) { return String(Math.round(v)); }
+    return v.toFixed(1);
+  }
+  function components() {
+    return data.meta.positions[state.pos].components;
+  }
+  function pool() {
+    return data.meta.positions[state.pos].scopes[state.scope].pool;
+  }
+  function defaultWeights() {
+    var w = {};
+    var comps = components();
+    for (var i = 0; i < comps.length; i++) { w[comps[i].key] = comps[i].weight; }
+    return w;
+  }
+  function computeRanking(pos, scope, weights) {
+    var meta = data.meta.positions[pos];
+    var comps = meta.components;
+    var pl = meta.scopes[scope].pool;
+    var total = 0;
+    for (var i = 0; i < comps.length; i++) { total += Number(weights[comps[i].key]) || 0; }
+    if (total <= 0) { return null; }
+    var rows = [];
+    for (var j = 0; j < data.players.length; j++) {
+      var p = data.players[j];
+      if (p.pos !== pos || p.scope !== scope) { continue; }
+      var scores = {};
+      var rating = 0;
+      for (var k = 0; k < comps.length; k++) {
+        var key = comps[k].key;
+        var st = pl[key];
+        var z = st.sd ? (Number(p.inputs[key]) - st.mean) / st.sd : 0;
+        var s = comps[k].invert ? 100 - 15 * z : 100 + 15 * z;
+        scores[key] = s;
+        rating += (Number(weights[key]) || 0) * s;
+      }
+      rows.push({ p: p, scores: scores, rating: rating / total });
+    }
+    rows.sort(function (a, b) {
+      if (b.rating !== a.rating) { return b.rating - a.rating; }
+      if (b.p.plays !== a.p.plays) { return b.p.plays - a.p.plays; }
+      if (a.p.name < b.p.name) { return -1; }
+      if (a.p.name > b.p.name) { return 1; }
+      return 0;
+    });
+    return rows;
+  }
+  function buildCsv(rows) {
+    var comps = components();
+    var head = ["Rank", "Player", "Teams", "Seasons", "Plays", "Rating"];
+    for (var i = 0; i < comps.length; i++) {
+      head.push(comps[i].label);
+      head.push(comps[i].label + " score");
+    }
+    function q(v) {
+      var s = String(v);
+      if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf(String.fromCharCode(10)) !== -1) {
+        return '"' + s.replace(/"/g, '""') + '"';
+      }
+      return s;
+    }
+    var lines = [head.map(q).join(",")];
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      var vals = [r + 1, row.p.name, row.p.teams.join(", "), row.p.seasons[0] === row.p.seasons[1] ? String(row.p.seasons[0]) : row.p.seasons[0] + " to " + row.p.seasons[1], row.p.plays, fmtRating(row.rating)];
+      for (var k = 0; k < comps.length; k++) {
+        vals.push(fmtVal(comps[k].key, row.p.inputs[comps[k].key]));
+        vals.push(fmtRating(row.scores[comps[k].key]));
+      }
+      lines.push(vals.map(q).join(","));
+    }
+    return lines.join(String.fromCharCode(10)) + String.fromCharCode(10);
+  }
+  function syncUrl() {
+    try {
+      var params = new URLSearchParams();
+      params.set("pos", state.pos);
+      params.set("scope", state.scope);
+      var comps = components();
+      for (var i = 0; i < comps.length; i++) {
+        params.set("w_" + comps[i].key, String(state.weights[comps[i].key]));
+      }
+      window.history.replaceState(null, "", window.location.pathname + "?" + params.toString());
+    } catch (e) {}
+  }
+  function renderFormula() {
+    var comps = components();
+    var total = 0;
+    for (var i = 0; i < comps.length; i++) { total += Number(state.weights[comps[i].key]) || 0; }
+    var parts = [];
+    for (var j = 0; j < comps.length; j++) {
+      var share = total > 0 ? (Number(state.weights[comps[j].key]) || 0) / total : 0;
+      parts.push(fmtShare(share) + "% x " + comps[j].label + " score");
+    }
+    var inv = [];
+    for (var k = 0; k < comps.length; k++) {
+      if (comps[k].invert) { inv.push(comps[k].label); }
+    }
+    var txt = "Rating = " + parts.join(" + ") + ". Each component score = 100 + 15 x (value minus pool average) / pool spread.";
+    if (inv.length) {
+      txt += " " + inv.join(" and ") + " enter inverted: 100 minus 15 x the same ratio, so a lower value scores higher.";
+    }
+    txt += " This is the same open formula as the published rankings, re-weighted with your weights.";
+    formulaEl.textContent = txt;
+  }
+  function renderPool() {
+    var comps = components();
+    var pl = pool();
+    var h = [];
+    h.push('<div class="db-table-wrap"><table class="db-table">');
+    h.push("<thead><tr><th>Input</th><th>Pool average</th><th>Pool spread</th><th>Direction</th></tr></thead><tbody>");
+    for (var i = 0; i < comps.length; i++) {
+      var st = pl[comps[i].key];
+      h.push("<tr><td>" + esc(comps[i].label) + "</td><td>" + fmtVal(comps[i].key, st.mean) + "</td><td>" + fmtVal(comps[i].key, st.sd) + "</td><td>" + (comps[i].invert ? "lower is better" : "higher is better") + "</td></tr>");
+    }
+    h.push("</tbody></table></div>");
+    poolEl.innerHTML = h.join("");
+  }
+  function renderWeights() {
+    var comps = components();
+    var h = [];
+    for (var i = 0; i < comps.length; i++) {
+      var key = comps[i].key;
+      h.push('<div class="weight-row"><label for="w-' + key + '">' + esc(comps[i].label) + '</label>' +
+        '<input type="range" id="w-' + key + '" data-key="' + key + '" min="0" max="100" step="5" value="' + Number(state.weights[key] || 0) + '">' +
+        '<output id="wout-' + key + '">' + Number(state.weights[key] || 0) + '</output></div>');
+    }
+    weightBox.innerHTML = h.join("");
+    var inputs = weightBox.querySelectorAll("input[type=range]");
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].addEventListener("input", function () {
+        var key = this.getAttribute("data-key");
+        state.weights[key] = Number(this.value);
+        document.getElementById("wout-" + key).textContent = this.value;
+        syncUrl();
+        render();
+      });
+    }
+  }
+  function render() {
+    renderFormula();
+    renderPool();
+    var rows = computeRanking(state.pos, state.scope, state.weights);
+    currentRows = rows;
+    if (!rows) {
+      statusEl.textContent = "Set at least one weight above zero to see a ranking.";
+      tableWrap.innerHTML = "";
+      csvBtn.style.display = "none";
+      return;
+    }
+    var meta = data.meta.positions[state.pos];
+    var comps = components();
+    statusEl.textContent = rows.length + " qualifying players. " + meta.scopes[state.scope].threshold + ".";
+    var unit = meta.unit;
+    var h = [];
+    h.push('<div class="db-table-wrap"><table class="db-table">');
+    h.push("<thead><tr><th>Rank</th><th>Player</th><th>Teams</th><th>Seasons</th><th>" + esc(unit.charAt(0).toUpperCase() + unit.slice(1)) + "</th><th>Rating</th>");
+    for (var i = 0; i < comps.length; i++) {
+      h.push("<th>" + esc(comps[i].label) + "</th><th>" + esc(comps[i].label) + " score</th>");
+    }
+    h.push("</tr></thead><tbody>");
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      var p = row.p;
+      var name = p.has_page ? '<a href="../players/' + esc(p.id) + '">' + esc(p.name) + '</a>' : esc(p.name);
+      var seasons = p.seasons[0] === p.seasons[1] ? String(p.seasons[0]) : p.seasons[0] + " to " + p.seasons[1];
+      h.push("<tr><td>" + (r + 1) + "</td><td>" + name + "</td><td>" + esc(p.teams.join(", ")) + "</td><td>" + seasons + "</td><td>" + fmtInt(p.plays) + "</td><td>" + fmtRating(row.rating) + "</td>");
+      for (var k = 0; k < comps.length; k++) {
+        h.push("<td>" + fmtVal(comps[k].key, p.inputs[comps[k].key]) + "</td><td>" + fmtRating(row.scores[comps[k].key]) + "</td>");
+      }
+      h.push("</tr>");
+    }
+    h.push("</tbody></table></div>");
+    tableWrap.innerHTML = h.join("");
+    csvBtn.style.display = "";
+  }
+  function readParams() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var pos = params.get("pos");
+      var scope = params.get("scope");
+      if (pos && data.meta.positions[pos]) { state.pos = pos; }
+      if (scope === "2026" || scope === "career") { state.scope = scope; }
+      state.weights = defaultWeights();
+      var comps = components();
+      for (var i = 0; i < comps.length; i++) {
+        var v = params.get("w_" + comps[i].key);
+        if (v !== null && v !== "" && !isNaN(Number(v))) {
+          state.weights[comps[i].key] = Math.max(0, Math.min(100, Number(v)));
+        }
+      }
+    } catch (e) {
+      state.weights = defaultWeights();
+    }
+  }
+  posSel.addEventListener("change", function () {
+    state.pos = posSel.value;
+    state.weights = defaultWeights();
+    syncUrl();
+    renderWeights();
+    render();
+  });
+  scopeSel.addEventListener("change", function () {
+    state.scope = scopeSel.value;
+    syncUrl();
+    render();
+  });
+  resetBtn.addEventListener("click", function () {
+    state.weights = defaultWeights();
+    syncUrl();
+    renderWeights();
+    render();
+  });
+  csvBtn.addEventListener("click", function () {
+    if (!currentRows) { return; }
+    var csv = buildCsv(currentRows);
+    var blob = new Blob([csv], { type: "text/csv" });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "ratings-explorer-" + state.pos.toLowerCase() + "-" + state.scope + ".csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  });
+  statusEl.textContent = "Loading rating data.";
+  fetch("ratings-data.json").then(function (resp) {
+    if (!resp.ok) { throw new Error("Rating data did not load."); }
+    return resp.json();
+  }).then(function (json) {
+    data = json;
+    readParams();
+    posSel.value = state.pos;
+    scopeSel.value = state.scope;
+    renderWeights();
+    render();
+  }).catch(function () {
+    statusEl.textContent = "Rating data did not load. Please reload the page.";
+  });
+  window.NTW_RATINGS_TEST = {
+    compute: function (pos, scope, weights) { return computeRanking(pos, scope, weights); },
+    csv: function (rows) { return buildCsv(rows); },
+    ready: function () { return !!data; }
+  };
+})();
+</script>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>

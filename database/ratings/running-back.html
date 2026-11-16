@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running back ratings | Next Trend Wire</title>
+<meta name="description" content="Open formula running back ratings: 2026 through Week 10 and career, 1999 to 2026. Formula, inputs, and pool averages published on the page. Blake Corum leads the 2026 running back ratings with 127.2; Moe Williams leads the career ratings with 135.3.">
+<link rel="canonical" href="https://next-trend-wire.vercel.app/database/ratings/running-back">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../database.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LNQNTTBR2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-LNQNTTBR2P');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z4wdrb84h6");
+</script>
+<style>
+.csv-btn { font: inherit; font-size: 14px; padding: 8px 16px; color: var(--ink); background: var(--panel); border: 1px solid var(--hairline); cursor: pointer; }
+.formula-box { border: 1px solid var(--hairline); padding: 12px 16px; margin: 16px 0; }
+.formula-box p { margin: 8px 0; }
+.weight-row { display: grid; grid-template-columns: 220px 1fr 52px; gap: 12px; align-items: center; margin: 10px 0; max-width: 760px; }
+.weight-row label { font-size: 14px; }
+.weight-row input[type="range"] { width: 100%; }
+.weight-row output { font-size: 14px; text-align: right; }
+.explorer-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; max-width: 760px; }
+.explorer-controls label { display: block; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.explorer-controls select { width: 100%; box-sizing: border-box; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--hairline); }
+@media (max-width: 640px) { .explorer-controls { grid-template-columns: 1fr; } .weight-row { grid-template-columns: 1fr; gap: 4px; } .weight-row output { text-align: left; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="archive-header">
+    <button class="logo" data-demo>NEXT TREND <b>WIRE</b></button>
+    <nav><a href="../../">Latest</a><a href="../../#ideas">Ideas</a><a href="../../#business">Business</a><a href="../../#culture">Culture</a><a href="../">Database</a><a href="../../archive/">Archive</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
+    <a class="subscribe" href="#newsletter">Subscribe <b>&#8599;</b></a>
+  </header>
+  <main class="page db-page">
+<p class="eyebrow">NFL stats database</p>
+    <h1>Running back ratings</h1>
+    <p class="db-intro">Open formula running back ratings from play by play data, 1999 to 2026. Every input, weight, and pool average is published on this page. Blake Corum leads the 2026 running back ratings with 127.2; Moe Williams leads the career ratings with 135.3.</p>
+    <p class="db-back"><a href="./">&larr; Back to the ratings hub</a></p>
+    <section><h2>How the rating works</h2>
+    <p>This rating is an open formula. Every input is shown in the tables below, the weights are stated here, and the pool averages and spreads used to score each input are published with each table. Anyone with the same play by play data gets the same numbers. There is nothing hidden to trust.</p>
+    <div class="formula-box"><p><b>Formula.</b> Each input is turned into a component score: 100 plus 15 times (the player's value minus the pool average) divided by the pool spread. The pool is the set of qualifying players in that table, and the spread is the population standard deviation of the input across that pool. Fumbles lost per touch enter inverted, so a lower value scores higher. For an inverted input the component score is 100 minus 15 times the same ratio. The rating is the weighted average of the component scores. 100 is the average qualifier in that pool. There is no fixed ceiling and no fixed floor.</p>
+    <p><b>Weights.</b> EPA per touch 50%, Touch success rate 30%, Fumbles lost per touch 20%.</p>
+    <p><b>Inputs.</b> A touch is a rush attempt where the player is the rusher, or a target where the player is the intended receiver. Kneels, spikes, and no plays are excluded.</p></div>
+    <p><b>Expected points added (EPA)</b> measures how much a play improved the team's expected points, given down, distance, field position, and score. A positive number means the play helped; a negative number means it hurt. <b>Success rate</b> is the share of plays with positive EPA: plays that improved the team's expected points at all. Success rate and EPA come from the same play values. EPA measures how much value a play added on average; success rate measures how often a play added any value at all.</p>
+    <p><b>Seasons covered.</b> 1999 to 2026. Play by play data starts in 1999, so players whose careers began earlier are shown with only their 1999 onward plays. No era adjustment is applied: a play in 2003 counts the same as a play in 2026. That choice is deliberate. Any era adjustment would be a second model on top of the formula, and the point of this page is that the reader can check every step. Career tables combine the regular season and the postseason.</p>
+    <p><b>Left out on purpose.</b> Completion probability and air yards are not recorded in the play by play data before 2006, and yards after catch is not recorded before 2006 either. A formula that used them could not cover 1999 onward with one set of rules, so none of them is part of any rating here. Air yards appear as context on the 2026 tables only, where coverage is complete, and air yards do not affect the rating.</p>
+    <p><b>What this rating does not measure.</b> It does not separate a player from teammates, coaching, or scheme: a quarterback's number reflects receivers and blocking as well as throws. It does not adjust for opponent strength or for era. It uses only what the play by play record shows, so it covers no blocking, no routes run, no coverage, and no pressure data. It describes past play value only. It is not a prediction about any future game.</p>
+    <p><b>Thresholds.</b> The 2026 table requires at least 100 touches and 50 rush attempts. The career table requires at least 500 touches and 250 rush attempts. A player's position is the position listed most often in the season stats for that span. Small samples are excluded so one good game cannot top a table.</p>
+    </section>
+    <section><h2>2026 running back ratings, through Week 10 (partial)</h2>
+    <p>29 players qualify (at least 100 touches and 50 rush attempts). All qualifiers shown.</p>
+    <p class="db-note">2026 ratings cover Weeks 1 to 10. Week 10 is partial: 13 of 14 games are scored. All scored games have play by play data. Not in this data: LAC at BAL (2026-11-16). Teams with a Week 10 bye: CHI, DEN, PHI, TB. Data pulled on November 16, 2026.</p>
+    <p>Pool averages and spreads for this table. These are the numbers the formula uses, so the rating can be checked by hand.</p>
+    <div class="db-table-wrap"><table class="db-table"><thead><tr><th>Input</th><th>Weight</th><th>Pool average</th><th>Pool spread</th><th>Direction</th></tr></thead><tbody><tr><td>EPA per touch</td><td>50%</td><td>-0.046</td><td>+0.115</td><td>higher is better</td></tr><tr><td>Touch success rate</td><td>30%</td><td>40.8%</td><td>6.2%</td><td>higher is better</td></tr><tr><td>Fumbles lost per touch</td><td>20%</td><td>0.5%</td><td>0.6%</td><td>lower is better</td></tr></tbody></table></div>
+    <p><button type="button" class="csv-btn" data-table="tbl-running-back-2026" data-filename="ratings-running-back-2026.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-running-back-2026">
+<thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>Touches</th><th>Rating</th><th>EPA per touch</th><th>Success rate</th><th>Fumbles lost per touch</th><th>Rush yards</th><th>Receiving yards</th><th>Yards per touch</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><a href="../players/00-0039738">Blake Corum</a></td><td>LA</td><td>124</td><td>127.2</td><td>+0.171</td><td>54.8%</td><td>0.0%</td><td>547</td><td>118</td><td>5.36</td></tr>
+<tr><td>2</td><td><a href="../players/00-0033280">Christian McCaffrey</a></td><td>SF</td><td>165</td><td>124.5</td><td>+0.216</td><td>51.5%</td><td>0.6%</td><td>519</td><td>433</td><td>5.77</td></tr>
+<tr><td>3</td><td><a href="../players/00-0036555">Chuba Hubbard</a></td><td>CAR</td><td>198</td><td>119.2</td><td>+0.153</td><td>45.5%</td><td>0.0%</td><td>711</td><td>247</td><td>4.84</td></tr>
+<tr><td>4</td><td><a href="../players/00-0038134">Kenneth Walker III</a></td><td>KC</td><td>196</td><td>117.0</td><td>+0.092</td><td>48.0%</td><td>0.0%</td><td>872</td><td>172</td><td>5.33</td></tr>
+<tr><td>5</td><td><a href="../players/00-0037228">Jaylen Warren</a></td><td>PIT</td><td>169</td><td>111.8</td><td>+0.079</td><td>46.2%</td><td>0.6%</td><td>719</td><td>320</td><td>6.15</td></tr>
+<tr><td>6</td><td><a href="../players/00-0039139">Jahmyr Gibbs</a></td><td>DET</td><td>253</td><td>111.5</td><td>+0.051</td><td>49.8%</td><td>0.8%</td><td>1,000</td><td>375</td><td>5.43</td></tr>
+<tr><td>7</td><td><a href="../players/00-0040719">Bhayshul Tuten</a></td><td>JAX</td><td>168</td><td>109.8</td><td>+0.037</td><td>42.9%</td><td>0.0%</td><td>609</td><td>206</td><td>4.85</td></tr>
+<tr><td>8</td><td><a href="../players/00-0036997">Javonte Williams</a></td><td>DAL</td><td>200</td><td>109.6</td><td>+0.016</td><td>44.5%</td><td>0.0%</td><td>692</td><td>131</td><td>4.12</td></tr>
+<tr><td>9</td><td><a href="../players/00-0037248">James Cook</a></td><td>BUF</td><td>206</td><td>107.6</td><td>+0.062</td><td>44.7%</td><td>1.0%</td><td>971</td><td>110</td><td>5.25</td></tr>
+<tr><td>10</td><td><a href="../players/00-0039794">Braelon Allen</a></td><td>NYJ</td><td>153</td><td>102.5</td><td>-0.054</td><td>45.8%</td><td>0.7%</td><td>638</td><td>108</td><td>4.88</td></tr>
+<tr><td>11</td><td><a href="../players/00-0038542">Bijan Robinson</a></td><td>ATL</td><td>230</td><td>102.0</td><td>-0.074</td><td>42.2%</td><td>0.0%</td><td>951</td><td>242</td><td>5.19</td></tr>
+<tr><td>12</td><td><a href="../players/00-0036275">D&#x27;Andre Swift</a></td><td>CHI</td><td>184</td><td>101.2</td><td>-0.037</td><td>45.7%</td><td>1.1%</td><td>576</td><td>162</td><td>4.01</td></tr>
+<tr><td>13</td><td><a href="../players/00-0039361">Bucky Irving</a></td><td>TB</td><td>195</td><td>100.3</td><td>-0.011</td><td>41.5%</td><td>1.0%</td><td>825</td><td>106</td><td>4.77</td></tr>
+<tr><td>14</td><td><a href="../players/00-0040715">Cam Skattebo</a></td><td>NYG</td><td>133</td><td>98.1</td><td>-0.039</td><td>39.1%</td><td>0.8%</td><td>496</td><td>120</td><td>4.63</td></tr>
+<tr><td>15</td><td><a href="../players/00-0037840">Kyren Williams</a></td><td>LA</td><td>190</td><td>97.0</td><td>-0.059</td><td>41.6%</td><td>1.1%</td><td>616</td><td>267</td><td>4.65</td></tr>
+<tr><td>16</td><td><a href="../players/00-0032764">Derrick Henry</a></td><td>BAL</td><td>190</td><td>96.2</td><td>-0.090</td><td>39.5%</td><td>0.5%</td><td>691</td><td>75</td><td>4.03</td></tr>
+<tr><td>17</td><td><a href="../players/00-0035261">Tony Pollard</a></td><td>TEN</td><td>172</td><td>96.0</td><td>-0.131</td><td>39.0%</td><td>0.0%</td><td>628</td><td>136</td><td>4.44</td></tr>
+<tr><td>18</td><td><a href="../players/00-0040198">Ollie Gordon II</a></td><td>MIA</td><td>142</td><td>95.5</td><td>-0.074</td><td>33.1%</td><td>0.0%</td><td>539</td><td>62</td><td>4.23</td></tr>
+<tr><td>19</td><td><a href="../players/00-0036875">Rhamondre Stevenson</a></td><td>NE</td><td>141</td><td>95.2</td><td>-0.037</td><td>39.7%</td><td>1.4%</td><td>403</td><td>255</td><td>4.67</td></tr>
+<tr><td>20</td><td><a href="../players/00-0040583">Woody Marks</a></td><td>HOU</td><td>129</td><td>94.7</td><td>-0.106</td><td>34.9%</td><td>0.0%</td><td>391</td><td>113</td><td>3.91</td></tr>
+<tr><td>21</td><td><a href="../players/00-0040784">Quinshon Judkins</a></td><td>CLE</td><td>155</td><td>91.5</td><td>-0.153</td><td>34.8%</td><td>0.0%</td><td>423</td><td>169</td><td>3.82</td></tr>
+<tr><td>22</td><td><a href="../players/00-0037263">Tyler Allgeier</a></td><td>ARI</td><td>120</td><td>90.8</td><td>-0.139</td><td>32.5%</td><td>0.0%</td><td>383</td><td>128</td><td>4.26</td></tr>
+<tr><td>23</td><td><a href="../players/00-0040122">Ashton Jeanty</a></td><td>LV</td><td>183</td><td>90.1</td><td>-0.182</td><td>35.5%</td><td>0.0%</td><td>380</td><td>417</td><td>4.36</td></tr>
+<tr><td>24</td><td><a href="../players/00-0036223">Jonathan Taylor</a></td><td>IND</td><td>217</td><td>88.9</td><td>-0.102</td><td>40.1%</td><td>1.8%</td><td>739</td><td>240</td><td>4.51</td></tr>
+<tr><td>25</td><td><a href="../players/00-0038597">Chase Brown</a></td><td>CIN</td><td>167</td><td>88.8</td><td>-0.163</td><td>40.7%</td><td>1.2%</td><td>441</td><td>246</td><td>4.11</td></tr>
+<tr><td>26</td><td><a href="../players/00-0038797">Emanuel Wilson</a></td><td>SEA</td><td>120</td><td>88.4</td><td>-0.154</td><td>36.7%</td><td>0.8%</td><td>403</td><td>65</td><td>3.90</td></tr>
+<tr><td>27</td><td><a href="../players/00-0033293">Aaron Jones</a></td><td>MIN</td><td>149</td><td>85.5</td><td>-0.177</td><td>33.6%</td><td>0.7%</td><td>521</td><td>103</td><td>4.19</td></tr>
+<tr><td>28</td><td><a href="../players/00-0036158">J.K. Dobbins</a></td><td>DEN</td><td>108</td><td>83.1</td><td>-0.193</td><td>26.9%</td><td>0.0%</td><td>324</td><td>31</td><td>3.29</td></tr>
+<tr><td>29</td><td><a href="../players/00-0040666">Omarion Hampton</a></td><td>LAC</td><td>115</td><td>76.1</td><td>-0.238</td><td>33.9%</td><td>1.7%</td><td>369</td><td>63</td><td>3.76</td></tr>
+</tbody>
+</table></div>    </section>
+    <section><h2>Career running back ratings, 1999 to 2026</h2>
+    <p>254 players qualify (at least 500 touches and 250 rush attempts). Top 50 shown. Every qualifier is in the <a href="explorer">rating explorer</a>.</p>
+    <p class="db-note">Career totals combine the regular season and the postseason, 1999 to 2026, including the partial 2026 season. Players whose careers began before 1999 are shown with only their 1999 onward plays, because earlier seasons are not in this data.</p>
+    <p>Pool averages and spreads for this table. These are the numbers the formula uses, so the rating can be checked by hand.</p>
+    <div class="db-table-wrap"><table class="db-table"><thead><tr><th>Input</th><th>Weight</th><th>Pool average</th><th>Pool spread</th><th>Direction</th></tr></thead><tbody><tr><td>EPA per touch</td><td>50%</td><td>-0.043</td><td>+0.058</td><td>higher is better</td></tr><tr><td>Touch success rate</td><td>30%</td><td>39.8%</td><td>2.7%</td><td>higher is better</td></tr><tr><td>Fumbles lost per touch</td><td>20%</td><td>0.6%</td><td>0.3%</td><td>lower is better</td></tr></tbody></table></div>
+    <p><button type="button" class="csv-btn" data-table="tbl-running-back-career" data-filename="ratings-running-back-career.csv">Download CSV</button></p>
+<div class="db-table-wrap"><table class="db-table" id="tbl-running-back-career">
+<thead><tr><th>Rank</th><th>Player</th><th>Teams</th><th>Seasons</th><th>Touches</th><th>Rating</th><th>EPA per touch</th><th>Success rate</th><th>Fumbles lost per touch</th><th>Rush yards</th><th>Receiving yards</th><th>Yards per touch</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><a href="../players/00-0017892">Moe Williams</a></td><td>MIN, BAL</td><td>1999 to 2005</td><td>609</td><td>135.3</td><td>+0.124</td><td>46.5%</td><td>0.3%</td><td>1,796</td><td>1,478</td><td>5.38</td></tr>
+<tr><td>2</td><td><a href="../players/00-0024813">Pierre Thomas</a></td><td>NO, WAS</td><td>2007 to 2015</td><td>1,291</td><td>134.7</td><td>+0.100</td><td>47.8%</td><td>0.3%</td><td>4,032</td><td>2,864</td><td>5.34</td></tr>
+<tr><td>3</td><td><a href="../players/00-0007661">Priest Holmes</a></td><td>BAL, KC</td><td>1999 to 2007</td><td>1,918</td><td>133.8</td><td>+0.114</td><td>47.3%</td><td>0.5%</td><td>7,335</td><td>2,701</td><td>5.23</td></tr>
+<tr><td>4</td><td><a href="../players/00-0026019">Danny Woodhead</a></td><td>NYJ, NE, LAC, BAL</td><td>2009 to 2017</td><td>994</td><td>130.3</td><td>+0.077</td><td>47.0%</td><td>0.3%</td><td>2,443</td><td>2,813</td><td>5.29</td></tr>
+<tr><td>5</td><td><a href="../players/00-0021216">Brian Westbrook</a></td><td>PHI, SF</td><td>2002 to 2010</td><td>2,022</td><td>128.9</td><td>+0.104</td><td>44.3%</td><td>0.3%</td><td>6,911</td><td>4,282</td><td>5.54</td></tr>
+<tr><td>6</td><td><a href="../players/00-0033280">Christian McCaffrey</a></td><td>CAR, SF</td><td>2017 to 2026</td><td>2,797</td><td>128.4</td><td>+0.076</td><td>45.5%</td><td>0.3%</td><td>8,715</td><td>6,215</td><td>5.34</td></tr>
+<tr><td>7</td><td><a href="../players/00-0023564">Darren Sproles</a></td><td>LAC, NO, PHI</td><td>2005 to 2019</td><td>1,616</td><td>125.5</td><td>+0.076</td><td>43.7%</td><td>0.2%</td><td>3,858</td><td>5,323</td><td>5.68</td></tr>
+<tr><td>8</td><td><a href="../players/00-0031062">James White</a></td><td>NE</td><td>2014 to 2021</td><td>960</td><td>125.4</td><td>+0.066</td><td>42.8%</td><td>0.0%</td><td>1,428</td><td>3,784</td><td>5.43</td></tr>
+<tr><td>9</td><td><a href="../players/00-0005092">Marshall Faulk</a></td><td>LA</td><td>1999 to 2005</td><td>2,189</td><td>124.9</td><td>+0.075</td><td>44.8%</td><td>0.5%</td><td>7,402</td><td>4,427</td><td>5.40</td></tr>
+<tr><td>10</td><td><a href="../players/00-0039040">De&#x27;Von Achane</a></td><td>MIA</td><td>2023 to 2026</td><td>811</td><td>123.2</td><td>+0.054</td><td>43.3%</td><td>0.1%</td><td>3,193</td><td>1,317</td><td>5.56</td></tr>
+<tr><td>11</td><td><a href="../players/00-0019808">Kenny Watson</a></td><td>WAS, CIN</td><td>2002 to 2008</td><td>506</td><td>122.0</td><td>+0.049</td><td>46.0%</td><td>0.6%</td><td>1,648</td><td>1,014</td><td>5.26</td></tr>
+<tr><td>12</td><td><a href="../players/00-0005779">Charlie Garner</a></td><td>SF, LV, TB</td><td>1999 to 2004</td><td>1,563</td><td>121.8</td><td>+0.070</td><td>42.9%</td><td>0.4%</td><td>5,143</td><td>3,332</td><td>5.42</td></tr>
+<tr><td>13</td><td><a href="../players/00-0039139">Jahmyr Gibbs</a></td><td>DET</td><td>2023 to 2026</td><td>1,225</td><td>120.8</td><td>+0.052</td><td>44.4%</td><td>0.5%</td><td>4,829</td><td>1,944</td><td>5.53</td></tr>
+<tr><td>14</td><td><a href="../players/00-0024294">Jerious Norwood</a></td><td>ATL, LA</td><td>2006 to 2011</td><td>503</td><td>120.3</td><td>+0.074</td><td>41.7%</td><td>0.4%</td><td>2,070</td><td>940</td><td>5.98</td></tr>
+<tr><td>15</td><td><a href="../players/00-0033923">Kareem Hunt</a></td><td>KC, CLE</td><td>2017 to 2025</td><td>1,811</td><td>119.7</td><td>+0.034</td><td>42.6%</td><td>0.1%</td><td>6,042</td><td>2,249</td><td>4.58</td></tr>
+<tr><td>16</td><td><a href="../players/00-0024245">Joseph Addai</a></td><td>IND</td><td>2006 to 2011</td><td>1,519</td><td>119.6</td><td>+0.020</td><td>45.6%</td><td>0.4%</td><td>5,071</td><td>1,746</td><td>4.49</td></tr>
+<tr><td>17</td><td><a href="../players/00-0037248">James Cook</a></td><td>BUF</td><td>2022 to 2026</td><td>1,378</td><td>119.2</td><td>+0.048</td><td>44.8%</td><td>0.7%</td><td>5,857</td><td>1,403</td><td>5.27</td></tr>
+<tr><td>18</td><td><a href="../players/00-0034184">Gus Edwards</a></td><td>BAL, LAC</td><td>2018 to 2024</td><td>911</td><td>119.0</td><td>+0.029</td><td>45.6%</td><td>0.5%</td><td>4,008</td><td>408</td><td>4.85</td></tr>
+<tr><td>19</td><td><a href="../players/00-0033553">James Conner</a></td><td>PIT, ARI</td><td>2017 to 2025</td><td>1,773</td><td>117.1</td><td>+0.022</td><td>43.9%</td><td>0.4%</td><td>6,125</td><td>2,287</td><td>4.74</td></tr>
+<tr><td>20</td><td><a href="../players/00-0022770">Derrick Ward</a></td><td>NYG, TB, HOU</td><td>2004 to 2011</td><td>675</td><td>117.0</td><td>+0.033</td><td>41.3%</td><td>0.1%</td><td>2,681</td><td>811</td><td>5.17</td></tr>
+<tr><td>21</td><td><a href="../players/00-0022217">Mewelde Moore</a></td><td>MIN, PIT, IND</td><td>2004 to 2012</td><td>772</td><td>117.0</td><td>+0.026</td><td>44.3%</td><td>0.5%</td><td>2,329</td><td>2,004</td><td>5.61</td></tr>
+<tr><td>22</td><td><a href="../players/00-0035537">Ty Johnson</a></td><td>DET, NYJ, BUF</td><td>2019 to 2026</td><td>592</td><td>116.4</td><td>+0.031</td><td>42.4%</td><td>0.3%</td><td>1,629</td><td>1,507</td><td>5.30</td></tr>
+<tr><td>23</td><td><a href="../players/00-0005091">Kevin Faulk</a></td><td>NE</td><td>1999 to 2011</td><td>1,512</td><td>116.1</td><td>+0.047</td><td>45.7%</td><td>1.1%</td><td>4,040</td><td>4,107</td><td>5.39</td></tr>
+<tr><td>24</td><td><a href="../players/00-0036265">AJ Dillon</a></td><td>GB, PHI, CAR</td><td>2020 to 2026</td><td>758</td><td>115.9</td><td>-0.001</td><td>44.1%</td><td>0.3%</td><td>2,600</td><td>800</td><td>4.49</td></tr>
+<tr><td>25</td><td><a href="../players/00-0035657">Damien Harris</a></td><td>NE, BUF</td><td>2019 to 2023</td><td>535</td><td>115.4</td><td>-0.010</td><td>45.2%</td><td>0.4%</td><td>2,218</td><td>304</td><td>4.71</td></tr>
+<tr><td>26</td><td><a href="../players/00-0030404">Chris Thompson</a></td><td>WAS, JAX</td><td>2013 to 2020</td><td>576</td><td>114.6</td><td>+0.014</td><td>41.5%</td><td>0.2%</td><td>1,239</td><td>2,005</td><td>5.63</td></tr>
+<tr><td>27</td><td><a href="../players/00-0032764">Derrick Henry</a></td><td>TEN, BAL</td><td>2016 to 2026</td><td>3,316</td><td>114.4</td><td>+0.022</td><td>42.4%</td><td>0.4%</td><td>14,715</td><td>1,964</td><td>5.03</td></tr>
+<tr><td>28</td><td><a href="../players/00-0027994">Shane Vereen</a></td><td>NE, NYG</td><td>2011 to 2017</td><td>741</td><td>114.0</td><td>+0.023</td><td>42.0%</td><td>0.4%</td><td>1,618</td><td>2,188</td><td>5.14</td></tr>
+<tr><td>29</td><td><a href="../players/00-0020462">LaMont Jordan</a></td><td>NYJ, LV, NE, DEN</td><td>2001 to 2009</td><td>1,114</td><td>113.9</td><td>+0.022</td><td>41.7%</td><td>0.4%</td><td>3,952</td><td>1,334</td><td>4.75</td></tr>
+<tr><td>30</td><td><a href="../players/00-0024275">Maurice Jones-Drew</a></td><td>JAX, LV</td><td>2006 to 2014</td><td>2,291</td><td>113.6</td><td>+0.035</td><td>41.0%</td><td>0.4%</td><td>8,215</td><td>3,039</td><td>4.91</td></tr>
+<tr><td>31</td><td><a href="../players/00-0000745">Tiki Barber</a></td><td>NYG</td><td>1999 to 2006</td><td>2,775</td><td>113.6</td><td>+0.028</td><td>43.7%</td><td>0.8%</td><td>10,219</td><td>4,744</td><td>5.39</td></tr>
+<tr><td>32</td><td><a href="../players/00-0030496">Le&#x27;Veon Bell</a></td><td>PIT, NYJ, KC, TB</td><td>2013 to 2021</td><td>2,208</td><td>113.1</td><td>-0.006</td><td>42.6%</td><td>0.2%</td><td>6,966</td><td>3,408</td><td>4.70</td></tr>
+<tr><td>33</td><td><a href="../players/00-0025450">Brandon Jackson</a></td><td>GB, CLE</td><td>2007 to 2012</td><td>509</td><td>113.1</td><td>+0.011</td><td>39.7%</td><td>0.0%</td><td>1,451</td><td>943</td><td>4.70</td></tr>
+<tr><td>34</td><td><a href="../players/00-0037228">Jaylen Warren</a></td><td>PIT</td><td>2022 to 2026</td><td>955</td><td>113.0</td><td>+0.009</td><td>42.6%</td><td>0.4%</td><td>3,438</td><td>1,586</td><td>5.26</td></tr>
+<tr><td>35</td><td><a href="../players/00-0036919">Kenny Gainwell</a></td><td>PHI, PIT, TB</td><td>2021 to 2026</td><td>785</td><td>112.9</td><td>+0.007</td><td>42.4%</td><td>0.4%</td><td>2,283</td><td>1,494</td><td>4.81</td></tr>
+<tr><td>36</td><td><a href="../players/00-0033293">Aaron Jones</a></td><td>GB, MIN</td><td>2017 to 2026</td><td>2,339</td><td>112.6</td><td>+0.010</td><td>43.4%</td><td>0.6%</td><td>8,706</td><td>3,004</td><td>5.01</td></tr>
+<tr><td>37</td><td><a href="../players/00-0015286">Robert Smith</a></td><td>MIN</td><td>1999 to 2000</td><td>684</td><td>112.2</td><td>+0.028</td><td>39.8%</td><td>0.3%</td><td>2,831</td><td>627</td><td>5.06</td></tr>
+<tr><td>38</td><td><a href="../players/00-0033951">Marlon Mack</a></td><td>IND, DEN</td><td>2017 to 2022</td><td>716</td><td>112.1</td><td>-0.008</td><td>42.5%</td><td>0.3%</td><td>2,768</td><td>553</td><td>4.64</td></tr>
+<tr><td>39</td><td><a href="../players/00-0038542">Bijan Robinson</a></td><td>ATL</td><td>2023 to 2026</td><td>1,298</td><td>111.8</td><td>-0.013</td><td>43.8%</td><td>0.5%</td><td>4,865</td><td>1,980</td><td>5.27</td></tr>
+<tr><td>40</td><td><a href="../players/00-0038134">Kenneth Walker III</a></td><td>SEA, KC</td><td>2022 to 2026</td><td>1,270</td><td>111.5</td><td>-0.012</td><td>40.6%</td><td>0.0%</td><td>4,803</td><td>1,284</td><td>4.79</td></tr>
+<tr><td>41</td><td><a href="../players/00-0034367">Nyheim Hines</a></td><td>IND, BUF, NO</td><td>2018 to 2025</td><td>633</td><td>111.5</td><td>-0.007</td><td>41.2%</td><td>0.2%</td><td>1,301</td><td>1,787</td><td>4.88</td></tr>
+<tr><td>42</td><td><a href="../players/00-0020536">LaDainian Tomlinson</a></td><td>LAC, NYJ</td><td>2001 to 2011</td><td>4,053</td><td>111.4</td><td>+0.020</td><td>39.9%</td><td>0.3%</td><td>14,154</td><td>4,932</td><td>4.71</td></tr>
+<tr><td>43</td><td><a href="../players/00-0036158">J.K. Dobbins</a></td><td>BAL, LAC, DEN</td><td>2020 to 2026</td><td>832</td><td>111.4</td><td>+0.006</td><td>39.1%</td><td>0.0%</td><td>3,523</td><td>478</td><td>4.81</td></tr>
+<tr><td>44</td><td><a href="../players/00-0037263">Tyler Allgeier</a></td><td>ATL, ARI</td><td>2022 to 2026</td><td>869</td><td>111.3</td><td>-0.019</td><td>41.0%</td><td>0.0%</td><td>3,263</td><td>646</td><td>4.50</td></tr>
+<tr><td>45</td><td><a href="../players/00-0037840">Kyren Williams</a></td><td>LA</td><td>2022 to 2026</td><td>1,286</td><td>110.8</td><td>-0.015</td><td>45.5%</td><td>0.8%</td><td>4,878</td><td>1,104</td><td>4.65</td></tr>
+<tr><td>46</td><td><a href="../players/00-0039361">Bucky Irving</a></td><td>TB</td><td>2024 to 2026</td><td>682</td><td>110.4</td><td>+0.009</td><td>42.1%</td><td>0.6%</td><td>2,612</td><td>781</td><td>4.98</td></tr>
+<tr><td>47</td><td><a href="../players/00-0019594">Mike Anderson</a></td><td>DEN, BAL</td><td>2000 to 2007</td><td>1,085</td><td>110.0</td><td>+0.028</td><td>41.4%</td><td>0.7%</td><td>4,238</td><td>768</td><td>4.61</td></tr>
+<tr><td>48</td><td><a href="../players/00-0027218">Joique Bell</a></td><td>IND, DET</td><td>2010 to 2016</td><td>803</td><td>109.8</td><td>+0.011</td><td>41.8%</td><td>0.6%</td><td>2,284</td><td>1,682</td><td>4.94</td></tr>
+<tr><td>49</td><td><a href="../players/00-0030578">Cordarrelle Patterson</a></td><td>MIN, LV, NE, CHI, ATL, PIT</td><td>2013 to 2024</td><td>1,013</td><td>109.7</td><td>-0.032</td><td>42.3%</td><td>0.2%</td><td>2,658</td><td>2,903</td><td>5.49</td></tr>
+<tr><td>50</td><td><a href="../players/00-0031687">Raheem Mostert</a></td><td>CLE, SF, MIA, LV</td><td>2015 to 2025</td><td>1,005</td><td>109.6</td><td>+0.009</td><td>43.0%</td><td>0.8%</td><td>4,264</td><td>974</td><td>5.21</td></tr>
+</tbody>
+</table></div>    </section>
+    <p class="db-source">Source: nflverse play by play data, 1999 to 2026, regular season and postseason combined. Figures are presented in this site's own layout. See the <a href="../../data-sources">data sources page</a> for credits.</p>
+    <p class="db-back db-links">More in the database: <a href="./">Ratings hub</a> &middot; <a href="quarterback">Quarterback ratings</a> &middot; <a href="wide-receiver">Wide receiver ratings</a> &middot; <a href="tight-end">Tight end ratings</a> &middot; <a href="explorer">Rating explorer</a> &middot; <a href="../">NFL stats hub</a> &middot; <a href="../leaderboards/">Stats leaders hub</a></p><script>
+(function () {
+  function csvEscape(v) {
+    var s = String(v);
+    if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf(String.fromCharCode(10)) !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+  function tableToCsv(table) {
+    var lines = [];
+    var rows = table.querySelectorAll("tr");
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].querySelectorAll("th, td");
+      var vals = [];
+      for (var j = 0; j < cells.length; j++) {
+        vals.push(csvEscape(cells[j].textContent.replace(/^\s+|\s+$/g, "")));
+      }
+      lines.push(vals.join(","));
+    }
+    return lines.join(String.fromCharCode(10)) + String.fromCharCode(10);
+  }
+  var buttons = document.querySelectorAll(".csv-btn");
+  for (var b = 0; b < buttons.length; b++) {
+    buttons[b].addEventListener("click", function () {
+      var table = document.getElementById(this.getAttribute("data-table"));
+      if (!table) { return; }
+      var csv = tableToCsv(table);
+      var blob = new Blob([csv], { type: "text/csv" });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = this.getAttribute("data-filename") || "ratings.csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  }
+})();
+</script>
+  </main>
+  <footer><span>&copy; 2027 Next Trend Wire</span><span>Independent. Curious. Forward.</span></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="../../script.js"></script>
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ntw-theme', t); } catch (e) {}
+    toggle.textContent = t === 'dark' ? 'Light' : 'Dark';
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('ntw-theme') || 'light'; } catch (e) {}
+  setTheme(saved);
+  toggle.addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
